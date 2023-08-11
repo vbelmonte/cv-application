@@ -1,9 +1,35 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+import cvLogo from './assets/cv-builder-logo.svg'
 
-function App() {
+function Navigation() {
+  return (
+    <nav>
+      <img src={cvLogo} />
+    </nav>
+  )
+}
+
+function EditArea() {
+  return (
+    <>
+      <div className='edit-area'>
+      </div>
+    </>
+  )
+}
+
+function PreviewArea() {
+  return (
+    <>
+      <div className='preview-area'>
+      </div>
+    </>
+  )
+}
+
+function OldApp() {
   const [count, setCount] = useState(0)
 
   return (
@@ -28,6 +54,18 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+    </>
+  )
+}
+
+function App() {
+  return (
+    <>
+      <Navigation />
+      <main>
+        <EditArea />
+        <PreviewArea />
+      </main>
     </>
   )
 }
