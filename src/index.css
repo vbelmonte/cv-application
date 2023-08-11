@@ -48,14 +48,46 @@ table {
 }
 
 :root {
-  --bittersweet: #F27059;
+  --white: #FFFFFF;
   --seasalt: #F8F9FA;
+  --french-gray: #CED4DA;
+  --french-gray-2: #ADB5BD;
   --slate-gray: #6C757D;
+  --onyx: #495057;
+  --eerie-black: #212529;
+  --bittersweet: #F27059;
+  --red: #EF233C;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+button {
+  border-radius: 0.25rem;
+  padding: 0.5rem 0.75rem;
+  background: none;
+}
+
+button.ghost {
+  border: none;
+}
+
+button.outline.black {
+  border: solid 1px var(--eerie-black);
+  color: var(--eerie-black);
+}
+
+button.outline.red {
+  border: solid 1px var(--red);
+  color: var(--red);
+}
+
+button.icon {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
 }
 
 nav {
@@ -71,8 +103,26 @@ main {
 
 .edit-area {
   background-color: var(--seasalt);
+  flex: 1;
 }
 
 .preview-area {
   background-color: var(--slate-gray);
+  flex: 1;
+}
+
+.options-container {
+  background-color: var(--french-gray);
+  padding: 2rem 3rem;
+}
+
+.options-container .buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.options-container .left, .options-container .right {
+  display: flex;
+  gap: 1rem;
 }

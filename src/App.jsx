@@ -2,6 +2,8 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import cvLogo from './assets/cv-builder-logo.svg'
+import editIcon from './assets/icon-edit.svg'
+import customizeIcon from './assets/icon-customize.svg'
 
 function Navigation() {
   return (
@@ -11,10 +13,27 @@ function Navigation() {
   )
 }
 
+function Options() {
+  return (
+    <div className='options-container'>
+      <div className='buttons'>
+        <div className='left'>
+          <button className='ghost icon'><img src={editIcon} />Edit</button>
+          <button className='ghost icon'><img src={customizeIcon} />Customize</button>
+        </div>
+        <div className='right'>
+          <button className='outline red'>Clear Resume</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function EditArea() {
   return (
     <>
       <div className='edit-area'>
+        <Options />
       </div>
     </>
   )
