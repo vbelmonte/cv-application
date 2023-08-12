@@ -185,6 +185,15 @@ function EditArea() {
               </div>
             </Inputs>
           </DropdownContainer>
+          <DropdownContainer containerName='Awards'>
+            <Inputs>
+              <Input type='input' id='award' name='award' />
+              <div className='display-flex gap-16 flex-wrap'>
+                <Button text='Add' classes='power flex-1' />
+                <Button text='Cancel' classes='outline black flex-1' />
+              </div>
+            </Inputs>
+          </DropdownContainer>
         </div>
       </div>
     </>
