@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import cvLogo from './assets/cv-builder-logo.svg'
 import editIcon from './assets/icon-edit.svg'
 import customizeIcon from './assets/icon-customize.svg'
+import chevronUp from './assets/chevron-up.svg'
 
 function Navigation() {
   return (
@@ -29,11 +30,64 @@ function Options() {
   )
 }
 
+function Input({ label, type, id, name, value }) {
+  return (
+    <div className='input flex-1 min-width-0'>
+      <label htmlFor={name}>
+        {label}
+      </label>
+      <input type={type} id={id} name={name} value={value} />
+    </div>
+  )
+}
+
+function Inputs({ children }) {
+  return (
+    <div className='inputs'>
+      {children}
+    </div>
+  )
+}
+
+function DropdownContainer({ containerName, children }) {
+  return (
+    <div className='input-container'>
+      <div className='header'>
+        <div>
+          <h2 className='bittersweet'>{containerName}</h2>
+        </div>
+        <div>
+          <img src={chevronUp} className='chevron' />
+        </div>
+      </div>
+      {children}
+    </div>
+  )
+}
+
 function EditArea() {
   return (
     <>
       <div className='edit-area'>
         <Options />
+        <div className='input-area'>
+          <DropdownContainer containerName='Personal Details'>
+            <Inputs>
+              <div className='display-flex gap-16 flex-wrap'>
+                <Input label='First Name' type='text' id='fname' name='fname' value='John' />
+                <Input label='Last Name' type='text' id='lname' name='lname' value='Smith' />
+              </div>
+              <Input label='Address' type='text' id='address' name='address' value='1234 Main Street' />
+              <div className='display-flex gap-16 flex-wrap'>
+                <Input label='State' type='text' id='state' name='state' value='California' />
+                <Input label='City' type='text' id='city' name='city' value='Redondo Beach' />
+                <Input label='Zip Code' type='text' id='zip' name='zip' value='90277' />
+              </div>
+              <Input label='Email' type='text' id='email' name='email' value='jsmith@gmail.com' />
+              <Input label='Phone Number' type='text' id='phone' name='phone' value='310-123-4567' />
+            </Inputs>
+          </DropdownContainer>
+        </div>
       </div>
     </>
   )
@@ -54,10 +108,10 @@ function OldApp() {
   return (
     <>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
+        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
-        <a href="https://react.dev" target="_blank">
+        <a href="https://react.dev" target="_blank" rel="noreferrer">
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>

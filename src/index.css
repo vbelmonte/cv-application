@@ -57,12 +57,77 @@ table {
   --eerie-black: #212529;
   --bittersweet: #F27059;
   --red: #EF233C;
+  --onyx-filter: invert(9%) sepia(7%) saturate(1316%) hue-rotate(169deg) brightness(103%) contrast(88%);
 }
 
 body {
+  font-family: 'Inter Regular', 'Arial', sans-serif;
+  font-size: 16px;
+  color: var(--eerie-black);
   margin: 0;
   padding: 0;
 }
+
+.display-flex {
+  display: flex;
+}
+
+.gap-16 {
+  gap: 1rem;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.min-width-0 {
+  min-width: 0;
+}
+
+.flex-wrap {
+  flex-flow: wrap;
+}
+
+
+
+/** FONT PROPERTIES **/
+
+@font-face {
+  font-family: 'Inter Regular';
+  src: url('./assets/fonts/Inter-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Inter Medium';
+  src: url('./assets/fonts/Inter-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Inter SemiBold';
+  src: url('./assets/fonts/Inter-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Inter Bold';
+  src: url('./assets/fonts/Inter-Bold.ttf');
+}
+
+h2 {
+  font-family: 'Inter Bold';
+  font-size: 1.5rem;
+}
+
+.bittersweet {
+  color: var(--bittersweet);
+}
+
+
+
+/** BUTTON PROPERTIES **/
 
 button {
   border-radius: 0.25rem;
@@ -89,6 +154,34 @@ button.icon {
   align-items: flex-end;
   gap: 0.5rem;
 }
+
+
+
+/** INPUT PROPERTIES **/
+
+label {
+  font-family: 'Inter SemiBold';
+  font-size: 0.875rem;
+  color: var(--onyx);
+}
+
+input {
+  border: solid 1px var(--french-gray);
+  border-radius: 0.25rem;
+  font-family: 'Inter Regular';
+  font-size: 1rem;
+  color: var(--eerie-black);
+  padding: 0.75rem;
+}
+
+div.input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+
 
 nav {
   background-color: var(--bittersweet);
@@ -124,5 +217,30 @@ main {
 
 .options-container .left, .options-container .right {
   display: flex;
+  gap: 1rem;
+}
+
+.input-area {
+  padding: 3rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.input-container .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+img.chevron {
+  filter: var(--onyx-filter);
+}
+
+.input-container .inputs {
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
