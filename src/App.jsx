@@ -30,13 +30,27 @@ function Options() {
   )
 }
 
-function Input({ label, type, id, name, value }) {
+function Input({ type, id, name, value}) {
+  return <input type={type} id={id} name={name} value={value} />
+}
+
+function TextArea({ id, name, value }) {
+  return (
+    <textarea id={id} name={name} rows='4'>
+      {value}
+    </textarea>
+  )
+}
+
+function InputSet({ label, type, id, name, value, option }) {
   return (
     <div className='input flex-1 min-width-0'>
       <label htmlFor={name}>
         {label}
       </label>
-      <input type={type} id={id} name={name} value={value} />
+      {/*<Input type={type} id={id} name={name} value={value} />*/}
+      {option === 'input' && <Input type={type} id={id} name={name} value={value} />}
+      {option === 'textarea' && <TextArea id={id} name={name} value={value} />}
     </div>
   )
 }
@@ -74,17 +88,22 @@ function EditArea() {
           <DropdownContainer containerName='Personal Details'>
             <Inputs>
               <div className='display-flex gap-16 flex-wrap'>
-                <Input label='First Name' type='text' id='fname' name='fname' value='John' />
-                <Input label='Last Name' type='text' id='lname' name='lname' value='Smith' />
+                <InputSet label='First Name' type='text' id='fname' name='fname' value='John' option='input' />
+                <InputSet label='Last Name' type='text' id='lname' name='lname' value='Smith' option='input' />
               </div>
-              <Input label='Address' type='text' id='address' name='address' value='1234 Main Street' />
+              <InputSet label='Address' type='text' id='address' name='address' value='1234 Main Street' option='input' />
               <div className='display-flex gap-16 flex-wrap'>
-                <Input label='State' type='text' id='state' name='state' value='California' />
-                <Input label='City' type='text' id='city' name='city' value='Redondo Beach' />
-                <Input label='Zip Code' type='text' id='zip' name='zip' value='90277' />
+                <InputSet label='State' type='text' id='state' name='state' value='California' option='input' />
+                <InputSet label='City' type='text' id='city' name='city' value='Redondo Beach' option='input' />
+                <InputSet label='Zip Code' type='text' id='zip' name='zip' value='90277' option='input' />
               </div>
-              <Input label='Email' type='text' id='email' name='email' value='jsmith@gmail.com' />
-              <Input label='Phone Number' type='text' id='phone' name='phone' value='310-123-4567' />
+              <InputSet label='Email' type='text' id='email' name='email' value='jsmith@gmail.com' option='input' />
+              <InputSet label='Phone Number' type='text' id='phone' name='phone' value='310-123-4567' option='input' />
+            </Inputs>
+          </DropdownContainer>
+          <DropdownContainer containerName='Summary Statement'>
+            <Inputs>
+              <InputSet label='Summary' id='summary' name='summary' value='Your summary statement here' option='textarea' />
             </Inputs>
           </DropdownContainer>
         </div>
