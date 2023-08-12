@@ -160,6 +160,22 @@ function EditArea() {
               </div>
             </Inputs>
           </DropdownContainer>
+          <DropdownContainer containerName='Education'>
+            <Inputs>
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input' />
+                <InputSet label='Institution' type='text' id='institution-c' name='institution-c' value='' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Start Date' type='text' id='start-date-c' name='start-date-c' option='input' />
+                <InputSet label='End Date' type='text' id='end-date-c' name='end-date-c' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <Button text='Add' classes='power flex-1' />
+                <Button text='Cancel' classes='outline black flex-1' />
+              </div>
+            </Inputs>
+          </DropdownContainer>
         </div>
       </div>
     </>
