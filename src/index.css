@@ -131,8 +131,12 @@ h2 {
 
 button {
   border-radius: 0.25rem;
-  padding: 0.5rem 0.75rem;
+  border: none;
+  padding: 0.75rem;
   background: none;
+
+  font-family: 'Inter Medium';
+  font-size: 0.875rem;
 }
 
 button.ghost {
@@ -153,6 +157,11 @@ button.icon {
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
+}
+
+button.power {
+  background-color: var(--bittersweet);
+  color: var(--white);
 }
 
 

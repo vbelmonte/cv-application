@@ -30,6 +30,14 @@ function Options() {
   )
 }
 
+function Button( {text, classes} ) {
+  return (
+    <button className={classes}>
+      {text}
+    </button>
+  )
+}
+
 function Input({ type, id, name, value}) {
   return <input type={type} id={id} name={name} value={value} />
 }
@@ -104,6 +112,20 @@ function EditArea() {
           <DropdownContainer containerName='Summary Statement'>
             <Inputs>
               <InputSet label='Summary' id='summary' name='summary' value='Your summary statement here' option='textarea' />
+            </Inputs>
+          </DropdownContainer>
+          <DropdownContainer containerName='Work Experience'>
+            <Inputs>
+              <InputSet label='Position' type='text' id='position' name='position' value='Software Engineer' option='input' />
+              <InputSet label='Company Name' type='text' id='company' name='company' value='Sony' option='input' />
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Start Date' type='text' id='start-date' name='start-date' option='input' />
+                <InputSet label='End Date' type='text' id='end-date' name='end-date' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <Button text='Add' classes='power flex-1' />
+                <Button text='Cancel' classes='outline black flex-1' />
+              </div>
             </Inputs>
           </DropdownContainer>
         </div>
