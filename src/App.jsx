@@ -128,6 +128,38 @@ function EditArea() {
               </div>
             </Inputs>
           </DropdownContainer>
+          <DropdownContainer containerName='Volunteer Experience'>
+            <Inputs>
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Position' type='text' id='position-v' name='position-v' value='Volunteer' option='input' />
+                <InputSet label='Organization' type='text' id='organization-v' name='organization-v' value='Nonprofit' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Start Date' type='text' id='start-date-v' name='start-date-v' option='input' />
+                <InputSet label='End Date' type='text' id='end-date-v' name='end-date-v' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <Button text='Add' classes='power flex-1' />
+                <Button text='Cancel' classes='outline black flex-1' />
+              </div>
+            </Inputs>
+          </DropdownContainer>
+          <DropdownContainer containerName='Education'>
+            <Inputs>
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Degree' type='text' id='degree' name='degree' value='Computer Science, Bachelor of Science' option='input' />
+                <InputSet label='Institution' type='text' id='institution' name='institution' value='Some College' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <InputSet label='Start Date' type='text' id='start-date-e' name='start-date-e' option='input' />
+                <InputSet label='End Date' type='text' id='end-date-e' name='end-date-e' option='input' />
+              </div>
+              <div className='display-flex gap-16 flex-wrap'>
+                <Button text='Add' classes='power flex-1' />
+                <Button text='Cancel' classes='outline black flex-1' />
+              </div>
+            </Inputs>
+          </DropdownContainer>
         </div>
       </div>
     </>
