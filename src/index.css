@@ -242,13 +242,24 @@ label {
   color: var(--onyx);
 }
 
-input, textarea {
+input, textarea, select {
   border: solid 1px var(--french-gray);
   border-radius: 0.25rem;
   font-family: 'Inter Regular';
   font-size: 1rem;
   color: var(--eerie-black);
   padding: 0.75rem;
+}
+
+select {
+  padding: 0.85rem 0.75rem;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url('./assets/chevron-down.svg');
+    background-repeat: no-repeat, repeat;
+    background-position: right .7em top 50%, 0 0;
+    background-size: 1rem auto, 100%;
 }
 
 textarea {
