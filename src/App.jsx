@@ -22,27 +22,42 @@ function Navigation() {
   )
 }
 
+function Button( {text, classes, img, type} ) {
+  if (type === 'icon') {
+    return (
+      <button className={classes + ' ghost icon'}>
+        <img src={img} className='icon-16' />
+        {text}
+      </button>
+    )
+  } else if (type === 'outline') {
+    return (
+      <button className={classes + ' outline'}>
+        {text}
+      </button>
+    )
+  } else {
+    return (
+      <button className={classes}>
+        {text}
+      </button>
+    )
+  }
+}
+
 function Options() {
   return (
     <div className='options-container'>
       <div className='buttons'>
         <div className='left'>
-          <button className='ghost icon'><img className='icon-16' src={editIcon} />Edit</button>
-          <button className='ghost icon'><img className='icon-16' src={customizeIcon} />Customize</button>
+          <Button text='Edit' img={editIcon} type='icon' />
+          <Button text='Customize' img={customizeIcon} type='icon' />
         </div>
         <div className='right'>
-          <button className='outline red'>Clear Resume</button>
+          <Button text='Clear Resume' classes='red' type='outline' />
         </div>
       </div>
     </div>
-  )
-}
-
-function Button( {text, classes} ) {
-  return (
-    <button className={classes}>
-      {text}
-    </button>
   )
 }
 
