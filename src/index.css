@@ -57,6 +57,8 @@ table {
   --eerie-black: #212529;
   --bittersweet: #F27059;
   --red: #EF233C;
+  --french-gray-2-filter: invert(84%) sepia(8%) saturate(275%) hue-rotate(169deg) brightness(85%) contrast(89%);
+  --slate-gray-filter: invert(45%) sepia(10%) saturate(369%) hue-rotate(167deg) brightness(98%) contrast(93%);
   --onyx-filter: invert(9%) sepia(7%) saturate(1316%) hue-rotate(169deg) brightness(103%) contrast(88%);
 }
 
@@ -165,13 +167,21 @@ li {
 }
 
 li.entry img {
-  filter: var(--onyx-filter);
+  filter: var(--slate-gray-filter);
+}
+
+li.entry button.edit {
+  filter: var(--french-gray-2-filter);
 }
 
 
 /** IMAGE PROPERTIES **/
 .icon-16 {
   height: 1rem;
+}
+
+.icon-20 {
+  height: 1.25rem;
 }
 
 
@@ -202,10 +212,15 @@ button.outline.red {
   color: var(--red);
 }
 
-button.icon {
+button.icon, button.icon-text {
   display: flex;
+  justify-content: center;
   align-items: flex-end;
   gap: 0.5rem;
+}
+
+button.icon {
+  padding: 0.25rem;
 }
 
 button.power {
