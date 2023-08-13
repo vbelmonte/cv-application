@@ -288,7 +288,7 @@ main {
 }
 
 .entries {
-  padding-left: 3.5rem;
+  padding-left: 2rem;
 }
 
 .options-container {
@@ -331,9 +331,9 @@ img.chevron {
 }
 
 .input-container .input-form {
-  /*display: flex;*/
-  display: none;
+  display: flex;
+  /*display: none;*/
   flex-direction: column;
   gap: 1rem;
-  padding-left: 2rem;
+  padding-left: 3rem;
 }
