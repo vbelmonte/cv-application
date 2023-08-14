@@ -57,9 +57,11 @@ table {
   --eerie-black: #212529;
   --bittersweet: #F27059;
   --red: #EF233C;
+  --french-gray-filter: invert(85%) sepia(6%) saturate(239%) hue-rotate(169deg) brightness(100%) contrast(89%);
   --french-gray-2-filter: invert(84%) sepia(8%) saturate(275%) hue-rotate(169deg) brightness(85%) contrast(89%);
   --slate-gray-filter: invert(45%) sepia(10%) saturate(369%) hue-rotate(167deg) brightness(98%) contrast(93%);
   --onyx-filter: invert(9%) sepia(7%) saturate(1316%) hue-rotate(169deg) brightness(103%) contrast(88%);
+  --bittersweet-filter: invert(64%) sepia(31%) saturate(7168%) hue-rotate(328deg) brightness(107%) contrast(90%);
 }
 
 body {
@@ -88,6 +90,10 @@ body {
 
 .gap-8 {
   gap: 0.5rem;
+}
+
+.gap-12 {
+  gap: 0.75rem;
 }
 
 .gap-16 {
@@ -159,19 +165,32 @@ h2 {
   color: var(--bittersweet);
 }
 
+.bittersweet-filter {
+  filter: var(--bittersweet-filter);
+}
+
+.onyx {
+  color: var(--onyx);
+}
+
+.onyx-filter {
+  filter: invert(30%) sepia(16%) saturate(348%) hue-rotate(169deg) brightness(90%) contrast(87%);
+}
+
 
 
 /** LIST PROPERTIES **/
 li {
-  font-family: 'Inter SemiBold';
+  font-family: 'Inter Medium';
 }
 
 li.entry img {
-  filter: var(--slate-gray-filter);
+  filter: var(--bittersweet-filter);
+  height: 1.25rem;
 }
 
-li.entry button.edit {
-  filter: var(--french-gray-2-filter);
+li.entry button.edit img {
+  filter: var(--onyx-filter);
 }
 
 
@@ -190,16 +209,21 @@ li.entry button.edit {
 
 button {
   border-radius: 0.25rem;
-  border: none;
+  border: solid 2px transparent;
   padding: 0.75rem;
   background: none;
 
-  font-family: 'Inter Medium';
+  font-family: 'Inter SemiBold';
   font-size: 0.875rem;
+  transition: all 0.05s linear;
 }
 
 button.ghost {
   border: none;
+}
+
+button.ghost:hover {
+  outline: solid 1px var(--onyx);
 }
 
 button.outline.black {
@@ -212,6 +236,11 @@ button.outline.red {
   color: var(--red);
 }
 
+button.bittersweet:hover {
+  border: solid 2px var(--bittersweet);
+  color: var(--bittersweet);
+}
+
 button.icon, button.icon-text {
   display: flex;
   justify-content: center;
@@ -221,6 +250,10 @@ button.icon, button.icon-text {
 
 button.icon {
   padding: 0.25rem;
+}
+
+button.icon img {
+  height: 1rem;
 }
 
 button.power {
@@ -342,8 +375,8 @@ img.chevron {
 }
 
 .input-container .input-form {
-  display: flex;
-  /*display: none;*/
+  /*display: flex;*/
+  display: none;
   flex-direction: column;
   gap: 1rem;
   padding-left: 3rem;

@@ -23,17 +23,17 @@ function Navigation() {
   )
 }
 
-function Button( {text, classes, img, type} ) {
+function Button( {text, classes, img, imgClasses, type} ) {
   if (type === 'icon-text') {
     return (
-      <button className={classes + ' ghost icon-text'}>
-        <img src={img} className='icon-16' />
+      <button className={classes + ' icon-text'}>
+        <img src={img} className={imgClasses + ' icon-16'} />
         {text}
       </button>
     )
   } else if (type === 'icon') {
     return (
-      <button className={classes + ' ghost icon'}>
+      <button className={classes + ' icon'}>
         <img src={img} className='icon-20' />
       </button>
     )
@@ -129,7 +129,7 @@ function Entry({ entry, type }) {
         {type === 'reference' && <img src={userIcon} />}
         {entry}
       </div>
-      <div className='display-flex gap-8'>
+      <div className='display-flex'>
         <Button img={editIcon} classes='edit' type='icon' />
         <Button img={trashIcon} classes='edit' type='icon' />
         <Button img={eyeIcon} classes='edit' type='icon' />
@@ -151,7 +151,7 @@ function DropdownContainer({ containerName, children }) {
     <div className='input-container'>
       <div className='header'>
         <div>
-          <h2 className='bittersweet'>{containerName}</h2>
+          <h2 className='onyx'>{containerName}</h2>
         </div>
         <div>
           <img src={chevronUp} className='chevron' />
@@ -204,7 +204,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Work Experience' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>
           </DropdownContainer>
           <DropdownContainer containerName='Volunteer Experience'>
@@ -224,7 +224,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Volunteer Experience' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>
           </DropdownContainer>
           <DropdownContainer containerName='Education'>
@@ -244,7 +244,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Education' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>         
           </DropdownContainer>
           <DropdownContainer containerName='Certifications'>
@@ -264,7 +264,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Certification' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>
           </DropdownContainer>
           <DropdownContainer containerName='Skills'>
@@ -277,7 +277,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Skill' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>
           </DropdownContainer>
           <DropdownContainer containerName='Awards'>
@@ -290,7 +290,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Award' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>
           </DropdownContainer>
           <DropdownContainer containerName='References'>
@@ -310,7 +310,7 @@ function EditArea() {
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
               </InputForm>
-              <Button text='Add Reference' classes='small' img={plusIcon} type='icon-text' />
+              <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
             </Entries>
           </DropdownContainer>
         </div>
