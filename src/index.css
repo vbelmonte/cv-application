@@ -55,7 +55,9 @@ table {
   --slate-gray: #6C757D;
   --onyx: #495057;
   --eerie-black: #212529;
+  --misty-rose: #FFEBE7;
   --bittersweet: #F27059;
+  --jasper: #DC6651;
   --red: #EF233C;
   --french-gray-filter: invert(85%) sepia(6%) saturate(239%) hue-rotate(169deg) brightness(100%) contrast(89%);
   --french-gray-2-filter: invert(84%) sepia(8%) saturate(275%) hue-rotate(169deg) brightness(85%) contrast(89%);
@@ -209,13 +211,13 @@ li.entry button.edit img {
 
 button {
   border-radius: 0.25rem;
-  border: solid 2px transparent;
+  border: solid 1px transparent;
   padding: 0.75rem;
   background: none;
 
-  font-family: 'Inter SemiBold';
+  font-family: 'Inter Medium';
   font-size: 0.875rem;
-  transition: all 0.05s linear;
+  transition: all 0.08s linear;
 }
 
 button.ghost {
@@ -231,13 +233,18 @@ button.outline.black {
   color: var(--eerie-black);
 }
 
+button.outline.black:hover {
+  border: solid 1px var(--slate-gray);
+  color: var(--slate-gray);
+}
+
 button.outline.red {
   border: solid 1px var(--red);
   color: var(--red);
 }
 
 button.bittersweet:hover {
-  border: solid 2px var(--bittersweet);
+  background-color: var(--misty-rose);
   color: var(--bittersweet);
 }
 
@@ -256,9 +263,17 @@ button.icon img {
   height: 1rem;
 }
 
+button.icon:hover {
+  border: solid 1px var(--french-gray);
+}
+
 button.power {
   background-color: var(--bittersweet);
   color: var(--white);
+}
+
+button.power:hover {
+  background-color: var(--jasper);
 }
 
 button.small {
