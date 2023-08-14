@@ -15,6 +15,10 @@ import trashIcon from './assets/icon-trash.svg'
 import eyeIcon from './assets/icon-eye.svg'
 import plusIcon from './assets/icon-plus.svg'
 
+function toggleContainer() {
+  console.log('click');
+}
+
 function Navigation() {
   return (
     <nav>
@@ -23,153 +27,167 @@ function Navigation() {
   )
 }
 
-function Button( {text, classes, img, imgClasses, type} ) {
+function Button({ text, classes, img, imgClasses, type, handleClick }) {
+
   if (type === 'icon-text') {
     return (
-      <button className={classes + ' icon-text'}>
+      <button className={classes + ' icon-text'} onClick={handleClick}>
         <img src={img} className={imgClasses + ' icon-16'} />
         {text}
       </button>
     )
   } else if (type === 'icon') {
     return (
-      <button className={classes + ' icon'}>
+      <button className={classes + ' icon'} onClick={handleClick}>
         <img src={img} className='icon-20' />
       </button>
     )
   } else if (type === 'outline') {
     return (
-      <button className={classes + ' outline'}>
+      <button className={classes + ' outline'} onClick={handleClick}>
         {text}
       </button>
     )
   } else {
     return (
-      <button className={classes}>
+      <button className={classes} onClick={handleClick}>
         {text}
       </button>
     )
   }
 }
 
-function Options() {
-  return (
-    <div className='options-container'>
-      <div className='buttons'>
-        <div className='left'>
-          <Button text='Edit' img={editIcon} type='icon-text' />
-          <Button text='Customize' img={customizeIcon} type='icon-text' />
-        </div>
-        <div className='right'>
-          <Button text='Clear Resume' classes='red' type='outline' />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function Input({ type, id, name, value}) {
-  const [text, setText] = useState(value);
-  return (
-    <input
-      type={type}
-      id={id}
-      name={name}
-      value={text}
-      onChange={e => setText(e.target.value)} />
-  )
-}
-
-function InputSelectState({ id, name }) {
-  const states = [{"name":"Alabama","abbreviation":"AL"},{"name":"Alaska","abbreviation":"AK"},{"name":"Arizona","abbreviation":"AZ"},{"name":"Arkansas","abbreviation":"AR"},{"name":"California","abbreviation":"CA"},{"name":"Colorado","abbreviation":"CO"},{"name":"Connecticut","abbreviation":"CT"},{"name":"Delaware","abbreviation":"DE"},{"name":"Florida","abbreviation":"FL"},{"name":"Georgia","abbreviation":"GA"},{"name":"Hawaii","abbreviation":"HI"},{"name":"Idaho","abbreviation":"ID"},{"name":"Illinois","abbreviation":"IL"},{"name":"Indiana","abbreviation":"IN"},{"name":"Iowa","abbreviation":"IA"},{"name":"Kansas","abbreviation":"KS"},{"name":"Kentucky","abbreviation":"KY"},{"name":"Louisiana","abbreviation":"LA"},{"name":"Maine","abbreviation":"ME"},{"name":"Maryland","abbreviation":"MD"},{"name":"Massachusetts","abbreviation":"MA"},{"name":"Michigan","abbreviation":"MI"},{"name":"Minnesota","abbreviation":"MN"},{"name":"Mississippi","abbreviation":"MS"},{"name":"Missouri","abbreviation":"MO"},{"name":"Montana","abbreviation":"MT"},{"name":"Nebraska","abbreviation":"NE"},{"name":"Nevada","abbreviation":"NV"},{"name":"New Hampshire","abbreviation":"NH"},{"name":"New Jersey","abbreviation":"NJ"},{"name":"New Mexico","abbreviation":"NM"},{"name":"New York","abbreviation":"NY"},{"name":"North Carolina","abbreviation":"NC"},{"name":"North Dakota","abbreviation":"ND"},{"name":"Ohio","abbreviation":"OH"},{"name":"Oklahoma","abbreviation":"OK"},{"name":"Oregon","abbreviation":"OR"},{"name":"Pennsylvania","abbreviation":"PA"},{"name":"Rhode Island","abbreviation":"RI"},{"name":"South Carolina","abbreviation":"SC"},{"name":"South Dakota","abbreviation":"SD"},{"name":"Tennessee","abbreviation":"TN"},{"name":"Texas","abbreviation":"TX"},{"name":"Utah","abbreviation":"UT"},{"name":"Vermont","abbreviation":"VT"},{"name":"Virginia","abbreviation":"VA"},{"name":"Washington","abbreviation":"WA"},{"name":"West Virginia","abbreviation":"WV"},{"name":"Wisconsin","abbreviation":"WI"},{"name":"Wyoming","abbreviation":"WY"}];
-
-  return (
-    <select name={name} id={id}>
-      <option disabled selected value>Select State</option>
-      {states.map( (state) => {
-        return (
-        <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
-        )
-      })}
-    </select>
-  )
-}
-
-function TextArea({ id, name, value }) {
-  return (
-    <textarea id={id} name={name} rows='4'>
-      {value}
-    </textarea>
-  )
-}
-
-function InputSet({ label, type, id, name, value, option }) {
-  return (
-    <div className='input flex-1 min-width-0'>
-      <label htmlFor={name}>
-        {label}
-      </label>
-      {option === 'input' && <Input type={type} id={id} name={name} value={value} />}
-      {option === 'textarea' && <TextArea id={id} name={name} value={value} />}
-      {option === 'select' && <InputSelectState id={id} name={name} />}
-    </div>
-  )
-}
-
-function InputForm({ children }) {
-  return (
-    <div className='input-form'>
-      {children}
-    </div>
-  )
-}
-
-function Entry({ entry, type }) {
-  return (
-    <li className='display-flex gap-48 justify-space-between entry'>
-      <div className='display-flex gap-24 align-center'>
-        {type === 'work' && <img src={briefcaseIcon} />}
-        {type === 'volunteer' && <img src={starIcon} />}
-        {type === 'education' && <img src={bookIcon} />}
-        {(type === 'certification' || type === 'award') && <img src={awardIcon} />}
-        {type === 'skill' && <img src={boxIcon} />}
-        {type === 'reference' && <img src={userIcon} />}
-        {entry}
-      </div>
-      <div className='display-flex'>
-        <Button img={editIcon} classes='edit' type='icon' />
-        <Button img={trashIcon} classes='edit' type='icon' />
-        <Button img={eyeIcon} classes='edit' type='icon' />
-      </div>
-    </li>
-  )
-}
-
-function Entries({ children }) {
-  return (
-    <ul className='entries display-flex flex-column gap-16'>
-      {children}
-    </ul>
-  )
-}
-
-function DropdownContainer({ containerName, children }) {
-  return (
-    <div className='input-container'>
-      <div className='header'>
-        <div>
-          <h2 className='onyx'>{containerName}</h2>
-        </div>
-        <div>
-          <img src={chevronUp} className='chevron' />
-        </div>
-      </div>
-      {children}
-    </div>
-  )
-}
-
 function EditArea() {
+  let inputArray = document.getElementsByTagName('input');
+
+  const [inputs, setInputs] = useState(inputArray);
+
+  function clearAllFields() {
+    let tempInputs = document.getElementsByTagName('input');
+    for (let i = 0; i < inputArray.length; i+=1) {
+      tempInputs[i].value='';
+    }
+    setInputs(tempInputs);
+  }
+
+  function Options() {
+    return (
+      <div className='options-container'>
+        <div className='buttons'>
+          <div className='left'>
+            <Button text='Edit' img={editIcon} type='icon-text' />
+            <Button text='Customize' img={customizeIcon} type='icon-text' />
+          </div>
+          <div className='right'>
+            {/*<Button text='Clear Resume' classes='red' type='outline' handleClick={clearAllFields} />*/}
+            <button onClick={clearAllFields}>Clear Resume</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  function Input({ type, id, name, value}) {
+    const [text, setText] = useState(value);
+    return (
+      <input
+        type={type}
+        id={id}
+        name={name}
+        value={text}
+        onChange={e => setText(e.target.value)} />
+    )
+  }
+  
+  function InputSelectState({ id, name }) {
+    const states = [{"name":"Alabama","abbreviation":"AL"},{"name":"Alaska","abbreviation":"AK"},{"name":"Arizona","abbreviation":"AZ"},{"name":"Arkansas","abbreviation":"AR"},{"name":"California","abbreviation":"CA"},{"name":"Colorado","abbreviation":"CO"},{"name":"Connecticut","abbreviation":"CT"},{"name":"Delaware","abbreviation":"DE"},{"name":"Florida","abbreviation":"FL"},{"name":"Georgia","abbreviation":"GA"},{"name":"Hawaii","abbreviation":"HI"},{"name":"Idaho","abbreviation":"ID"},{"name":"Illinois","abbreviation":"IL"},{"name":"Indiana","abbreviation":"IN"},{"name":"Iowa","abbreviation":"IA"},{"name":"Kansas","abbreviation":"KS"},{"name":"Kentucky","abbreviation":"KY"},{"name":"Louisiana","abbreviation":"LA"},{"name":"Maine","abbreviation":"ME"},{"name":"Maryland","abbreviation":"MD"},{"name":"Massachusetts","abbreviation":"MA"},{"name":"Michigan","abbreviation":"MI"},{"name":"Minnesota","abbreviation":"MN"},{"name":"Mississippi","abbreviation":"MS"},{"name":"Missouri","abbreviation":"MO"},{"name":"Montana","abbreviation":"MT"},{"name":"Nebraska","abbreviation":"NE"},{"name":"Nevada","abbreviation":"NV"},{"name":"New Hampshire","abbreviation":"NH"},{"name":"New Jersey","abbreviation":"NJ"},{"name":"New Mexico","abbreviation":"NM"},{"name":"New York","abbreviation":"NY"},{"name":"North Carolina","abbreviation":"NC"},{"name":"North Dakota","abbreviation":"ND"},{"name":"Ohio","abbreviation":"OH"},{"name":"Oklahoma","abbreviation":"OK"},{"name":"Oregon","abbreviation":"OR"},{"name":"Pennsylvania","abbreviation":"PA"},{"name":"Rhode Island","abbreviation":"RI"},{"name":"South Carolina","abbreviation":"SC"},{"name":"South Dakota","abbreviation":"SD"},{"name":"Tennessee","abbreviation":"TN"},{"name":"Texas","abbreviation":"TX"},{"name":"Utah","abbreviation":"UT"},{"name":"Vermont","abbreviation":"VT"},{"name":"Virginia","abbreviation":"VA"},{"name":"Washington","abbreviation":"WA"},{"name":"West Virginia","abbreviation":"WV"},{"name":"Wisconsin","abbreviation":"WI"},{"name":"Wyoming","abbreviation":"WY"}];
+  
+    return (
+      <select name={name} id={id}>
+        <option disabled defaultValue value>Select State</option>
+        {states.map( (state) => {
+          return (
+          <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
+          )
+        })}
+      </select>
+    )
+  }
+  
+  function TextArea({ id, name, value }) {
+    return (
+      <textarea id={id} name={name} rows='4'>
+        {value}
+      </textarea>
+    )
+  }
+  
+  function InputSet({ label, type, id, name, value, option }) {
+    return (
+      <div className='input flex-1 min-width-0'>
+        <label htmlFor={name}>
+          {label}
+        </label>
+        {option === 'input' && <Input type={type} id={id} name={name} value={value} />}
+        {option === 'textarea' && <TextArea id={id} name={name} value={value} />}
+        {option === 'select' && <InputSelectState id={id} name={name} />}
+      </div>
+    )
+  }
+  
+  function InputForm({ children }) {
+    return (
+      <div className='input-form'>
+        {children}
+      </div>
+    )
+  }
+  
+  function Entry({ entry, type }) {
+    return (
+      <li className='display-flex gap-48 justify-space-between entry'>
+        <div className='display-flex gap-24 align-center'>
+          {type === 'work' && <img src={briefcaseIcon} />}
+          {type === 'volunteer' && <img src={starIcon} />}
+          {type === 'education' && <img src={bookIcon} />}
+          {(type === 'certification' || type === 'award') && <img src={awardIcon} />}
+          {type === 'skill' && <img src={boxIcon} />}
+          {type === 'reference' && <img src={userIcon} />}
+          {entry}
+        </div>
+        <div className='display-flex'>
+          <Button img={editIcon} classes='edit' type='icon' />
+          <Button img={trashIcon} classes='edit' type='icon' />
+          <Button img={eyeIcon} classes='edit' type='icon' />
+        </div>
+      </li>
+    )
+  }
+  
+  function Entries({ children }) {
+    return (
+      <ul className='entries display-flex flex-column gap-16'>
+        {children}
+      </ul>
+    )
+  }
+  
+  function DropdownContainer({ containerName, children }) {
+    return (
+      <div className='input-container'>
+        <div className='header'>
+          <div>
+            <h2 className='onyx'>{containerName}</h2>
+          </div>
+          <div>
+            <img src={chevronUp} className='chevron' onClick={toggleContainer} />
+          </div>
+        </div>
+        {children}
+      </div>
+    )
+  }
+
   return (
     <>
       <div className='edit-area'>
