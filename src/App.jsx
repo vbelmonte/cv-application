@@ -69,7 +69,15 @@ function Options() {
 }
 
 function Input({ type, id, name, value}) {
-  return <input type={type} id={id} name={name} value={value} />
+  const [text, setText] = useState(value);
+  return (
+    <input
+      type={type}
+      id={id}
+      name={name}
+      value={text}
+      onChange={e => setText(e.target.value)} />
+  )
 }
 
 function InputSelectState({ id, name }) {
@@ -101,7 +109,6 @@ function InputSet({ label, type, id, name, value, option }) {
       <label htmlFor={name}>
         {label}
       </label>
-      {/*<Input type={type} id={id} name={name} value={value} />*/}
       {option === 'input' && <Input type={type} id={id} name={name} value={value} />}
       {option === 'textarea' && <TextArea id={id} name={name} value={value} />}
       {option === 'select' && <InputSelectState id={id} name={name} />}
