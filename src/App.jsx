@@ -16,9 +16,6 @@ import eyeIcon from './assets/icon-eye.svg'
 import plusIcon from './assets/icon-plus.svg'
 
 
-function toggleContainer() {
-  console.log('click');
-}
 
 function Navigation() {
   return (
@@ -126,10 +123,10 @@ function InputSelectState({ id, name }) {
   )
 }
 
-function TextArea({ id, name, value }) {
+function TextArea({ id, name, defaultValue }) {
   return (
     <textarea id={id} name={name} rows='4'>
-      {value}
+      {defaultValue}
     </textarea>
   )
 }
@@ -185,6 +182,15 @@ function Entries({ children }) {
 }
 
 function DropdownContainer({ containerName, children, containerType }) {
+  const useToggle = () => {
+    const [toggleValue, setToggleValue] = useState(true);
+
+    const toggler = () => { setToggleValue(!toggleValue) };
+    return [toggleValue, toggler];
+  }
+
+  const [toggle, setToggle] = useToggle();
+
   if (containerType === 'no-entries') {
     return (
       <div className='input-container'>
@@ -193,10 +199,10 @@ function DropdownContainer({ containerName, children, containerType }) {
             <h2 className='onyx'>{containerName}</h2>
           </div>
           <div>
-            <img src={chevronUp} className='chevron' onClick={toggleContainer} />
+            <img src={chevronUp} className='chevron' onClick={setToggle} />
           </div>
         </div>
-        {children}
+        {toggle && children}
       </div>
     )
   } else {
@@ -207,11 +213,11 @@ function DropdownContainer({ containerName, children, containerType }) {
             <h2 className='onyx'>{containerName}</h2>
           </div>
           <div>
-            <img src={chevronUp} className='chevron' onClick={toggleContainer} />
+            <img src={chevronUp} className='chevron' onClick={setToggle}/>
           </div>
         </div>
         <div className='entries-input-container display-flex flex-column gap-32'>
-          {children}
+          {toggle && children}
         </div>
       </div>
       )
@@ -242,7 +248,7 @@ function EditArea() {
           </DropdownContainer>
           <DropdownContainer containerName='Summary Statement' containerType='no-entries'>
             <InputForm classes='padding-left-32'>
-              <InputSet label='Summary' id='summary' name='summary' value='Your summary statement here' option='textarea' />
+              <InputSet label='Summary' id='summary' name='summary' defaultValue='Your summary statement here' option='textarea' />
             </InputForm>
           </DropdownContainer>
           <DropdownContainer containerName='Work Experience'>
