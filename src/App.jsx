@@ -147,9 +147,9 @@ function InputSet({ label, type, id, name, value, option }) {
   )
 }
 
-function InputForm({ children }) {
+function InputForm({ children, classes }) {
   return (
-    <div className='input-form'>
+    <div className={'input-form ' + classes}>
       {children}
     </div>
   )
@@ -184,20 +184,38 @@ function Entries({ children }) {
   )
 }
 
-function DropdownContainer({ containerName, children }) {
-  return (
-    <div className='input-container'>
-      <div className='header'>
-        <div>
-          <h2 className='onyx'>{containerName}</h2>
+function DropdownContainer({ containerName, children, containerType }) {
+  if (containerType === 'no-entries') {
+    return (
+      <div className='input-container'>
+        <div className='header'>
+          <div>
+            <h2 className='onyx'>{containerName}</h2>
+          </div>
+          <div>
+            <img src={chevronUp} className='chevron' onClick={toggleContainer} />
+          </div>
         </div>
-        <div>
-          <img src={chevronUp} className='chevron' onClick={toggleContainer} />
+        {children}
+      </div>
+    )
+  } else {
+      return (
+      <div className='input-container'>
+        <div className='header'>
+          <div>
+            <h2 className='onyx'>{containerName}</h2>
+          </div>
+          <div>
+            <img src={chevronUp} className='chevron' onClick={toggleContainer} />
+          </div>
+        </div>
+        <div className='entries-input-container display-flex flex-column gap-32'>
+          {children}
         </div>
       </div>
-      {children}
-    </div>
-  )
+      )
+  }
 }
 
 function EditArea() {
@@ -206,8 +224,8 @@ function EditArea() {
       <div className='edit-area'>
         <Options />
         <div className='input-area'>
-          <DropdownContainer containerName='Personal Details'>
-            <InputForm>
+          <DropdownContainer containerName='Personal Details' containerType='no-entries'>
+            <InputForm classes='padding-left-32'>
               <div className='display-flex gap-16 flex-wrap'>
                 <InputSet label='First Name' type='text' id='fname' name='fname' value='John' option='input' />
                 <InputSet label='Last Name' type='text' id='lname' name='lname' value='Smith' option='input' />
@@ -222,15 +240,16 @@ function EditArea() {
               <InputSet label='Phone Number' type='text' id='phone' name='phone' value='310-123-4567' option='input' />
             </InputForm>
           </DropdownContainer>
-          <DropdownContainer containerName='Summary Statement'>
-            <InputForm>
+          <DropdownContainer containerName='Summary Statement' containerType='no-entries'>
+            <InputForm classes='padding-left-32'>
               <InputSet label='Summary' id='summary' name='summary' value='Your summary statement here' option='textarea' />
             </InputForm>
           </DropdownContainer>
           <DropdownContainer containerName='Work Experience'>
             <Entries>
               <Entry entry='Sony' type='work' />
-              <InputForm>
+            </Entries>
+            <InputForm>
                 <InputSet label='Position' type='text' id='position' name='position' value='Software Engineer' option='input' />
                 <InputSet label='Company Name' type='text' id='company' name='company' value='Sony' option='input' />
                 <div className='display-flex gap-16 flex-wrap'>
@@ -241,13 +260,13 @@ function EditArea() {
                   <Button text='Add' classes='power flex-1' />
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
-              </InputForm>
-              <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>
+            </InputForm>
+            <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
           </DropdownContainer>
           <DropdownContainer containerName='Volunteer Experience'>
             <Entries>
               <Entry entry='Volunteer' type='volunteer' />
+              </Entries>
               <InputForm>
                 <div className='display-flex gap-16 flex-wrap'>
                   <InputSet label='Position' type='text' id='position-v' name='position-v' value='Volunteer' option='input' />
@@ -263,12 +282,12 @@ function EditArea() {
                 </div>
               </InputForm>
               <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>
           </DropdownContainer>
           <DropdownContainer containerName='Education'>
             <Entries>
               <Entry entry='Some University' type='education' />
-              <InputForm>
+            </Entries>
+            <InputForm>
                 <div className='display-flex gap-16 flex-wrap'>
                   <InputSet label='Degree' type='text' id='degree' name='degree' value='Computer Science, Bachelor of Science' option='input' />
                   <InputSet label='Institution' type='text' id='institution' name='institution' value='Some College' option='input' />
@@ -281,14 +300,14 @@ function EditArea() {
                   <Button text='Add' classes='power flex-1' />
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
-              </InputForm>
-              <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>         
+            </InputForm>
+            <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />      
           </DropdownContainer>
           <DropdownContainer containerName='Certifications'>
             <Entries>
               <Entry entry='Certification' type='certification' />
-              <InputForm>
+            </Entries>
+            <InputForm>
                 <div className='display-flex gap-16 flex-wrap'>
                   <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input' />
                   <InputSet label='Institution' type='text' id='institution-c' name='institution-c' value='' option='input' />
@@ -301,40 +320,40 @@ function EditArea() {
                   <Button text='Add' classes='power flex-1' />
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
-              </InputForm>
-              <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>
+            </InputForm>
+            <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
           </DropdownContainer>
           <DropdownContainer containerName='Skills'>
             <Entries>
               <Entry entry='Project Management' type='skill' />
-              <InputForm>
+            </Entries>
+            <InputForm>
                 <Input type='input' id='skill' name='skill' />
                 <div className='display-flex gap-16 flex-wrap'>
                   <Button text='Add' classes='power flex-1' />
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
-              </InputForm>
-              <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>
+            </InputForm>
+            <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
           </DropdownContainer>
           <DropdownContainer containerName='Awards'>
             <Entries>
               <Entry entry='Some Award' type='award' />
-              <InputForm>
+            </Entries>
+            <InputForm>
                 <Input type='input' id='award' name='award' />
                 <div className='display-flex gap-16 flex-wrap'>
                   <Button text='Add' classes='power flex-1' />
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
-              </InputForm>
-              <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>
+            </InputForm>
+            <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
           </DropdownContainer>
           <DropdownContainer containerName='References'>
             <Entries>
               <Entry entry='John Smith' type='reference' />
-              <InputForm>
+            </Entries>
+            <InputForm>
                 <div className='display-flex gap-16 flex-wrap'>
                   <InputSet label='Name' type='text' id='reference-name' name='reference-name' value='' option='input' />
                   <InputSet label='Position' type='text' id='reference-position' name='reference-position' value='' option='input' />
@@ -347,9 +366,8 @@ function EditArea() {
                   <Button text='Add' classes='power flex-1' />
                   <Button text='Cancel' classes='outline black flex-1' />
                 </div>
-              </InputForm>
-              <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
-            </Entries>
+            </InputForm>
+            <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
           </DropdownContainer>
         </div>
       </div>
