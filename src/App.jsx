@@ -216,9 +216,9 @@ function DropdownContainer({ containerName, children, containerType }) {
             <img src={chevronUp} className='chevron' onClick={setToggle}/>
           </div>
         </div>
-        <div className='entries-input-container display-flex flex-column gap-32'>
-          {toggle && children}
-        </div>
+        {toggle && <div className='entries-input-container display-flex flex-column gap-32'>
+          {children}
+        </div>}
       </div>
       )
   }

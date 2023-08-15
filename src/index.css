@@ -375,7 +375,7 @@ main {
   padding-bottom: 15rem;
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 8rem;
 }
 
 .input-container {
