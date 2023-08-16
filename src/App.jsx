@@ -229,6 +229,132 @@ function DropdownContainer({ containerName, children, containerType }) {
 }
 
 function EditArea() {
+
+  const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
+  const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
+  const [educationForm, setEducationForm] = useState(<></>);
+  const [certificationForm, setCertificationForm] = useState(<></>);
+  const [skillForm, setSkillForm] = useState(<></>);
+  const [awardForm, setAwardForm] = useState(<></>);
+  const [referenceForm, setReferenceForm] = useState(<></>);
+
+  function addWorkExperience() {
+    setWorkExperienceForm(
+      <InputForm>
+        <InputSet label='Position' type='text' id='position' name='position' value='Software Engineer' option='input' />
+        <InputSet label='Company Name' type='text' id='company' name='company' value='Sony' option='input' />
+        <div className='display-flex gap-16 flex-wrap'>
+          <InputSet label='Start Date' type='text' id='start-date' name='start-date' option='input' />
+          <InputSet label='End Date' type='text' id='end-date' name='end-date' option='input' />
+        </div>
+        <div className='display-flex gap-16 flex-wrap'>
+          <Button text='Add' classes='power flex-1' />
+          <Button text='Cancel' classes='outline black flex-1' handleClick={() => setWorkExperienceForm(<></>)}/>
+        </div>
+      </InputForm>
+    )
+  }
+
+  function addVolunteerExperience() {
+    setVolunteerExperienceForm(
+      <InputForm>
+        <div className='display-flex gap-16 flex-wrap'>
+          <InputSet label='Position' type='text' id='position-v' name='position-v' value='Volunteer' option='input' />
+          <InputSet label='Organization' type='text' id='organization-v' name='organization-v' value='Nonprofit' option='input' />
+        </div>
+        <div className='display-flex gap-16 flex-wrap'>
+          <InputSet label='Start Date' type='text' id='start-date-v' name='start-date-v' option='input' />
+          <InputSet label='End Date' type='text' id='end-date-v' name='end-date-v' option='input' />
+        </div>
+        <div className='display-flex gap-16 flex-wrap'>
+          <Button text='Add' classes='power flex-1' />
+          <Button text='Cancel' classes='outline black flex-1' handleClick={() => setVolunteerExperienceForm(<></>)}/>
+        </div>
+      </InputForm>
+    )
+  }
+
+  function addEducation() {
+    setEducationForm(
+      <InputForm>
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Degree' type='text' id='degree' name='degree' value='Computer Science, Bachelor of Science' option='input' />
+            <InputSet label='Institution' type='text' id='institution' name='institution' value='Some College' option='input' />
+          </div>
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Start Date' type='text' id='start-date-e' name='start-date-e' option='input' />
+            <InputSet label='End Date' type='text' id='end-date-e' name='end-date-e' option='input' />
+          </div>
+          <div className='display-flex gap-16 flex-wrap'>
+            <Button text='Add' classes='power flex-1' />
+            <Button text='Cancel' classes='outline black flex-1' handleClick={() => setEducationForm(<></>)} />
+          </div>
+      </InputForm>
+    )
+  }
+
+  function addCertification() {
+    setCertificationForm(
+      <InputForm>
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input' />
+            <InputSet label='Institution' type='text' id='institution-c' name='institution-c' value='' option='input' />
+          </div>
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Start Date' type='text' id='start-date-c' name='start-date-c' option='input' />
+            <InputSet label='End Date' type='text' id='end-date-c' name='end-date-c' option='input' />
+          </div>
+          <div className='display-flex gap-16 flex-wrap'>
+            <Button text='Add' classes='power flex-1' />
+            <Button text='Cancel' classes='outline black flex-1' handleClick={() => setCertificationForm(<></>)}/>
+          </div>
+      </InputForm>
+    )
+  }
+
+  function addSkill() {
+    setSkillForm (
+      <InputForm>
+        <Input type='input' id='skill' name='skill' />
+        <div className='display-flex gap-16 flex-wrap'>
+          <Button text='Add' classes='power flex-1' />
+          <Button text='Cancel' classes='outline black flex-1' handleClick={() => setSkillForm(<></>)}/>
+        </div>
+      </InputForm>
+    )
+  }
+
+  function addAward() {
+    setAwardForm(
+      <InputForm>
+          <Input type='input' id='award' name='award' />
+          <div className='display-flex gap-16 flex-wrap'>
+            <Button text='Add' classes='power flex-1' />
+            <Button text='Cancel' classes='outline black flex-1' handleClick={() => setAwardForm(<></>)} />
+          </div>
+      </InputForm>
+    )
+  }
+
+  function addReference() {
+    setReferenceForm(
+      <InputForm>
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Name' type='text' id='reference-name' name='reference-name' value='' option='input' />
+            <InputSet label='Position' type='text' id='reference-position' name='reference-position' value='' option='input' />
+          </div>
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Email Address' type='text' id='email-r' name='email-r' option='input' />
+            <InputSet label='Phone Number' type='text' id='phone-r' name='phone-r' option='input' />
+          </div>
+          <div className='display-flex gap-16 flex-wrap'>
+            <Button text='Add' classes='power flex-1' />
+            <Button text='Cancel' classes='outline black flex-1' handleClick={() => setReferenceForm(<></>)} />
+          </div>
+      </InputForm>
+    )
+  }
+
   return (
     <>
       <div className='edit-area'>
@@ -259,125 +385,50 @@ function EditArea() {
             <Entries>
               <Entry entry='Sony' type='work' />
             </Entries>
-            <InputForm>
-                <InputSet label='Position' type='text' id='position' name='position' value='Software Engineer' option='input' />
-                <InputSet label='Company Name' type='text' id='company' name='company' value='Sony' option='input' />
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Start Date' type='text' id='start-date' name='start-date' option='input' />
-                  <InputSet label='End Date' type='text' id='end-date' name='end-date' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <Button text='Add' classes='power flex-1' />
-                  <Button text='Cancel' classes='outline black flex-1' />
-                </div>
-            </InputForm>
-            <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {workExperienceForm}
+            <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addWorkExperience}/>
           </DropdownContainer>
           <DropdownContainer containerName='Volunteer Experience'>
             <Entries>
               <Entry entry='Volunteer' type='volunteer' />
             </Entries>
-            <InputForm>
-              <div className='display-flex gap-16 flex-wrap'>
-                <InputSet label='Position' type='text' id='position-v' name='position-v' value='Volunteer' option='input' />
-                <InputSet label='Organization' type='text' id='organization-v' name='organization-v' value='Nonprofit' option='input' />
-              </div>
-              <div className='display-flex gap-16 flex-wrap'>
-                <InputSet label='Start Date' type='text' id='start-date-v' name='start-date-v' option='input' />
-                <InputSet label='End Date' type='text' id='end-date-v' name='end-date-v' option='input' />
-              </div>
-              <div className='display-flex gap-16 flex-wrap'>
-                <Button text='Add' classes='power flex-1' />
-                <Button text='Cancel' classes='outline black flex-1' />
-              </div>
-            </InputForm>
-            <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {volunteerExperienceForm}
+            <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addVolunteerExperience} />
           </DropdownContainer>
           <DropdownContainer containerName='Education'>
             <Entries>
               <Entry entry='Some University' type='education' />
             </Entries>
-            <InputForm>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Degree' type='text' id='degree' name='degree' value='Computer Science, Bachelor of Science' option='input' />
-                  <InputSet label='Institution' type='text' id='institution' name='institution' value='Some College' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Start Date' type='text' id='start-date-e' name='start-date-e' option='input' />
-                  <InputSet label='End Date' type='text' id='end-date-e' name='end-date-e' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <Button text='Add' classes='power flex-1' />
-                  <Button text='Cancel' classes='outline black flex-1' />
-                </div>
-            </InputForm>
-            <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {educationForm}
+            <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addEducation}/>
           </DropdownContainer>
           <DropdownContainer containerName='Certifications'>
             <Entries>
               <Entry entry='Certification' type='certification' />
             </Entries>
-            <InputForm>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input' />
-                  <InputSet label='Institution' type='text' id='institution-c' name='institution-c' value='' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Start Date' type='text' id='start-date-c' name='start-date-c' option='input' />
-                  <InputSet label='End Date' type='text' id='end-date-c' name='end-date-c' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <Button text='Add' classes='power flex-1' />
-                  <Button text='Cancel' classes='outline black flex-1' />
-                </div>
-            </InputForm>
-            <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {certificationForm}
+            <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addCertification}/>
           </DropdownContainer>
           <DropdownContainer containerName='Skills'>
             <Entries>
               <Entry entry='Project Management' type='skill' />
             </Entries>
-            <InputForm>
-                <Input type='input' id='skill' name='skill' />
-                <div className='display-flex gap-16 flex-wrap'>
-                  <Button text='Add' classes='power flex-1' />
-                  <Button text='Cancel' classes='outline black flex-1' />
-                </div>
-            </InputForm>
-            <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {skillForm}
+            <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addSkill} />
           </DropdownContainer>
           <DropdownContainer containerName='Awards'>
             <Entries>
               <Entry entry='Some Award' type='award' />
             </Entries>
-            <InputForm>
-                <Input type='input' id='award' name='award' />
-                <div className='display-flex gap-16 flex-wrap'>
-                  <Button text='Add' classes='power flex-1' />
-                  <Button text='Cancel' classes='outline black flex-1' />
-                </div>
-            </InputForm>
-            <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {awardForm}
+            <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addAward} />
           </DropdownContainer>
           <DropdownContainer containerName='References'>
             <Entries>
               <Entry entry='John Smith' type='reference' />
             </Entries>
-            <InputForm>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Name' type='text' id='reference-name' name='reference-name' value='' option='input' />
-                  <InputSet label='Position' type='text' id='reference-position' name='reference-position' value='' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <InputSet label='Email Address' type='text' id='email-r' name='email-r' option='input' />
-                  <InputSet label='Phone Number' type='text' id='phone-r' name='phone-r' option='input' />
-                </div>
-                <div className='display-flex gap-16 flex-wrap'>
-                  <Button text='Add' classes='power flex-1' />
-                  <Button text='Cancel' classes='outline black flex-1' />
-                </div>
-            </InputForm>
-            <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' />
+            {referenceForm}
+            <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addReference} />
           </DropdownContainer>
         </div>
       </div>
