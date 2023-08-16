@@ -182,14 +182,16 @@ function Entries({ children }) {
 }
 
 function DropdownContainer({ containerName, children, containerType }) {
-  const useToggle = () => {
-    const [toggleValue, setToggleValue] = useState(true);
 
-    const toggler = () => { setToggleValue(!toggleValue) };
-    return [toggleValue, toggler];
+  const [hidden, setHidden] = useState('');
+
+  function toggleHidden() {
+    if (hidden === 'hidden') {
+      setHidden('');
+    } else {
+      setHidden('hidden');
+    }
   }
-
-  const [toggle, setToggle] = useToggle();
 
   if (containerType === 'no-entries') {
     return (
@@ -199,10 +201,10 @@ function DropdownContainer({ containerName, children, containerType }) {
             <h2 className='onyx'>{containerName}</h2>
           </div>
           <div>
-            <img src={chevronUp} className='chevron' onClick={setToggle} />
+            <img src={chevronUp} className='chevron' onClick={toggleHidden} />
           </div>
         </div>
-        {toggle && children}
+        {children}
       </div>
     )
   } else {
@@ -213,12 +215,12 @@ function DropdownContainer({ containerName, children, containerType }) {
             <h2 className='onyx'>{containerName}</h2>
           </div>
           <div>
-            <img src={chevronUp} className='chevron' onClick={setToggle}/>
+            <img src={chevronUp} className='chevron' onClick={toggleHidden}/>
           </div>
         </div>
-        {toggle && <div className='entries-input-container display-flex flex-column gap-32'>
+        <div className={'entries-input-container display-flex flex-column gap-32 ' + hidden}>
           {children}
-        </div>}
+        </div>
       </div>
       )
   }

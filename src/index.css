@@ -142,6 +142,10 @@ body {
   padding-left: 2.75rem;
 }
 
+.hidden {
+  display: none;
+}
+
 
 
 /** FONT PROPERTIES **/
