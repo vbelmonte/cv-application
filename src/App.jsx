@@ -204,7 +204,9 @@ function DropdownContainer({ containerName, children, containerType }) {
             <img src={chevronUp} className='chevron' onClick={toggleHidden} />
           </div>
         </div>
-        {children}
+        <div className={hidden}>
+          {children}
+        </div>
       </div>
     )
   } else {
