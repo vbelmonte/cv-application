@@ -402,18 +402,22 @@ function EditArea() {
       case 'certification':
         certificationEntriesArray.push(obj);
         setCertificationEntries(<List list={certificationEntriesArray} formClass={formClass} />);
+        setCertificationForm(<></>);
         break;
       case 'skill':
         skillEntriesArray.push(obj);
         setSkillEntries(<List list={skillEntriesArray} formClass={formClass} />);
+        setSkillForm(<></>);
         break;
       case 'award':
         awardEntriesArray.push(obj);
         setAwardEntries(<List list={awardEntriesArray} formClass={formClass} />);
+        setAwardForm(<></>);
         break;
       case 'reference':
         referenceEntriesArray.push(obj);
         setReferenceEntries(<List llist={referenceEntriesArray} formClass={formClass} />);
+        setReferenceForm(<></>);
         break;
     }
   }
@@ -472,7 +476,7 @@ function EditArea() {
             <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <Button text='Add' classes='power flex-1' />
+            <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
             <Button text='Cancel' classes='outline black flex-1' handleClick={() => setEducationForm(<></>)} />
           </div>
       </InputForm>
@@ -493,7 +497,7 @@ function EditArea() {
             <InputSet label='End Date' type='text' id='end-date' name='end-date' value ='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <Button text='Add' classes='power flex-1' />
+            <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
             <Button text='Cancel' classes='outline black flex-1' handleClick={() => setCertificationForm(<></>)}/>
           </div>
       </InputForm>
@@ -507,7 +511,7 @@ function EditArea() {
       <InputForm classes={formClass}>
         <Input type='input' id='skill' name='skill' value='' />
         <div className='display-flex gap-16 flex-wrap'>
-          <Button text='Add' classes='power flex-1' />
+          <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setSkillForm(<></>)}/>
         </div>
       </InputForm>
@@ -525,7 +529,7 @@ function EditArea() {
             <InputSet label='Date Awarded' type='input' id='date' name='date' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <Button text='Add' classes='power flex-1' />
+            <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
             <Button text='Cancel' classes='outline black flex-1' handleClick={() => setAwardForm(<></>)} />
           </div>
       </InputForm>
@@ -546,7 +550,7 @@ function EditArea() {
             <InputSet label='Phone Number' type='text' id='phone' name='phone' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <Button text='Add' classes='power flex-1' />
+            <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
             <Button text='Cancel' classes='outline black flex-1' handleClick={() => setReferenceForm(<></>)} />
           </div>
       </InputForm>
