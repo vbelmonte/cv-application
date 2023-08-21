@@ -401,7 +401,7 @@ img.chevron {
   padding-left: 2rem;
 }
 
-.input-container .input-form {
+.input-container form {
   display: flex;
   /*display: none;*/
   flex-direction: column;

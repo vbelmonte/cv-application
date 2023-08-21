@@ -29,26 +29,26 @@ function Button({ text, classes, img, imgClasses, type, handleClick }) {
 
   if (type === 'icon-text') {
     return (
-      <button className={classes + ' icon-text'} onClick={handleClick}>
+      <button className={classes + ' icon-text'} type='button' onClick={handleClick}>
         <img src={img} className={imgClasses + ' icon-16'} />
         {text}
       </button>
     )
   } else if (type === 'icon') {
     return (
-      <button className={classes + ' icon'} onClick={handleClick}>
+      <button className={classes + ' icon'} type='button' onClick={handleClick}>
         <img src={img} className='icon-20' />
       </button>
     )
   } else if (type === 'outline') {
     return (
-      <button className={classes + ' outline'} onClick={handleClick}>
+      <button className={classes + ' outline'} type='button' onClick={handleClick}>
         {text}
       </button>
     )
   } else {
     return (
-      <button className={classes} onClick={handleClick}>
+      <button className={classes} type='button' onClick={handleClick}>
         {text}
       </button>
     )
@@ -146,9 +146,9 @@ function InputSet({ label, type, id, name, value, option }) {
 
 function InputForm({ children, classes }) {
   return (
-    <div className={'input-form ' + classes}>
+    <form className={classes}>
       {children}
-    </div>
+    </form>
   )
 }
 
@@ -228,7 +228,138 @@ function DropdownContainer({ containerName, children, containerType }) {
   }
 }
 
+function determineFormProcess(form, formName) {
+  let obj;
+  switch(formName) {
+    case 'work':
+      obj = {
+        position: form.elements['position'].value,
+        company: form.elements['company'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        type: formName
+      }
+      break;
+    case 'volunteer':
+      obj = {
+        position: form.elements['position'].value,
+        organization: form.elements['organization'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        type: formName
+      };
+      break;
+    case 'education':
+      obj = {
+        degree: form.elements['degree'].value,
+        institution: form.elements['institution'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        type: formName
+      }
+      break;
+    case 'certification':
+      obj = {
+        certifcation: form.elements['certification'].value,
+        institution: form.elements['institution'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        type: formName
+      }
+      break;
+    case 'skill':
+      obj = {
+        skill: form.elements['skill'].value
+      }
+      break;
+    case 'award':
+      obj = {
+        award: form.elements['award'].value,
+        organization: form.elements['organization'].value,
+        date: form.elements['date'].value
+      }
+      break;
+    case 'reference':
+      obj = {
+        name: form.elements['name'].value,
+        position: form.elements['position'].value,
+        email: form.elements['email'].value,
+        phone: form.elements['phone'].value
+      }
+      break;
+  }
+  return obj;
+}
+
+function List(props) {
+  switch(props.formClass) {
+    case 'work':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.position} type={entry.type}/>
+          })}
+        </>
+      )
+    case 'volunteer':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.position} type={entry.type}/>
+          })}
+        </>
+      )  
+    case 'education':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.degree} type={entry.type}/>
+          })}
+        </>
+      )
+    case 'certification':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.certificate} type={entry.type}/>
+          })}
+        </>
+      )
+    case 'skill':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.skill} type={entry.type}/>
+          })}
+        </>
+      )
+    case 'award':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.award} type={entry.type}/>
+          })}
+        </>
+      )
+    case 'reference':
+      return (
+        <>
+          {props.list.map((entry) => {
+            return <Entry key={self.crypto.randomUUID()} entry={entry.name} type={entry.type}/>
+          })}
+        </>
+      )
+  }
+}
+
 function EditArea() {
+  let workEntriesArray = [];
+  let volunteerEntriesArray = [];
+  let educationEntriesArray = [];
+  let certificationEntriesArray = [];
+  let skillEntriesArray = [];
+  let awardEntriesArray = [];
+  let referenceEntriesArray = [];
 
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
@@ -238,17 +369,68 @@ function EditArea() {
   const [awardForm, setAwardForm] = useState(<></>);
   const [referenceForm, setReferenceForm] = useState(<></>);
 
+  const [workEntries, setWorkEntries] = useState(<></>);
+  const [volunteerEntries, setVolunteerEntries] = useState(<></>);
+  const [educationEntries, setEducationEntries] = useState(<></>);
+  const [certificationEntries, setCertificationEntries] = useState(<></>);
+  const [skillEntries, setSkillEntries] = useState(<></>);
+  const [awardEntries, setAwardEntries] = useState(<></>);
+  const [referenceEntries, setReferenceEntries] = useState(<></>);
+
+  function addEntry(event, formClass) {
+    event.preventDefault();
+    const form = document.getElementsByClassName(formClass)[0];
+    const obj = determineFormProcess(form, formClass);
+    console.log(obj);
+  
+    switch(formClass) {
+      case 'work':
+        workEntriesArray.push(obj);
+        setWorkEntries(<List list={workEntriesArray} formClass={formClass} />);
+        setWorkExperienceForm(<></>);
+        break;
+      case 'volunteer':
+        volunteerEntriesArray.push(obj);
+        setVolunteerEntries(<List list={volunteerEntriesArray} formClass={formClass} />);
+        setVolunteerExperienceForm(<></>);
+        break;
+      case 'education':
+        educationEntriesArray.push(obj);
+        setEducationEntries(<List list={educationEntriesArray} formClass={formClass} />);
+        setEducationForm(<></>);
+        break;
+      case 'certification':
+        certificationEntriesArray.push(obj);
+        setCertificationEntries(<List list={certificationEntriesArray} formClass={formClass} />);
+        break;
+      case 'skill':
+        skillEntriesArray.push(obj);
+        setSkillEntries(<List list={skillEntriesArray} formClass={formClass} />);
+        break;
+      case 'award':
+        awardEntriesArray.push(obj);
+        setAwardEntries(<List list={awardEntriesArray} formClass={formClass} />);
+        break;
+      case 'reference':
+        referenceEntriesArray.push(obj);
+        setReferenceEntries(<List llist={referenceEntriesArray} formClass={formClass} />);
+        break;
+    }
+  }
+
   function addWorkExperience() {
+    const formClass = 'work';
+
     setWorkExperienceForm(
-      <InputForm>
-        <InputSet label='Position' type='text' id='position' name='position' value='Software Engineer' option='input' />
-        <InputSet label='Company Name' type='text' id='company' name='company' value='Sony' option='input' />
+      <InputForm classes={formClass}>
+        <InputSet label='Position' type='text' id='position' name='position' value='' option='input' />
+        <InputSet label='Company Name' type='text' id='company' name='company' value='' option='input' />
         <div className='display-flex gap-16 flex-wrap'>
-          <InputSet label='Start Date' type='text' id='start-date' name='start-date' option='input' />
-          <InputSet label='End Date' type='text' id='end-date' name='end-date' option='input' />
+          <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
+          <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
         </div>
         <div className='display-flex gap-16 flex-wrap'>
-          <Button text='Add' classes='power flex-1' />
+          <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)}/>
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setWorkExperienceForm(<></>)}/>
         </div>
       </InputForm>
@@ -256,18 +438,20 @@ function EditArea() {
   }
 
   function addVolunteerExperience() {
+    const formClass = 'volunteer';
+
     setVolunteerExperienceForm(
-      <InputForm>
+      <InputForm classes={formClass}>
         <div className='display-flex gap-16 flex-wrap'>
-          <InputSet label='Position' type='text' id='position-v' name='position-v' value='Volunteer' option='input' />
-          <InputSet label='Organization' type='text' id='organization-v' name='organization-v' value='Nonprofit' option='input' />
+          <InputSet label='Position' type='text' id='position' name='position' value='' option='input' />
+          <InputSet label='Organization' type='text' id='organization' name='organization' value='' option='input' />
         </div>
         <div className='display-flex gap-16 flex-wrap'>
-          <InputSet label='Start Date' type='text' id='start-date-v' name='start-date-v' option='input' />
-          <InputSet label='End Date' type='text' id='end-date-v' name='end-date-v' option='input' />
+          <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
+          <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
         </div>
         <div className='display-flex gap-16 flex-wrap'>
-          <Button text='Add' classes='power flex-1' />
+          <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setVolunteerExperienceForm(<></>)}/>
         </div>
       </InputForm>
@@ -275,15 +459,17 @@ function EditArea() {
   }
 
   function addEducation() {
+    const formClass = 'education';
+
     setEducationForm(
-      <InputForm>
+      <InputForm classes={formClass}>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Degree' type='text' id='degree' name='degree' value='Computer Science, Bachelor of Science' option='input' />
-            <InputSet label='Institution' type='text' id='institution' name='institution' value='Some College' option='input' />
+            <InputSet label='Degree' type='text' id='degree' name='degree' value='' option='input' />
+            <InputSet label='Institution' type='text' id='institution' name='institution' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Start Date' type='text' id='start-date-e' name='start-date-e' option='input' />
-            <InputSet label='End Date' type='text' id='end-date-e' name='end-date-e' option='input' />
+            <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
+            <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' />
@@ -294,15 +480,17 @@ function EditArea() {
   }
 
   function addCertification() {
+    const formClass = 'certificate';
+
     setCertificationForm(
-      <InputForm>
+      <InputForm classes={formClass}>
           <div className='display-flex gap-16 flex-wrap'>
             <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input' />
-            <InputSet label='Institution' type='text' id='institution-c' name='institution-c' value='' option='input' />
+            <InputSet label='Institution' type='text' id='institution' name='institution' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Start Date' type='text' id='start-date-c' name='start-date-c' option='input' />
-            <InputSet label='End Date' type='text' id='end-date-c' name='end-date-c' option='input' />
+            <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
+            <InputSet label='End Date' type='text' id='end-date' name='end-date' value ='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' />
@@ -313,9 +501,11 @@ function EditArea() {
   }
 
   function addSkill() {
+    const formClass = 'skill';
+
     setSkillForm (
-      <InputForm>
-        <Input type='input' id='skill' name='skill' />
+      <InputForm classes={formClass}>
+        <Input type='input' id='skill' name='skill' value='' />
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' />
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setSkillForm(<></>)}/>
@@ -325,9 +515,15 @@ function EditArea() {
   }
 
   function addAward() {
+    const formClass = 'award';
+
     setAwardForm(
-      <InputForm>
-          <Input type='input' id='award' name='award' />
+      <InputForm classes={formClass}>
+          <InputSet label='Award' type='input' id='award' name='award' value='' option='input' />
+          <div className='display-flex gap-16 flex-wrap'>
+            <InputSet label='Organization' type='input' id='organization' name='organization' value='' option='input' />
+            <InputSet label='Date Awarded' type='input' id='date' name='date' value='' option='input' />
+          </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' />
             <Button text='Cancel' classes='outline black flex-1' handleClick={() => setAwardForm(<></>)} />
@@ -337,15 +533,17 @@ function EditArea() {
   }
 
   function addReference() {
+    const formClass = 'reference';
+
     setReferenceForm(
-      <InputForm>
+      <InputForm classes={formClass}>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Name' type='text' id='reference-name' name='reference-name' value='' option='input' />
-            <InputSet label='Position' type='text' id='reference-position' name='reference-position' value='' option='input' />
+            <InputSet label='Name' type='text' id='name' name='name' value='' option='input' />
+            <InputSet label='Position' type='text' id='position' name='position' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Email Address' type='text' id='email-r' name='email-r' option='input' />
-            <InputSet label='Phone Number' type='text' id='phone-r' name='phone-r' option='input' />
+            <InputSet label='Email Address' type='text' id='email' name='email' value=''option='input' />
+            <InputSet label='Phone Number' type='text' id='phone' name='phone' value='' option='input' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' />
@@ -383,49 +581,49 @@ function EditArea() {
           </DropdownContainer>
           <DropdownContainer containerName='Work Experience'>
             <Entries>
-              <Entry entry='Sony' type='work' />
+              {workEntries}
             </Entries>
             {workExperienceForm}
             <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addWorkExperience}/>
           </DropdownContainer>
           <DropdownContainer containerName='Volunteer Experience'>
             <Entries>
-              <Entry entry='Volunteer' type='volunteer' />
+              {volunteerEntries}
             </Entries>
             {volunteerExperienceForm}
             <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addVolunteerExperience} />
           </DropdownContainer>
           <DropdownContainer containerName='Education'>
             <Entries>
-              <Entry entry='Some University' type='education' />
+              {educationEntries}
             </Entries>
             {educationForm}
             <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addEducation}/>
           </DropdownContainer>
           <DropdownContainer containerName='Certifications'>
             <Entries>
-              <Entry entry='Certification' type='certification' />
+              {certificationEntries}
             </Entries>
             {certificationForm}
             <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addCertification}/>
           </DropdownContainer>
           <DropdownContainer containerName='Skills'>
             <Entries>
-              <Entry entry='Project Management' type='skill' />
+              {skillEntries}
             </Entries>
             {skillForm}
             <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addSkill} />
           </DropdownContainer>
           <DropdownContainer containerName='Awards'>
             <Entries>
-              <Entry entry='Some Award' type='award' />
+              {awardEntries}
             </Entries>
             {awardForm}
             <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addAward} />
           </DropdownContainer>
           <DropdownContainer containerName='References'>
             <Entries>
-              <Entry entry='John Smith' type='reference' />
+              {referenceEntries}
             </Entries>
             {referenceForm}
             <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addReference} />
