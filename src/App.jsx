@@ -63,7 +63,7 @@ function handleChange(e, callback, type) {
   }
 }
 
-function clearAllFields() {
+/*function clearAllFields() {
   const inputs = document.getElementsByTagName('input');
   for (let i = 0; i < inputs.length; i+=1) {
     inputs[i].value = '';
@@ -91,7 +91,7 @@ function Options() {
       </div>
     </div>
   )
-}
+}*/
 
 function Input({ type, id, name, value}) {
   const [text, setText] = useState(value);
@@ -260,7 +260,7 @@ function determineFormProcess(form, formName) {
       break;
     case 'certification':
       obj = {
-        certifcation: form.elements['certification'].value,
+        certification: form.elements['certification'].value,
         institution: form.elements['institution'].value,
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
@@ -321,7 +321,7 @@ function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.certificate} type={entry.type}/>
+            return <Entry key={self.crypto.randomUUID()} entry={entry.certification} type={entry.type}/>
           })}
         </>
       )
@@ -353,14 +353,6 @@ function List(props) {
 }
 
 function EditArea() {
-  let workEntriesArray = [];
-  let volunteerEntriesArray = [];
-  let educationEntriesArray = [];
-  let certificationEntriesArray = [];
-  let skillEntriesArray = [];
-  let awardEntriesArray = [];
-  let referenceEntriesArray = [];
-
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
   const [educationForm, setEducationForm] = useState(<></>);
@@ -377,46 +369,120 @@ function EditArea() {
   const [awardEntries, setAwardEntries] = useState(<></>);
   const [referenceEntries, setReferenceEntries] = useState(<></>);
 
+  const [workArray, setWorkArray] = useState([]);
+  const [volunteerArray, setVolunteerArray] = useState([]);
+  const [educationArray, setEducationArray] = useState([]);
+  const [certificationArray, setCertificationArray] = useState([]);
+  const [skillArray, setSkillArray] = useState([]);
+  const [awardArray, setAwardArray] = useState([]);
+  const [referenceArray, setReferenceArray] = useState([]);
+
+  function clearAllFields() {
+    const inputs = document.getElementsByTagName('input');
+    for (let i = 0; i < inputs.length; i+=1) {
+      inputs[i].value = '';
+    }
+    const textarea = document.getElementsByTagName('textarea');
+    for (let i = 0; i < textarea.length; i+=1) {
+      textarea[i].value = '';
+    }
+  
+    const select = document.getElementsByTagName('select');
+    select[0].selectedIndex = 0;
+
+    setWorkEntries(<></>);
+    setWorkArray([]);
+
+    setVolunteerEntries(<></>);
+    setVolunteerArray([]);
+
+    setEducationEntries(<></>);
+    setEducationArray([]);
+
+    setCertificationEntries(<></>);
+    setCertificationArray([]);
+
+    setSkillEntries(<></>);
+    setSkillArray([]);
+
+    setAwardEntries(<></>);
+    setAwardArray([]);
+
+    setReferenceEntries(<></>);
+    setReferenceArray([]);
+  }
+  
+  function Options() {
+    return (
+      <div className='options-container'>
+        <div className='buttons'>
+          <div className='left'>
+            <Button text='Edit' img={editIcon} type='icon-text' />
+            <Button text='Customize' img={customizeIcon} type='icon-text' />
+          </div>
+          <div className='right'>
+            <Button text='Clear Resume' classes='red' type='outline' handleClick={clearAllFields} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   function addEntry(event, formClass) {
     event.preventDefault();
     const form = document.getElementsByClassName(formClass)[0];
     const obj = determineFormProcess(form, formClass);
     console.log(obj);
+    let temp;
   
     switch(formClass) {
       case 'work':
-        workEntriesArray.push(obj);
-        setWorkEntries(<List list={workEntriesArray} formClass={formClass} />);
+        temp = workArray;
+        temp.push(obj);
+        setWorkArray(temp);
+        setWorkEntries(<List list={workArray} formClass={formClass} />);
         setWorkExperienceForm(<></>);
         break;
       case 'volunteer':
-        volunteerEntriesArray.push(obj);
-        setVolunteerEntries(<List list={volunteerEntriesArray} formClass={formClass} />);
+        temp = volunteerArray;
+        temp.push(obj);
+        setVolunteerArray(temp);
+        setVolunteerEntries(<List list={volunteerArray} formClass={formClass} />);
         setVolunteerExperienceForm(<></>);
         break;
       case 'education':
-        educationEntriesArray.push(obj);
-        setEducationEntries(<List list={educationEntriesArray} formClass={formClass} />);
+        temp = educationArray;
+        temp.push(obj);
+        setEducationArray(temp);
+        setEducationEntries(<List list={educationArray} formClass={formClass} />);
         setEducationForm(<></>);
         break;
       case 'certification':
-        certificationEntriesArray.push(obj);
-        setCertificationEntries(<List list={certificationEntriesArray} formClass={formClass} />);
+        temp = certificationArray;
+        temp.push(obj);
+        setCertificationArray(temp);
+        setCertificationEntries(<List list={certificationArray} formClass={formClass} />);
         setCertificationForm(<></>);
         break;
       case 'skill':
-        skillEntriesArray.push(obj);
-        setSkillEntries(<List list={skillEntriesArray} formClass={formClass} />);
+        temp = skillArray;
+        temp.push(obj);
+        setSkillArray(temp);
+        setSkillEntries(<List list={skillArray} formClass={formClass} />);
         setSkillForm(<></>);
         break;
       case 'award':
-        awardEntriesArray.push(obj);
-        setAwardEntries(<List list={awardEntriesArray} formClass={formClass} />);
+        temp = awardArray;
+        temp.push(obj);
+        setAwardArray(temp);
+        setAwardEntries(<List list={awardArray} formClass={formClass} />);
         setAwardForm(<></>);
         break;
       case 'reference':
-        referenceEntriesArray.push(obj);
-        setReferenceEntries(<List llist={referenceEntriesArray} formClass={formClass} />);
+        temp = referenceArray;
+        temp.push(obj);
+        setReferenceArray(temp);
+        setReferenceEntries(<List llist={referenceArray} formClass={formClass} />);
         setReferenceForm(<></>);
         break;
     }
@@ -484,7 +550,7 @@ function EditArea() {
   }
 
   function addCertification() {
-    const formClass = 'certificate';
+    const formClass = 'certification';
 
     setCertificationForm(
       <InputForm classes={formClass}>
