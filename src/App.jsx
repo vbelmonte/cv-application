@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import cvLogo from './assets/cv-builder-logo.svg'
 import editIcon from './assets/icon-edit.svg'
 import customizeIcon from './assets/icon-customize.svg'
@@ -58,8 +56,8 @@ function Button({ text, classes, img, imgClasses, type, handleClick }) {
 function handleChange(e, callback, type) {
   if (type=== 'change') {
     callback(e.target.value);
-  } else {
-    callback('');
+  } else if (type === 'select') {
+    callback(e.target.value);
   }
 }
 
@@ -93,8 +91,21 @@ function Options() {
   )
 }*/
 
-function Input({ type, id, name, value}) {
-  const [text, setText] = useState(value);
+function Input({ type, id, name, value, callback }) {
+  return (
+    <input
+      className='input-type'
+      type={type}
+      id={id}
+      name={name}
+      value={value}
+      onChange={e => handleChange(e, callback, 'change')}
+      />
+  )
+}
+
+function InputIm({ type, id, name, value }) {
+  const [text, setText] = useState('');
 
   return (
     <input
@@ -103,43 +114,50 @@ function Input({ type, id, name, value}) {
       id={id}
       name={name}
       value={text}
-      onChange={e => {handleChange(e, setText, 'change')}}
-      />
+      onChange={e => handleChange(e, setText, 'change')}
+    />
   )
 }
 
-function InputSelectState({ id, name }) {
+function InputSelectState({ id, name, select, callback }) {
   const states = [{"name":"Alabama","abbreviation":"AL"},{"name":"Alaska","abbreviation":"AK"},{"name":"Arizona","abbreviation":"AZ"},{"name":"Arkansas","abbreviation":"AR"},{"name":"California","abbreviation":"CA"},{"name":"Colorado","abbreviation":"CO"},{"name":"Connecticut","abbreviation":"CT"},{"name":"Delaware","abbreviation":"DE"},{"name":"Florida","abbreviation":"FL"},{"name":"Georgia","abbreviation":"GA"},{"name":"Hawaii","abbreviation":"HI"},{"name":"Idaho","abbreviation":"ID"},{"name":"Illinois","abbreviation":"IL"},{"name":"Indiana","abbreviation":"IN"},{"name":"Iowa","abbreviation":"IA"},{"name":"Kansas","abbreviation":"KS"},{"name":"Kentucky","abbreviation":"KY"},{"name":"Louisiana","abbreviation":"LA"},{"name":"Maine","abbreviation":"ME"},{"name":"Maryland","abbreviation":"MD"},{"name":"Massachusetts","abbreviation":"MA"},{"name":"Michigan","abbreviation":"MI"},{"name":"Minnesota","abbreviation":"MN"},{"name":"Mississippi","abbreviation":"MS"},{"name":"Missouri","abbreviation":"MO"},{"name":"Montana","abbreviation":"MT"},{"name":"Nebraska","abbreviation":"NE"},{"name":"Nevada","abbreviation":"NV"},{"name":"New Hampshire","abbreviation":"NH"},{"name":"New Jersey","abbreviation":"NJ"},{"name":"New Mexico","abbreviation":"NM"},{"name":"New York","abbreviation":"NY"},{"name":"North Carolina","abbreviation":"NC"},{"name":"North Dakota","abbreviation":"ND"},{"name":"Ohio","abbreviation":"OH"},{"name":"Oklahoma","abbreviation":"OK"},{"name":"Oregon","abbreviation":"OR"},{"name":"Pennsylvania","abbreviation":"PA"},{"name":"Rhode Island","abbreviation":"RI"},{"name":"South Carolina","abbreviation":"SC"},{"name":"South Dakota","abbreviation":"SD"},{"name":"Tennessee","abbreviation":"TN"},{"name":"Texas","abbreviation":"TX"},{"name":"Utah","abbreviation":"UT"},{"name":"Vermont","abbreviation":"VT"},{"name":"Virginia","abbreviation":"VA"},{"name":"Washington","abbreviation":"WA"},{"name":"West Virginia","abbreviation":"WV"},{"name":"Wisconsin","abbreviation":"WI"},{"name":"Wyoming","abbreviation":"WY"}];
-
+  
   return (
-    <select name={name} id={id} defaultValue='default'>
-      <option disabled value='default'>Select State</option>
+    <select name={name} id={id} value={select} onChange={e => {handleChange(e, callback, 'select')}}>
+      {select === 'default' && <option disabled value='default'>Select State</option>}
+      {select !== 'default' && <option disabled>Select State</option>}
       {states.map( (state) => {
-        return (
-        <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
-        )
+        if (state.abbreviation === select) {
+          return (
+            <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
+          )
+        } else {
+          return (
+            <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
+          )
+        }
       })}
     </select>
   )
 }
 
-function TextArea({ id, name, defaultValue }) {
+function TextArea({ id, name, value, callback }) {
   return (
-    <textarea id={id} name={name} rows='4'>
-      {defaultValue}
+    <textarea id={id} name={name} rows='4' value={value} onChange={e => handleChange(e, callback, 'change')}>
     </textarea>
   )
 }
 
-function InputSet({ label, type, id, name, value, option }) {
+function InputSet({ label, type, id, name, value, option, callback, select }) {
   return (
     <div className='input flex-1 min-width-0'>
       <label htmlFor={name}>
         {label}
       </label>
-      {option === 'input' && <Input type={type} id={id} name={name} value={value} />}
-      {option === 'textarea' && <TextArea id={id} name={name} value={value} />}
-      {option === 'select' && <InputSelectState id={id} name={name} />}
+      {option === 'input' && <Input type={type} id={id} name={name} value={value} callback={callback} />}
+      {option === 'input-im' && <InputIm type={type} id={id} name={name} value={value} />}
+      {option === 'textarea' && <TextArea id={id} name={name} value={value} callback={callback} />}
+      {option === 'select' && <InputSelectState id={id} name={name} select={select} callback={callback} />}
     </div>
   )
 }
@@ -353,6 +371,17 @@ function List(props) {
 }
 
 function EditArea() {
+  const [firstName, setFirstName] = useState('John');
+  const [lastName, setLastName] = useState('Smith');
+  const [address, setAddress] = useState('1234 Main Street');
+  const [state, setState] = useState('CA');
+  const [city, setCity] = useState('Redondo Beach');
+  const [zipCode, setZipCode] = useState('90277');
+  const [email, setEmail] = useState('jsmith@gmail.com');
+  const [phone, setPhone] = useState('310-123-4567');
+
+  const [summary, setSummary] = useState('Test');
+
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
   const [educationForm, setEducationForm] = useState(<></>);
@@ -378,17 +407,15 @@ function EditArea() {
   const [referenceArray, setReferenceArray] = useState([]);
 
   function clearAllFields() {
-    const inputs = document.getElementsByTagName('input');
-    for (let i = 0; i < inputs.length; i+=1) {
-      inputs[i].value = '';
-    }
-    const textarea = document.getElementsByTagName('textarea');
-    for (let i = 0; i < textarea.length; i+=1) {
-      textarea[i].value = '';
-    }
-  
-    const select = document.getElementsByTagName('select');
-    select[0].selectedIndex = 0;
+    setFirstName('');
+    setLastName('');
+    setAddress('');
+    setState('default');
+    setCity('');
+    setZipCode('');
+    setEmail('');
+    setPhone('');
+    setSummary('');
 
     setWorkEntries(<></>);
     setWorkArray([]);
@@ -493,11 +520,11 @@ function EditArea() {
 
     setWorkExperienceForm(
       <InputForm classes={formClass}>
-        <InputSet label='Position' type='text' id='position' name='position' value='' option='input' />
-        <InputSet label='Company Name' type='text' id='company' name='company' value='' option='input' />
+        <InputSet label='Position' type='text' id='position' name='position' value='' option='input-im' />
+        <InputSet label='Company Name' type='text' id='company' name='company' value='' option='input-im' />
         <div className='display-flex gap-16 flex-wrap'>
-          <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
-          <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
+          <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input-im' />
+          <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input-im' />
         </div>
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)}/>
@@ -513,12 +540,12 @@ function EditArea() {
     setVolunteerExperienceForm(
       <InputForm classes={formClass}>
         <div className='display-flex gap-16 flex-wrap'>
-          <InputSet label='Position' type='text' id='position' name='position' value='' option='input' />
-          <InputSet label='Organization' type='text' id='organization' name='organization' value='' option='input' />
+          <InputSet label='Position' type='text' id='position' name='position' value='' option='input-im' />
+          <InputSet label='Organization' type='text' id='organization' name='organization' value='' option='input-im' />
         </div>
         <div className='display-flex gap-16 flex-wrap'>
-          <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
-          <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
+          <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input-im' />
+          <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input-im' />
         </div>
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
@@ -534,12 +561,12 @@ function EditArea() {
     setEducationForm(
       <InputForm classes={formClass}>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Degree' type='text' id='degree' name='degree' value='' option='input' />
-            <InputSet label='Institution' type='text' id='institution' name='institution' value='' option='input' />
+            <InputSet label='Degree' type='text' id='degree' name='degree' value='' option='input-im' />
+            <InputSet label='Institution' type='text' id='institution' name='institution' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
-            <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input' />
+            <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input-im' />
+            <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
@@ -555,12 +582,12 @@ function EditArea() {
     setCertificationForm(
       <InputForm classes={formClass}>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input' />
-            <InputSet label='Institution' type='text' id='institution' name='institution' value='' option='input' />
+            <InputSet label='Certification' type='text' id='certification' name='certification' value='' option='input-im' />
+            <InputSet label='Institution' type='text' id='institution' name='institution' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input' />
-            <InputSet label='End Date' type='text' id='end-date' name='end-date' value ='' option='input' />
+            <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input-im' />
+            <InputSet label='End Date' type='text' id='end-date' name='end-date' value ='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
@@ -575,7 +602,7 @@ function EditArea() {
 
     setSkillForm (
       <InputForm classes={formClass}>
-        <Input type='input' id='skill' name='skill' value='' />
+        <InputIm type='input' id='skill' name='skill' value='' />
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setSkillForm(<></>)}/>
@@ -589,10 +616,10 @@ function EditArea() {
 
     setAwardForm(
       <InputForm classes={formClass}>
-          <InputSet label='Award' type='input' id='award' name='award' value='' option='input' />
+          <InputSet label='Award' type='input' id='award' name='award' value='' option='input-im' />
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Organization' type='input' id='organization' name='organization' value='' option='input' />
-            <InputSet label='Date Awarded' type='input' id='date' name='date' value='' option='input' />
+            <InputSet label='Organization' type='input' id='organization' name='organization' value='' option='input-im' />
+            <InputSet label='Date Awarded' type='input' id='date' name='date' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
@@ -608,12 +635,12 @@ function EditArea() {
     setReferenceForm(
       <InputForm classes={formClass}>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Name' type='text' id='name' name='name' value='' option='input' />
-            <InputSet label='Position' type='text' id='position' name='position' value='' option='input' />
+            <InputSet label='Name' type='text' id='name' name='name' value='' option='input-im' />
+            <InputSet label='Position' type='text' id='position' name='position' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Email Address' type='text' id='email' name='email' value=''option='input' />
-            <InputSet label='Phone Number' type='text' id='phone' name='phone' value='' option='input' />
+            <InputSet label='Email Address' type='text' id='email' name='email' value=''option='input-im' />
+            <InputSet label='Phone Number' type='text' id='phone' name='phone' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
@@ -629,24 +656,24 @@ function EditArea() {
         <Options />
         <div className='input-area'>
           <DropdownContainer containerName='Personal Details' containerType='no-entries'>
-            <InputForm classes='padding-left-32'>
+            <InputForm classes='personal-details padding-left-32'>
               <div className='display-flex gap-16 flex-wrap'>
-                <InputSet label='First Name' type='text' id='fname' name='fname' value='John' option='input' />
-                <InputSet label='Last Name' type='text' id='lname' name='lname' value='Smith' option='input' />
+                <InputSet label='First Name' type='text' id='fname' name='fname' value={firstName} option='input' callback={setFirstName} />
+                <InputSet label='Last Name' type='text' id='lname' name='lname' value={lastName} option='input' callback={setLastName} />
               </div>
-              <InputSet label='Address' type='text' id='address' name='address' value='1234 Main Street' option='input' />
+              <InputSet label='Address' type='text' id='address' name='address' value={address} option='input' callback={setAddress} />
               <div className='display-flex gap-16 flex-wrap'>
-                <InputSet label='State' id='state' name='state' option='select' />
-                <InputSet label='City' type='text' id='city' name='city' value='Redondo Beach' option='input' />
-                <InputSet label='Zip Code' type='text' id='zip' name='zip' value='90277' option='input' />
+                <InputSet label='State' id='state' name='state' option='select' select={state} callback={setState} />
+                <InputSet label='City' type='text' id='city' name='city' value={city} option='input' callback={setCity} />
+                <InputSet label='Zip Code' type='text' id='zip' name='zip' value={zipCode} option='input' callback={setZipCode} />
               </div>
-              <InputSet label='Email' type='text' id='email' name='email' value='jsmith@gmail.com' option='input' />
-              <InputSet label='Phone Number' type='text' id='phone' name='phone' value='310-123-4567' option='input' />
+              <InputSet label='Email' type='text' id='email' name='email' value={email} option='input' callback={setEmail} />
+              <InputSet label='Phone Number' type='text' id='phone' name='phone' value={phone} option='input' callback={setPhone} />
             </InputForm>
           </DropdownContainer>
           <DropdownContainer containerName='Summary Statement' containerType='no-entries'>
-            <InputForm classes='padding-left-32'>
-              <InputSet label='Summary' id='summary' name='summary' defaultValue='Your summary statement here' option='textarea' />
+            <InputForm classes='summary-statement padding-left-32'>
+              <InputSet label='Summary' id='summary' name='summary' value={summary} option='textarea' callback={setSummary} />
             </InputForm>
           </DropdownContainer>
           <DropdownContainer containerName='Work Experience'>
@@ -709,35 +736,6 @@ function PreviewArea() {
     <>
       <div className='preview-area'>
       </div>
-    </>
-  )
-}
-
-function OldApp() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
