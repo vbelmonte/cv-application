@@ -1,250 +1,14 @@
 import { useState } from 'react'
-import cvLogo from './assets/cv-builder-logo.svg'
 import editIcon from './assets/icon-edit.svg'
 import customizeIcon from './assets/icon-customize.svg'
-import chevronUp from './assets/chevron-up.svg'
-import briefcaseIcon from './assets/icon-briefcase.svg'
-import starIcon from './assets/icon-star.svg'
-import bookIcon from './assets/icon-book.svg'
-import awardIcon from './assets/icon-award.svg'
-import boxIcon from './assets/icon-box.svg'
-import userIcon from './assets/icon-user.svg'
-import trashIcon from './assets/icon-trash.svg'
-import eyeIcon from './assets/icon-eye.svg'
 import plusIcon from './assets/icon-plus.svg'
+import { Navigation } from './components/Navigation'
+import { Button } from './components/Button'
+import { InputIm, InputSet, InputForm } from './components/Inputs'
+import { Entries, List } from './components/Entries'
+import { DropdownContainer } from './components/Dropdown'
 
 
-
-function Navigation() {
-  return (
-    <nav>
-      <img src={cvLogo} />
-    </nav>
-  )
-}
-
-function Button({ text, classes, img, imgClasses, type, handleClick }) {
-
-  if (type === 'icon-text') {
-    return (
-      <button className={classes + ' icon-text'} type='button' onClick={handleClick}>
-        <img src={img} className={imgClasses + ' icon-16'} />
-        {text}
-      </button>
-    )
-  } else if (type === 'icon') {
-    return (
-      <button className={classes + ' icon'} type='button' onClick={handleClick}>
-        <img src={img} className='icon-20' />
-      </button>
-    )
-  } else if (type === 'outline') {
-    return (
-      <button className={classes + ' outline'} type='button' onClick={handleClick}>
-        {text}
-      </button>
-    )
-  } else {
-    return (
-      <button className={classes} type='button' onClick={handleClick}>
-        {text}
-      </button>
-    )
-  }
-}
-
-function handleChange(e, callback, type) {
-  if (type=== 'change') {
-    callback(e.target.value);
-  } else if (type === 'select') {
-    callback(e.target.value);
-  }
-}
-
-/*function clearAllFields() {
-  const inputs = document.getElementsByTagName('input');
-  for (let i = 0; i < inputs.length; i+=1) {
-    inputs[i].value = '';
-  }
-  const textarea = document.getElementsByTagName('textarea');
-  for (let i = 0; i < textarea.length; i+=1) {
-    textarea[i].value = '';
-  }
-
-  const select = document.getElementsByTagName('select');
-  select[0].selectedIndex = 0;
-}
-
-function Options() {
-  return (
-    <div className='options-container'>
-      <div className='buttons'>
-        <div className='left'>
-          <Button text='Edit' img={editIcon} type='icon-text' />
-          <Button text='Customize' img={customizeIcon} type='icon-text' />
-        </div>
-        <div className='right'>
-          <Button text='Clear Resume' classes='red' type='outline' handleClick={clearAllFields} />
-        </div>
-      </div>
-    </div>
-  )
-}*/
-
-function Input({ type, id, name, value, callback }) {
-  return (
-    <input
-      className='input-type'
-      type={type}
-      id={id}
-      name={name}
-      value={value}
-      onChange={e => handleChange(e, callback, 'change')}
-      />
-  )
-}
-
-function InputIm({ type, id, name, value }) {
-  const [text, setText] = useState('');
-
-  return (
-    <input
-      className='input-type'
-      type={type}
-      id={id}
-      name={name}
-      value={text}
-      onChange={e => handleChange(e, setText, 'change')}
-    />
-  )
-}
-
-function InputSelectState({ id, name, select, callback }) {
-  const states = [{"name":"Alabama","abbreviation":"AL"},{"name":"Alaska","abbreviation":"AK"},{"name":"Arizona","abbreviation":"AZ"},{"name":"Arkansas","abbreviation":"AR"},{"name":"California","abbreviation":"CA"},{"name":"Colorado","abbreviation":"CO"},{"name":"Connecticut","abbreviation":"CT"},{"name":"Delaware","abbreviation":"DE"},{"name":"Florida","abbreviation":"FL"},{"name":"Georgia","abbreviation":"GA"},{"name":"Hawaii","abbreviation":"HI"},{"name":"Idaho","abbreviation":"ID"},{"name":"Illinois","abbreviation":"IL"},{"name":"Indiana","abbreviation":"IN"},{"name":"Iowa","abbreviation":"IA"},{"name":"Kansas","abbreviation":"KS"},{"name":"Kentucky","abbreviation":"KY"},{"name":"Louisiana","abbreviation":"LA"},{"name":"Maine","abbreviation":"ME"},{"name":"Maryland","abbreviation":"MD"},{"name":"Massachusetts","abbreviation":"MA"},{"name":"Michigan","abbreviation":"MI"},{"name":"Minnesota","abbreviation":"MN"},{"name":"Mississippi","abbreviation":"MS"},{"name":"Missouri","abbreviation":"MO"},{"name":"Montana","abbreviation":"MT"},{"name":"Nebraska","abbreviation":"NE"},{"name":"Nevada","abbreviation":"NV"},{"name":"New Hampshire","abbreviation":"NH"},{"name":"New Jersey","abbreviation":"NJ"},{"name":"New Mexico","abbreviation":"NM"},{"name":"New York","abbreviation":"NY"},{"name":"North Carolina","abbreviation":"NC"},{"name":"North Dakota","abbreviation":"ND"},{"name":"Ohio","abbreviation":"OH"},{"name":"Oklahoma","abbreviation":"OK"},{"name":"Oregon","abbreviation":"OR"},{"name":"Pennsylvania","abbreviation":"PA"},{"name":"Rhode Island","abbreviation":"RI"},{"name":"South Carolina","abbreviation":"SC"},{"name":"South Dakota","abbreviation":"SD"},{"name":"Tennessee","abbreviation":"TN"},{"name":"Texas","abbreviation":"TX"},{"name":"Utah","abbreviation":"UT"},{"name":"Vermont","abbreviation":"VT"},{"name":"Virginia","abbreviation":"VA"},{"name":"Washington","abbreviation":"WA"},{"name":"West Virginia","abbreviation":"WV"},{"name":"Wisconsin","abbreviation":"WI"},{"name":"Wyoming","abbreviation":"WY"}];
-  
-  return (
-    <select name={name} id={id} value={select} onChange={e => {handleChange(e, callback, 'select')}}>
-      {select === 'default' && <option disabled value='default'>Select State</option>}
-      {select !== 'default' && <option disabled>Select State</option>}
-      {states.map( (state) => {
-        if (state.abbreviation === select) {
-          return (
-            <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
-          )
-        } else {
-          return (
-            <option key={state.abbreviation} value={state.abbreviation}>{state.name}</option>
-          )
-        }
-      })}
-    </select>
-  )
-}
-
-function TextArea({ id, name, value, callback }) {
-  return (
-    <textarea id={id} name={name} rows='4' value={value} onChange={e => handleChange(e, callback, 'change')}>
-    </textarea>
-  )
-}
-
-function InputSet({ label, type, id, name, value, option, callback, select }) {
-  return (
-    <div className='input flex-1 min-width-0'>
-      <label htmlFor={name}>
-        {label}
-      </label>
-      {option === 'input' && <Input type={type} id={id} name={name} value={value} callback={callback} />}
-      {option === 'input-im' && <InputIm type={type} id={id} name={name} value={value} />}
-      {option === 'textarea' && <TextArea id={id} name={name} value={value} callback={callback} />}
-      {option === 'select' && <InputSelectState id={id} name={name} select={select} callback={callback} />}
-    </div>
-  )
-}
-
-function InputForm({ children, classes }) {
-  return (
-    <form className={classes}>
-      {children}
-    </form>
-  )
-}
-
-function Entry({ entry, type }) {
-  return (
-    <li className='display-flex gap-48 justify-space-between entry'>
-      <div className='display-flex gap-24 align-center'>
-        {type === 'work' && <img src={briefcaseIcon} />}
-        {type === 'volunteer' && <img src={starIcon} />}
-        {type === 'education' && <img src={bookIcon} />}
-        {(type === 'certification' || type === 'award') && <img src={awardIcon} />}
-        {type === 'skill' && <img src={boxIcon} />}
-        {type === 'reference' && <img src={userIcon} />}
-        {entry}
-      </div>
-      <div className='display-flex'>
-        <Button img={editIcon} classes='edit' type='icon' />
-        <Button img={trashIcon} classes='edit' type='icon' />
-        <Button img={eyeIcon} classes='edit' type='icon' />
-      </div>
-    </li>
-  )
-}
-
-function Entries({ children }) {
-  return (
-    <ul className='entries display-flex flex-column gap-16'>
-      {children}
-    </ul>
-  )
-}
-
-function DropdownContainer({ containerName, children, containerType }) {
-
-  const [hidden, setHidden] = useState('');
-
-  function toggleHidden() {
-    if (hidden === 'hidden') {
-      setHidden('');
-    } else {
-      setHidden('hidden');
-    }
-  }
-
-  if (containerType === 'no-entries') {
-    return (
-      <div className='input-container'>
-        <div className='header'>
-          <div>
-            <h2 className='onyx'>{containerName}</h2>
-          </div>
-          <div>
-            <img src={chevronUp} className='chevron' onClick={toggleHidden} />
-          </div>
-        </div>
-        <div className={hidden}>
-          {children}
-        </div>
-      </div>
-    )
-  } else {
-      return (
-      <div className='input-container'>
-        <div className='header'>
-          <div>
-            <h2 className='onyx'>{containerName}</h2>
-          </div>
-          <div>
-            <img src={chevronUp} className='chevron' onClick={toggleHidden}/>
-          </div>
-        </div>
-        <div className={'entries-input-container display-flex flex-column gap-32 ' + hidden}>
-          {children}
-        </div>
-      </div>
-      )
-  }
-}
 
 function determineFormProcess(form, formName) {
   let obj;
@@ -287,14 +51,16 @@ function determineFormProcess(form, formName) {
       break;
     case 'skill':
       obj = {
-        skill: form.elements['skill'].value
+        skill: form.elements['skill'].value,
+        type: formName
       }
       break;
     case 'award':
       obj = {
         award: form.elements['award'].value,
         organization: form.elements['organization'].value,
-        date: form.elements['date'].value
+        date: form.elements['date'].value,
+        type: formName
       }
       break;
     case 'reference':
@@ -302,72 +68,12 @@ function determineFormProcess(form, formName) {
         name: form.elements['name'].value,
         position: form.elements['position'].value,
         email: form.elements['email'].value,
-        phone: form.elements['phone'].value
+        phone: form.elements['phone'].value,
+        type: formName
       }
       break;
   }
   return obj;
-}
-
-function List(props) {
-  switch(props.formClass) {
-    case 'work':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.position} type={entry.type}/>
-          })}
-        </>
-      )
-    case 'volunteer':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.position} type={entry.type}/>
-          })}
-        </>
-      )  
-    case 'education':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.degree} type={entry.type}/>
-          })}
-        </>
-      )
-    case 'certification':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.certification} type={entry.type}/>
-          })}
-        </>
-      )
-    case 'skill':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.skill} type={entry.type}/>
-          })}
-        </>
-      )
-    case 'award':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.award} type={entry.type}/>
-          })}
-        </>
-      )
-    case 'reference':
-      return (
-        <>
-          {props.list.map((entry) => {
-            return <Entry key={self.crypto.randomUUID()} entry={entry.name} type={entry.type}/>
-          })}
-        </>
-      )
-  }
 }
 
 function EditArea() {
@@ -509,7 +215,7 @@ function EditArea() {
         temp = referenceArray;
         temp.push(obj);
         setReferenceArray(temp);
-        setReferenceEntries(<List llist={referenceArray} formClass={formClass} />);
+        setReferenceEntries(<List list={referenceArray} formClass={formClass} />);
         setReferenceForm(<></>);
         break;
     }
