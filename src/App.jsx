@@ -125,24 +125,31 @@ function EditArea() {
 
     setWorkEntries(<></>);
     setWorkArray([]);
+    setWorkExperienceForm(<></>);
 
     setVolunteerEntries(<></>);
     setVolunteerArray([]);
+    setVolunteerExperienceForm(<></>);
 
     setEducationEntries(<></>);
     setEducationArray([]);
+    setEducationForm(<></>);
 
     setCertificationEntries(<></>);
     setCertificationArray([]);
+    setCertificationForm(<></>);
 
     setSkillEntries(<></>);
     setSkillArray([]);
+    setSkillArray(<></>);
 
     setAwardEntries(<></>);
     setAwardArray([]);
+    setAwardForm(<></>);
 
     setReferenceEntries(<></>);
     setReferenceArray([]);
+    setReferenceForm(<></>);
   }
   
   function Options() {
