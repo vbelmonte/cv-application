@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import editIcon from './assets/icon-edit.svg'
-import customizeIcon from './assets/icon-customize.svg'
 import plusIcon from './assets/icon-plus.svg'
 import { Navigation } from './components/Navigation'
 import { Button } from './components/Button'
 import { InputIm, InputSet, InputForm } from './components/Inputs'
 import { Entries, List } from './components/Entries'
 import { DropdownContainer } from './components/Dropdown'
+import { Options } from './components/Options'
 
 
 
@@ -112,6 +111,41 @@ function EditArea() {
   const [awardArray, setAwardArray] = useState([]);
   const [referenceArray, setReferenceArray] = useState([]);
 
+  const [font, setFont] = useState('Inter');
+  const [bodyColor, setBodyColor] = useState('#212529');
+  const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
+  const [secondaryColor, setSecondaryColor] = useState('#EF233C');
+  const [tertiaryColor, setTertiaryColor] = useState('#F27059');
+  
+  const [area, setArea] = useState('info');
+
+  function restoreDefaults() {
+    console.log('click!');
+  }
+
+  function displayInput() {
+    setArea('info');
+    setOptions(
+      <Options showInput={displayInput} showCustomize={displayCustomize}>
+        <Button text='Clear Resume' classes='red' type='outline' handleClick={clearAllFields} />
+      </Options>
+    );
+  }
+
+  function displayCustomize() {
+    setArea('customize');
+    setOptions(
+      <Options showInput={displayInput} showCustomize={displayCustomize}>
+        <Button text='Restore Default Styles' classes='red' type='outline' handleClick={restoreDefaults} />
+      </Options>
+    );
+  }
+
+  const [options, setOptions] = useState(
+    <Options showInput={displayInput} showCustomize={displayCustomize}>
+      <Button text='Clear Resume' classes='red' type='outline' handleClick={clearAllFields} />
+    </Options>);
+
   function clearAllFields() {
     setFirstName('');
     setLastName('');
@@ -152,7 +186,7 @@ function EditArea() {
     setReferenceForm(<></>);
   }
   
-  function Options() {
+  /*function Options() {
     return (
       <div className='options-container'>
         <div className='buttons'>
@@ -166,7 +200,7 @@ function EditArea() {
         </div>
       </div>
     )
-  }
+  }*/
 
   function addEntry(event, formClass) {
     event.preventDefault();
@@ -366,9 +400,111 @@ function EditArea() {
   return (
     <>
       <div className='edit-area'>
-        <Options />
+        {/*<Options resetName='Clear Resume' resetCallback={clearAllFields} />*/}
+        {options}
         <div className='input-area'>
-          <DropdownContainer containerName='Personal Details' containerType='no-entries'>
+          {area === 'info' &&
+            <>
+              <DropdownContainer containerName='Personal Details' containerType='no-entries'>
+                <InputForm classes='personal-details padding-left-32'>
+                  <div className='display-flex gap-16 flex-wrap'>
+                    <InputSet label='First Name' type='text' id='fname' name='fname' value={firstName} option='input' callback={setFirstName} />
+                    <InputSet label='Last Name' type='text' id='lname' name='lname' value={lastName} option='input' callback={setLastName} />
+                  </div>
+                  <InputSet label='Address' type='text' id='address' name='address' value={address} option='input' callback={setAddress} />
+                  <div className='display-flex gap-16 flex-wrap'>
+                    <InputSet label='State' id='state' name='state' option='select-state' select={state} callback={setState} />
+                    <InputSet label='City' type='text' id='city' name='city' value={city} option='input' callback={setCity} />
+                    <InputSet label='Zip Code' type='text' id='zip' name='zip' value={zipCode} option='input' callback={setZipCode} />
+                  </div>
+                  <InputSet label='Email' type='text' id='email' name='email' value={email} option='input' callback={setEmail} />
+                  <InputSet label='Phone Number' type='text' id='phone' name='phone' value={phone} option='input' callback={setPhone} />
+                </InputForm>
+              </DropdownContainer>
+              <DropdownContainer containerName='Summary Statement' containerType='no-entries'>
+                <InputForm classes='summary-statement padding-left-32'>
+                  <InputSet label='Summary' id='summary' name='summary' value={summary} option='textarea' callback={setSummary} />
+                </InputForm>
+              </DropdownContainer>
+              <DropdownContainer containerName='Work Experience'>
+                <Entries>
+                  {workEntries}
+                </Entries>
+                {workExperienceForm}
+                <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addWorkExperience}/>
+              </DropdownContainer>
+              <DropdownContainer containerName='Volunteer Experience'>
+                <Entries>
+                  {volunteerEntries}
+                </Entries>
+                {volunteerExperienceForm}
+                <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addVolunteerExperience} />
+              </DropdownContainer>
+              <DropdownContainer containerName='Education'>
+                <Entries>
+                  {educationEntries}
+                </Entries>
+                {educationForm}
+                <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addEducation}/>
+              </DropdownContainer>
+              <DropdownContainer containerName='Certifications'>
+                <Entries>
+                  {certificationEntries}
+                </Entries>
+                {certificationForm}
+                <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addCertification}/>
+              </DropdownContainer>
+              <DropdownContainer containerName='Skills'>
+                <Entries>
+                  {skillEntries}
+                </Entries>
+                {skillForm}
+                <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addSkill} />
+              </DropdownContainer>
+              <DropdownContainer containerName='Awards'>
+                <Entries>
+                  {awardEntries}
+                </Entries>
+                {awardForm}
+                <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addAward} />
+              </DropdownContainer>
+              <DropdownContainer containerName='References'>
+                <Entries>
+                  {referenceEntries}
+                </Entries>
+                {referenceForm}
+                <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addReference} />
+              </DropdownContainer>
+            </>
+          }
+          {area === 'customize' &&
+            <>
+              <DropdownContainer containerName='Layout Style' containerType='no-entries'>
+                <div className='display-flex flex-column gap-16 padding-left-32'>
+                  <div className='display-flex gap-16'>
+                    <div className='layout-preview'></div>
+                    <div className='layout-preview'></div>
+                  </div>
+                  <div className='display-flex gap-16'>
+                    <div className='layout-preview'></div>
+                    <div className='layout-preview'></div>
+                  </div>
+                </div>
+              </DropdownContainer>
+              <DropdownContainer containerName='Font Style'>
+                <InputSet label='Font' id='font' name='font' option='select-font' select={font} callback={setFont} />
+              </DropdownContainer>
+              <DropdownContainer containerName='Color Style' containerType='no-entries'>
+                <div className='display-flex gap-16 padding-left-32'>
+                  <InputSet label='Body' id='body' name='body' option='color' classes='flex-column-reverse palette' value={bodyColor} callback={setBodyColor} />
+                  <InputSet label='Primary' id='primary' name='primary' option='color' classes='flex-column-reverse palette' value={primaryColor} callback={setPrimaryColor} />
+                  <InputSet label='Secondary' id='secondary' name='secondary' option='color' classes='flex-column-reverse palette' value={secondaryColor} callback={setSecondaryColor} />
+                  <InputSet label='Tertiary' id='tertiary' name='tertiary' option='color' classes='flex-column-reverse palette' value={tertiaryColor} callback={setTertiaryColor} />
+                </div>
+              </DropdownContainer>
+            </>
+          }
+          {/*<DropdownContainer containerName='Personal Details' containerType='no-entries'>
             <InputForm classes='personal-details padding-left-32'>
               <div className='display-flex gap-16 flex-wrap'>
                 <InputSet label='First Name' type='text' id='fname' name='fname' value={firstName} option='input' callback={setFirstName} />
@@ -437,7 +573,7 @@ function EditArea() {
             </Entries>
             {referenceForm}
             <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addReference} />
-          </DropdownContainer>
+          </DropdownContainer>*/}
         </div>
       </div>
     </>
