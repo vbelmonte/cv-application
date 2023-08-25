@@ -1,9 +1,11 @@
 import { useState } from 'react'
 
 function handleChange(e, callback, type) {
-  if (type=== 'change') {
+  if (type === 'change') {
     callback(e.target.value);
   } else if (type === 'select') {
+    callback(e.target.value);
+  } else if (type === 'pick') {
     callback(e.target.value);
   }
 }
@@ -57,6 +59,39 @@ export function InputSelectState({ id, name, select, callback }) {
     </select>
   )
 }
+
+function InputSelectFont({ id, name, select, callback }) {
+  const fonts = [
+    {
+      'name': 'Inter'
+    },
+    {
+      'name': 'Montserrat'
+    },
+    {
+      'name': 'Georgia'
+    },
+    {
+      'name': 'Oswald/Lato'
+    }
+  ]
+
+  return (
+    <select name={name} id={id} value={select} onChange={e => {handleChange(e, callback, 'select')}}>
+      {fonts.map( (font) => {
+        if (font.name === 'Inter') {
+          return (
+            <option key={font.name} value={font.name} selected>{font.name}</option>
+          )
+        } else {
+          return (
+            <option key={font.name} value={font.name}>{font.name}</option>
+          )
+        }
+      })}
+    </select>
+  )
+}
   
 export function TextArea({ id, name, value, callback }) {
   return (
@@ -64,17 +99,28 @@ export function TextArea({ id, name, value, callback }) {
     </textarea>
   )
 }
-  
-export function InputSet({ label, type, id, name, value, option, callback, select }) {
+
+export function InputColor({ id, name, value, callback }) {
   return (
-    <div className='input flex-1 min-width-0'>
+    <input type='color' id={id} name={name} value={value} onChange={e => {handleChange(e, callback, 'pick')}} />
+  )
+}
+  
+export function InputSet({ label, type, id, name, value, option, callback, select, classes }) {
+  if (classes === undefined) {
+    classes = '';
+  }
+  return (
+    <div className={'input flex-1 min-width-0 ' + classes}>
       <label htmlFor={name}>
         {label}
       </label>
       {option === 'input' && <Input type={type} id={id} name={name} value={value} callback={callback} />}
       {option === 'input-im' && <InputIm type={type} id={id} name={name} />}
       {option === 'textarea' && <TextArea id={id} name={name} value={value} callback={callback} />}
-      {option === 'select' && <InputSelectState id={id} name={name} select={select} callback={callback} />}
+      {option === 'select-state' && <InputSelectState id={id} name={name} select={select} callback={callback} />}
+      {option === 'select-font' && <InputSelectFont id={id} name={name} select={select} callback={callback} />}
+      {option === 'color' && <InputColor id={id} name={name} value={value} callback={callback} />}
     </div>
   )
 }
