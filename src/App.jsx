@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import plusIcon from './assets/icon-plus.svg'
+import design1 from './assets/resume-design-1.svg'
+import design2 from './assets/resume-design-2.svg'
+import design3 from './assets/resume-design-3.svg'
+import design4 from './assets/resume-design-4.svg'
 import { Navigation } from './components/Navigation'
 import { Button } from './components/Button'
-import { InputIm, InputSet, InputForm } from './components/Inputs'
+import { InputIm, InputSet, InputForm, RadioImg } from './components/Inputs'
 import { Entries, List } from './components/Entries'
 import { DropdownContainer } from './components/Dropdown'
 import { Options } from './components/Options'
@@ -111,6 +115,7 @@ function EditArea() {
   const [awardArray, setAwardArray] = useState([]);
   const [referenceArray, setReferenceArray] = useState([]);
 
+  const [design, setDesign] = useState('design-1');
   const [font, setFont] = useState('Inter');
   const [bodyColor, setBodyColor] = useState('#212529');
   const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
@@ -481,14 +486,14 @@ function EditArea() {
             <>
               <DropdownContainer containerName='Layout Style' containerType='no-entries'>
                 <div className='display-flex flex-column gap-16 padding-left-32'>
-                  <div className='display-flex gap-16'>
-                    <div className='layout-preview'></div>
-                    <div className='layout-preview'></div>
-                  </div>
-                  <div className='display-flex gap-16'>
-                    <div className='layout-preview'></div>
-                    <div className='layout-preview'></div>
-                  </div>
+                  <InputForm>
+                    <div className='display-flex gap-16'>
+                      <RadioImg id='design-1' name='design' value='design-1' src={design1} state={design} callback={setDesign} />
+                      <RadioImg id='design-2' name='design' value='design-2' src={design2} state={design} callback={setDesign} />
+                      <RadioImg id='design-3' name='design' value='design-3' src={design3} state={design} callback={setDesign} />
+                      <RadioImg id='design-4' name='design' value='design-4' src={design4} state={design} callback={setDesign} />         
+                    </div>
+                  </InputForm>
                 </div>
               </DropdownContainer>
               <DropdownContainer containerName='Font Style'>

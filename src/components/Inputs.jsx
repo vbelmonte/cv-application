@@ -100,6 +100,15 @@ export function TextArea({ id, name, value, callback }) {
   )
 }
 
+export function RadioImg({ id, name, value, src, state, callback }) {
+  return (
+    <label htmlFor={id}>
+      <input type='radio' id={id} name={name} value={value} checked={value === state} onChange={e => handleChange(e, callback, 'select')} />
+      <img className='radio-img' src={src} />
+    </label>
+  )
+}
+
 export function InputColor({ id, name, value, callback }) {
   return (
     <input type='color' id={id} name={name} value={value} onChange={e => {handleChange(e, callback, 'pick')}} />
@@ -126,6 +135,9 @@ export function InputSet({ label, type, id, name, value, option, callback, selec
 }
   
 export function InputForm({ children, classes }) {
+  if (classes === undefined) {
+    classes = '';
+  }
   return (
     <form className={classes}>
       {children}
