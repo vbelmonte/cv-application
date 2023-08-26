@@ -125,7 +125,12 @@ function EditArea() {
   const [area, setArea] = useState('info');
 
   function restoreDefaults() {
-    console.log('click!');
+    setDesign('design-1');
+    setFont('Inter');
+    setBodyColor('#212529');
+    setPrimaryColor('#FFFFFF');
+    setSecondaryColor('#EF233C');
+    setTertiaryColor('#F27059');
   }
 
   function displayInput() {

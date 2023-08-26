@@ -79,15 +79,9 @@ function InputSelectFont({ id, name, select, callback }) {
   return (
     <select name={name} id={id} value={select} onChange={e => {handleChange(e, callback, 'select')}}>
       {fonts.map( (font) => {
-        if (font.name === 'Inter') {
-          return (
-            <option key={font.name} value={font.name} selected>{font.name}</option>
-          )
-        } else {
-          return (
-            <option key={font.name} value={font.name}>{font.name}</option>
-          )
-        }
+        return (
+          <option key={font.name} value={font.name}>{font.name}</option>
+        )
       })}
     </select>
   )
