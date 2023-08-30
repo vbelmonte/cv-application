@@ -10,6 +10,7 @@ import { InputIm, InputSet, InputForm, RadioImg } from './components/Inputs'
 import { Entries, List } from './components/Entries'
 import { DropdownContainer } from './components/Dropdown'
 import { Options } from './components/Options'
+import {Traditional} from './components/Traditional'
 
 
 
@@ -594,6 +595,7 @@ function PreviewArea() {
   return (
     <>
       <div className='preview-area'>
+        <Traditional/>
       </div>
     </>
   )

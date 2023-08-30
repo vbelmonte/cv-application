@@ -49,6 +49,7 @@ table {
 
 :root {
   --white: #FFFFFF;
+  --off-white: #F2F2F2;
   --seasalt: #F8F9FA;
   --french-gray: #CED4DA;
   --french-gray-2: #ADB5BD;
@@ -88,6 +89,10 @@ body {
 
 .justify-space-between {
   justify-content: space-between;
+}
+
+.gap-4 {
+  gap: 0.25rem;
 }
 
 .gap-8 {
@@ -174,6 +179,49 @@ h2 {
   font-family: 'Inter Bold';
   font-size: 1.5rem;
 }
+
+strong {
+  font-weight: 600;
+}
+
+.preview-area p {
+  line-height: 150%;
+}
+
+.preview-area
+
+.page header h1 {
+  font-size: 3rem;
+  line-height: 120%;
+  letter-spacing: 0.05rem;
+  text-transform: uppercase;
+}
+
+.page header h2 {
+  font-size: 1rem;
+  line-height: 150%;
+  letter-spacing: 0.05rem;
+}
+
+.page main h1 {
+  font-family: 'Inter SemiBold';
+  font-size: 1rem;
+  line-height: 140%;
+  text-transform: uppercase;
+}
+
+.page main h2 {
+  font-size: 0.875rem;
+  line-height: 150%;
+}
+
+.page hr {
+  border: 1px solid black;
+}
+
+
+
+/** COLOR PROPERTIES **/
 
 .bittersweet {
   color: var(--bittersweet);
@@ -468,4 +516,33 @@ img.chevron {
 div.palette {
   width: fit-content;
   align-items: center;
+}
+
+
+/** PAGE PROPERTIES **/
+.page {
+  background-color: var(--white);
+  width: 816px;
+  height: 1054px;
+
+  font-size: 0.875rem;
+}
+
+.page li {
+  font-family: 'Inter Regular';
+  list-style: disc;
+  margin-left: 2rem;
+  line-height: 150%;
+}
+
+.traditional {
+  padding: 2rem;
+}
+
+.traditional .container {
+  margin-left: 2rem;
+}
+
+.traditional hr {
+  margin: 3rem 0rem;
 }
