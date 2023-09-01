@@ -1,6 +1,9 @@
-function Section({ children }) {
+function Section({ classes, children }) {
+  if (classes === undefined) {
+    classes = '';
+  }
   return (
-    <div className='display-flex flex-column gap-8'>
+    <div className={'display-flex flex-column gap-8 ' + classes}>
       {children}
     </div>
   )
@@ -9,7 +12,7 @@ function Section({ children }) {
 function Container({ direction, children }) {
   if (direction === 'row') {
     return (
-      <div className='container display-flex gap-48'>
+      <div className='container display-flex gap-80'>
         {children}
       </div>
     )
@@ -37,6 +40,16 @@ function JobEntry({ jobTitle, company, dates }) {
         <li>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</li>
         <li>However some fonts, called variable fonts, can support a range of weights with a more or less fine granularity, and this can give the designer a much closer degree of control over the chosen weight.</li>
       </ul>
+    </div>
+  )
+}
+
+function GeneralEntry({ main, detail, subDetail }) {
+  return (
+    <div className='display-flex flex-column flex-1'>
+      <strong>{main}</strong>
+      <p>{detail}</p>
+      <p className='primary'>{subDetail}</p>
     </div>
   )
 }
@@ -102,6 +115,53 @@ export function Traditional() {
               </SkillsContainer>
             </Container>
           </Section>
+          <div className='display-flex gap-48 column-gap-80 flex-wrap'>
+            <Section classes='flex-grow-1'>
+              <h1>Education</h1>
+              <Container direction='row'>
+                <GeneralEntry
+                  main='Computer Science, Bachelor of Science'
+                  detail='Embry Riddle Aeronautical University'
+                  subDetail='2011-2015'
+                />
+                <GeneralEntry
+                  main='Computer Science, Bachelor of Science'
+                  detail='Embry Riddle Aeronautical University'
+                  subDetail='2011-2015'
+                />
+              </Container>
+            </Section>
+            <Section classes='flex-grow-1'>
+              <h1>Certifications</h1>
+              <Container>
+                <GeneralEntry
+                  main='Certificate'
+                  detail='Institution'
+                  subDetail='2011-2015'
+                />
+              </Container>
+            </Section>
+            <Section classes='flex-grow-1'>
+              <h1>Awards</h1>
+              <Container>
+                <GeneralEntry
+                  main='Award'
+                  detail='Institution'
+                  subDetail='2011-2015'
+                />
+              </Container>
+            </Section>
+            <Section classes='flex-grow-1'>
+              <h1>References</h1>
+              <Container>
+                <GeneralEntry
+                  main='Magnus Larsson'
+                  detail='Manager'
+                  subDetail='888-123-4567'
+                />
+              </Container>
+            </Section>
+          </div>
         </main>
       </div>
     </div>

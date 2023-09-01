@@ -87,6 +87,10 @@ body {
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .justify-space-between {
   justify-content: space-between;
 }
@@ -119,8 +123,20 @@ body {
   gap: 3rem;
 }
 
+.gap-80 {
+  gap: 5rem;
+}
+
+.column-gap-80 {
+  column-gap: 5rem;
+}
+
 .flex-1 {
   flex: 1;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
 }
 
 .align-center {
@@ -182,10 +198,6 @@ h2 {
 
 strong {
   font-weight: 600;
-}
-
-.preview-area p {
-  line-height: 150%;
 }
 
 .preview-area
@@ -526,13 +538,13 @@ div.palette {
   height: 1054px;
 
   font-size: 0.875rem;
+  line-height: 150%;
 }
 
 .page li {
   font-family: 'Inter Regular';
   list-style: disc;
   margin-left: 2rem;
-  line-height: 150%;
 }
 
 .traditional {
