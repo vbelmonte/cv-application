@@ -4,6 +4,7 @@ function handleChange(e, callback, type) {
   if (type === 'change') {
     callback(e.target.value);
   } else if (type === 'select') {
+    console.log(e.target.value);
     callback(e.target.value);
   } else if (type === 'pick') {
     callback(e.target.value);
@@ -56,6 +57,18 @@ export function InputSelectState({ id, name, select, callback }) {
           )
         }
       })}
+    </select>
+  )
+}
+
+export function InputSelectSkill({ id, name, select, callback }) {
+  console.log(select);
+  return (
+    <select name={name} id={id} defaultValue={select} onChange={e => {handleChange(e, callback, 'select')}}>
+      {select === 'default' && <option disabled value='default'>Select Skill Type</option>}
+      {select !== 'default' && <option disabled>Select Skill Type</option>}
+      <option key='soft' value='soft'>Soft</option>
+      <option key='technical' value='technical'>Technical</option>
     </select>
   )
 }

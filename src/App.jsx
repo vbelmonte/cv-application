@@ -6,7 +6,7 @@ import design3 from './assets/resume-design-3.svg'
 import design4 from './assets/resume-design-4.svg'
 import { Navigation } from './components/Navigation'
 import { Button } from './components/Button'
-import { InputIm, InputSet, InputForm, RadioImg } from './components/Inputs'
+import { InputSet, InputForm, RadioImg, InputSelectSkill } from './components/Inputs'
 import { Entries, List } from './components/Entries'
 import { DropdownContainer } from './components/Dropdown'
 import { Options } from './components/Options'
@@ -53,7 +53,13 @@ function determineFormProcess(form, formName) {
         type: formName
       }
       break;
-    case 'skill':
+    case 'skill-soft':
+      obj = {
+        skill: form.elements['skill'].value,
+        type: formName
+      }
+      break;
+    case 'skill-technical':
       obj = {
         skill: form.elements['skill'].value,
         type: formName
@@ -104,7 +110,8 @@ function EditArea() {
   const [volunteerEntries, setVolunteerEntries] = useState(<></>);
   const [educationEntries, setEducationEntries] = useState(<></>);
   const [certificationEntries, setCertificationEntries] = useState(<></>);
-  const [skillEntries, setSkillEntries] = useState(<></>);
+  const [skillSoftEntries, setSkillSoftEntries] = useState(<></>);
+  const [skillTechEntries, setSkillTechEntries] = useState(<></>);
   const [awardEntries, setAwardEntries] = useState(<></>);
   const [referenceEntries, setReferenceEntries] = useState(<></>);
 
@@ -112,9 +119,12 @@ function EditArea() {
   const [volunteerArray, setVolunteerArray] = useState([]);
   const [educationArray, setEducationArray] = useState([]);
   const [certificationArray, setCertificationArray] = useState([]);
-  const [skillArray, setSkillArray] = useState([]);
+  const [skillSoftArray, setSkillSoftArray] = useState([]);
+  const [skillTechArray, setSkillTechArray] = useState([]);
   const [awardArray, setAwardArray] = useState([]);
   const [referenceArray, setReferenceArray] = useState([]);
+
+  const [skillType, setSkillType] = useState('default');
 
   const [design, setDesign] = useState('design-1');
   const [font, setFont] = useState('Inter');
@@ -184,9 +194,12 @@ function EditArea() {
     setCertificationArray([]);
     setCertificationForm(<></>);
 
-    setSkillEntries(<></>);
-    setSkillArray([]);
-    setSkillArray(<></>);
+    setSkillSoftEntries(<></>);
+    setSkillTechEntries(<></>);
+    setSkillSoftArray([]);
+    setSkillTechArray([]);
+    setSkillSoftArray(<></>);
+    setSkillTechArray(<></>);
 
     setAwardEntries(<></>);
     setAwardArray([]);
@@ -214,8 +227,14 @@ function EditArea() {
   }*/
 
   function addEntry(event, formClass) {
+    console.log(formClass);
     event.preventDefault();
-    const form = document.getElementsByClassName(formClass)[0];
+    let form;
+    if (formClass === 'skill-soft' || formClass === 'skill-technical') {
+      form = document.getElementsByClassName('skill')[0];
+    } else {
+      form = document.getElementsByClassName(formClass)[0];
+    }
     const obj = determineFormProcess(form, formClass);
     console.log(obj);
     let temp;
@@ -249,13 +268,22 @@ function EditArea() {
         setCertificationEntries(<List list={certificationArray} formClass={formClass} />);
         setCertificationForm(<></>);
         break;
-      case 'skill':
-        temp = skillArray;
+      case 'skill-soft':
+        temp = skillSoftArray;
         temp.push(obj);
-        setSkillArray(temp);
-        setSkillEntries(<List list={skillArray} formClass={formClass} />);
+        setSkillSoftArray(temp);
+        setSkillSoftEntries(<List list={skillSoftArray} formClass={formClass} />);
+        setSkillType('default');
         setSkillForm(<></>);
         break;
+        case 'skill-technical':
+          temp = skillTechArray;
+          temp.push(obj);
+          setSkillTechArray(temp);
+          setSkillTechEntries(<List list={skillTechArray} formClass={formClass} />);
+          setSkillType('default');
+          setSkillForm(<></>);
+          break;
       case 'award':
         temp = awardArray;
         temp.push(obj);
@@ -360,10 +388,15 @@ function EditArea() {
 
     setSkillForm (
       <InputForm classes={formClass}>
-        <InputIm type='input' id='skill' name='skill' value='' />
+        <InputSet label='Skill' type='text' id='skill' name='skill' option='input-im' />
+        <InputSelectSkill id='skill-type' name='skill-type' select={skillType} callback={setSkillType} />
         <div className='display-flex gap-16 flex-wrap'>
-          <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
-          <Button text='Cancel' classes='outline black flex-1' handleClick={() => setSkillForm(<></>)}/>
+          <Button text='Add' classes='power flex-1' 
+            handleClick={() => {
+              const skillInputType = document.getElementById('skill-type');
+              addEntry(event, `${formClass}-${skillInputType.value}`)}}
+          />
+          <Button text='Cancel' classes='outline black flex-1' handleClick={() => {setSkillForm(<></>); setSkillType('default')}}/>
         </div>
       </InputForm>
     )
@@ -466,9 +499,18 @@ function EditArea() {
                 <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addCertification}/>
               </DropdownContainer>
               <DropdownContainer containerName='Skills'>
-                <Entries>
-                  {skillEntries}
-                </Entries>
+                <div className='display-flex flex-column gap-16'>
+                  <h3 className='slate-gray'>Soft Skills</h3>
+                  <Entries>
+                    {skillSoftEntries}
+                  </Entries>
+                </div>
+                <div className='display-flex flex-column gap-16'>
+                  <h3 className='slate-gray'>Technical Skills</h3>
+                  <Entries>
+                    {skillTechEntries}
+                  </Entries>
+                </div>
                 {skillForm}
                 <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addSkill} />
               </DropdownContainer>
