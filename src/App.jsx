@@ -209,22 +209,6 @@ function EditArea() {
     setReferenceArray([]);
     setReferenceForm(<></>);
   }
-  
-  /*function Options() {
-    return (
-      <div className='options-container'>
-        <div className='buttons'>
-          <div className='left'>
-            <Button text='Edit' img={editIcon} type='icon-text' />
-            <Button text='Customize' img={customizeIcon} type='icon-text' />
-          </div>
-          <div className='right'>
-            <Button text='Clear Resume' classes='red' type='outline' handleClick={clearAllFields} />
-          </div>
-        </div>
-      </div>
-    )
-  }*/
 
   function addEntry(event, formClass) {
     console.log(formClass);
@@ -444,7 +428,6 @@ function EditArea() {
   return (
     <>
       <div className='edit-area'>
-        {/*<Options resetName='Clear Resume' resetCallback={clearAllFields} />*/}
         {options}
         <div className='input-area'>
           {area === 'info' &&
@@ -557,76 +540,6 @@ function EditArea() {
               </DropdownContainer>
             </>
           }
-          {/*<DropdownContainer containerName='Personal Details' containerType='no-entries'>
-            <InputForm classes='personal-details padding-left-32'>
-              <div className='display-flex gap-16 flex-wrap'>
-                <InputSet label='First Name' type='text' id='fname' name='fname' value={firstName} option='input' callback={setFirstName} />
-                <InputSet label='Last Name' type='text' id='lname' name='lname' value={lastName} option='input' callback={setLastName} />
-              </div>
-              <InputSet label='Address' type='text' id='address' name='address' value={address} option='input' callback={setAddress} />
-              <div className='display-flex gap-16 flex-wrap'>
-                <InputSet label='State' id='state' name='state' option='select' select={state} callback={setState} />
-                <InputSet label='City' type='text' id='city' name='city' value={city} option='input' callback={setCity} />
-                <InputSet label='Zip Code' type='text' id='zip' name='zip' value={zipCode} option='input' callback={setZipCode} />
-              </div>
-              <InputSet label='Email' type='text' id='email' name='email' value={email} option='input' callback={setEmail} />
-              <InputSet label='Phone Number' type='text' id='phone' name='phone' value={phone} option='input' callback={setPhone} />
-            </InputForm>
-          </DropdownContainer>
-          <DropdownContainer containerName='Summary Statement' containerType='no-entries'>
-            <InputForm classes='summary-statement padding-left-32'>
-              <InputSet label='Summary' id='summary' name='summary' value={summary} option='textarea' callback={setSummary} />
-            </InputForm>
-          </DropdownContainer>
-          <DropdownContainer containerName='Work Experience'>
-            <Entries>
-              {workEntries}
-            </Entries>
-            {workExperienceForm}
-            <Button text='Add Work Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addWorkExperience}/>
-          </DropdownContainer>
-          <DropdownContainer containerName='Volunteer Experience'>
-            <Entries>
-              {volunteerEntries}
-            </Entries>
-            {volunteerExperienceForm}
-            <Button text='Add Volunteer Experience' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addVolunteerExperience} />
-          </DropdownContainer>
-          <DropdownContainer containerName='Education'>
-            <Entries>
-              {educationEntries}
-            </Entries>
-            {educationForm}
-            <Button text='Add Education' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addEducation}/>
-          </DropdownContainer>
-          <DropdownContainer containerName='Certifications'>
-            <Entries>
-              {certificationEntries}
-            </Entries>
-            {certificationForm}
-            <Button text='Add Certification' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addCertification}/>
-          </DropdownContainer>
-          <DropdownContainer containerName='Skills'>
-            <Entries>
-              {skillEntries}
-            </Entries>
-            {skillForm}
-            <Button text='Add Skill' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addSkill} />
-          </DropdownContainer>
-          <DropdownContainer containerName='Awards'>
-            <Entries>
-              {awardEntries}
-            </Entries>
-            {awardForm}
-            <Button text='Add Award' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addAward} />
-          </DropdownContainer>
-          <DropdownContainer containerName='References'>
-            <Entries>
-              {referenceEntries}
-            </Entries>
-            {referenceForm}
-            <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addReference} />
-          </DropdownContainer>*/}
         </div>
       </div>
     </>
