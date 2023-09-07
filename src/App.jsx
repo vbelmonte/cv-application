@@ -77,8 +77,7 @@ function determineFormProcess(form, formName) {
       obj = {
         name: form.elements['name'].value,
         position: form.elements['position'].value,
-        email: form.elements['email'].value,
-        phone: form.elements['phone'].value,
+        contact: form.elements['contact'].value,
         type: formName
       }
       break;
@@ -559,6 +558,7 @@ function PreviewArea() {
 function Main() {
   const [firstName, setFirstName] = useState('John');
   const [lastName, setLastName] = useState('Smith');
+  const [jobTitle, setJobTitle] = useState('UI/UX Designer');
   const [address, setAddress] = useState('1234 Main Street');
   const [state, setState] = useState('CA');
   const [city, setCity] = useState('Redondo Beach');
@@ -566,7 +566,7 @@ function Main() {
   const [email, setEmail] = useState('jsmith@gmail.com');
   const [phone, setPhone] = useState('310-123-4567');
 
-  const [summary, setSummary] = useState('Test');
+  const [summary, setSummary] = useState('I am UI/UX Designer who assists companies with improving their application interfaces.');
 
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
@@ -640,6 +640,7 @@ function Main() {
   function clearAllFields() {
     setFirstName('');
     setLastName('');
+    setJobTitle('');
     setAddress('');
     setState('default');
     setCity('');
@@ -884,8 +885,7 @@ function Main() {
             <InputSet label='Position' type='text' id='position' name='position' value='' option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
-            <InputSet label='Email Address' type='text' id='email' name='email' value=''option='input-im' />
-            <InputSet label='Phone Number' type='text' id='phone' name='phone' value='' option='input-im' />
+            <InputSet label='Contact Info (Phone or Email)' type='text' id='contact' name='contact' value=''option='input-im' />
           </div>
           <div className='display-flex gap-16 flex-wrap'>
             <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
@@ -908,14 +908,17 @@ function Main() {
                     <InputSet label='First Name' type='text' id='fname' name='fname' value={firstName} option='input' callback={setFirstName} />
                     <InputSet label='Last Name' type='text' id='lname' name='lname' value={lastName} option='input' callback={setLastName} />
                   </div>
+                  <InputSet label='Job Title' type='text' id='job-title' name='address' value={jobTitle} option='input' callback={setJobTitle} />
                   <InputSet label='Address' type='text' id='address' name='address' value={address} option='input' callback={setAddress} />
                   <div className='display-flex gap-16 flex-wrap'>
                     <InputSet label='State' id='state' name='state' option='select-state' select={state} callback={setState} />
                     <InputSet label='City' type='text' id='city' name='city' value={city} option='input' callback={setCity} />
                     <InputSet label='Zip Code' type='text' id='zip' name='zip' value={zipCode} option='input' callback={setZipCode} />
                   </div>
-                  <InputSet label='Email' type='text' id='email' name='email' value={email} option='input' callback={setEmail} />
-                  <InputSet label='Phone Number' type='text' id='phone' name='phone' value={phone} option='input' callback={setPhone} />
+                  <div className='display-flex gap-16 flex-wrap'>
+                    <InputSet label='Email' type='text' id='email' name='email' value={email} option='input' callback={setEmail} />
+                    <InputSet label='Phone Number' type='text' id='phone' name='phone' value={phone} option='input' callback={setPhone} />
+                  </div>
                 </InputForm>
               </DropdownContainer>
               <DropdownContainer containerName='Summary Statement' containerType='no-entries'>
@@ -1013,7 +1016,26 @@ function Main() {
         </div>
       </div>
       <div className='preview-area'>
-        <Traditional />
+        <Traditional
+          firstName={firstName}
+          lastName={lastName}
+          jobTitle={jobTitle}
+          address={address}
+          city={city}
+          state={state}
+          zipCode={zipCode}
+          email={email}
+          phone={phone}
+          summary={summary}
+          workExperience={workArray}
+          volunteerExperience={volunteerArray}
+          softSkills={skillSoftArray}
+          technicalSkills={skillTechArray}
+          education={educationArray}
+          certification={certificationArray}
+          awards={awardArray}
+          references={referenceArray}
+        />
       </div>
     </main>
   )

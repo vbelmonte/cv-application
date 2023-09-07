@@ -25,7 +25,7 @@ function Container({ direction, children }) {
   }
 }
 
-function JobEntry({ jobTitle, company, dates }) {
+function JobEntry({ jobTitle, company, startDate, endDate }) {
   return (
     <div className='display-flex flex-column'>
       <div className='display-flex gap-48 justify-space-between'>
@@ -33,7 +33,26 @@ function JobEntry({ jobTitle, company, dates }) {
           <p><strong>{jobTitle}</strong> / {company}</p>
         </div>
         <div>
-          <p className='primary'>{dates}</p>
+          <p className='primary'>{startDate} - {endDate}</p>
+        </div>
+      </div>
+      <ul>
+        <li>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</li>
+        <li>However some fonts, called variable fonts, can support a range of weights with a more or less fine granularity, and this can give the designer a much closer degree of control over the chosen weight.</li>
+      </ul>
+    </div>
+  )
+}
+
+function VolunteerEntry({ position, organization, startDate, endDate }) {
+  return (
+    <div className='display-flex flex-column'>
+      <div className='display-flex gap-48 justify-space-between'>
+        <div>
+          <p><strong>{position}</strong> / {organization}</p>
+        </div>
+        <div>
+          <p className='primary'>{startDate} - {endDate}</p>
         </div>
       </div>
       <ul>
@@ -62,29 +81,109 @@ function SkillsContainer({ children }) {
   )
 }
 
-function Skills({ entry }) {
+function Skills({ skill }) {
   return (
     <div>
-      {entry}
+      {skill}
     </div>
   )
 }
 
-export function Traditional() {
+function SoftSkillListings({ array }) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <Skills key={entry.skill} skill={entry.skill} />
+      })}
+    </>
+  )
+}
+
+function TechnicalSkillListings({ array }) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <Skills key={entry.skill} skill={entry.skill} />
+      })}
+    </>
+  )
+}
+
+function JobListings({array}) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <JobEntry key={entry.position} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} />
+      })}
+    </>
+  )
+}
+
+function VolunteerListings({array}) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} />
+      })}
+    </>
+  )
+}
+
+function EducationListings({ array }) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <GeneralEntry key={entry.degree} main={entry.degree} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} />
+      })}
+    </>
+  )
+}
+
+function CertificationListings({ array }) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <GeneralEntry key={entry.certification} main={entry.certification} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} />
+      })}
+    </>
+  )
+}
+
+function AwardListings({ array }) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <GeneralEntry key={entry.award} main={entry.award} detail={entry.organization} subDetail={entry.date} />
+      })}
+    </>
+  )
+}
+
+function ReferenceListings({ array }) {
+  return (
+    <>
+      {array.map((entry) => {
+        return <GeneralEntry key={entry.name} main={entry.name} detail={entry.position} subDetail={entry.contact} />
+      })}
+    </>
+  )
+}
+
+export function Traditional(props) {
   return (
     <div className='page'>
       <div className='traditional'>
         <header className='display-flex justify-space-between'>
           <div>
-            <h1>John Smith</h1>
-            <h2>Game Developer</h2>
+            <h1>{props.firstName} {props.lastName}</h1>
+            <h2>{props.jobTitle}</h2>
           </div>
           <div>
-            <p>1234 Main Street <br />
-              San Diego, Ca. 92093
+            <p>{props.address} <br />
+              {props.city}, {props.state} {props.zipCode}
             </p>
-            <p>jsmith@gmail.com</p>
-            <p>760-123-4567</p>
+            <p>{props.email}</p>
+            <p>{props.phone}</p>
           </div>
         </header>
         <hr/>
@@ -92,25 +191,34 @@ export function Traditional() {
           <Section>
             <h1>Summary</h1>
             <Container>
-              <p>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</p>
+              <p>{props.summary}</p>
             </Container>
           </Section>
           <Section>
             <h1>Work Experience</h1>
               <Container>
-                <JobEntry jobTitle='Job Title' company='Company' dates='October 2016 - December 2021'/>
-                <JobEntry jobTitle='Job Title' company='Company' dates='October 2016 - December 2021'/>
+                <JobListings array={props.workExperience}/>
+                <JobEntry jobTitle='Job Title' company='Company' startDate='October 2016' endDate='December 2021'/>
               </Container>
+          </Section>
+          <Section>
+            <h1>Volunteer Experience</h1>
+            <Container>
+              <VolunteerListings array={props.volunteerExperience}/>
+              <VolunteerEntry position='Volunteer' organization='Executive Lions Club' startDate='June 2018' endDate='February 2020'/>
+            </Container>
           </Section>
           <Section>
             <h1>Skills</h1>
             <Container direction='row'>
               <SkillsContainer>
                 <h2>Soft</h2>
-                <Skills entry='Project Management, Delegation, Customer Service, Communication' />
+                <SoftSkillListings array={props.softSkills}/>
+                <Skills skill='Project Management, Delegation, Customer Service, Communication' />
               </SkillsContainer>
               <SkillsContainer>
                 <h2>Technical</h2>
+                <TechnicalSkillListings array={props.technicalSkills}/>
                 <Skills entry='C++, C#, Unreal, Unity, Figma, VR/AR' />
               </SkillsContainer>
             </Container>
@@ -119,6 +227,7 @@ export function Traditional() {
             <Section classes='flex-grow-1'>
               <h1>Education</h1>
               <Container direction='row'>
+                <EducationListings array={props.education}/>
                 <GeneralEntry
                   main='Computer Science, Bachelor of Science'
                   detail='Embry Riddle Aeronautical University'
@@ -134,6 +243,7 @@ export function Traditional() {
             <Section classes='flex-grow-1'>
               <h1>Certifications</h1>
               <Container>
+                <CertificationListings array={props.certification}/>
                 <GeneralEntry
                   main='Certificate'
                   detail='Institution'
@@ -144,6 +254,7 @@ export function Traditional() {
             <Section classes='flex-grow-1'>
               <h1>Awards</h1>
               <Container>
+                <AwardListings array={props.awards}/>
                 <GeneralEntry
                   main='Award'
                   detail='Institution'
@@ -154,6 +265,7 @@ export function Traditional() {
             <Section classes='flex-grow-1'>
               <h1>References</h1>
               <Container>
+                <ReferenceListings array={props.references}/>
                 <GeneralEntry
                   main='Magnus Larsson'
                   detail='Manager'
