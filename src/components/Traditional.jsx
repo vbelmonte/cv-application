@@ -169,7 +169,29 @@ function ReferenceListings({ array }) {
   )
 }
 
+function assignCityStateZip(city, state, zip) {
+  let cityStateZip = `${city}, ${state} ${zip}`;
+
+  if (city === '') {
+    if (state !== 'default') {
+      cityStateZip = `${city} ${state} ${zip}`;
+    } else {
+      cityStateZip = `${city} ${zip}`;
+    }
+  } else {
+    if (state !== 'default') {
+      cityStateZip = `${city}, ${state} ${zip}`;
+    } else {
+      cityStateZip = `${city}, ${zip}`;
+    }
+  }
+
+  return cityStateZip;
+}
+
 export function Traditional(props) {
+  let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
+
   return (
     <div className='page'>
       <div className='traditional'>
@@ -180,7 +202,7 @@ export function Traditional(props) {
           </div>
           <div>
             <p>{props.address} <br />
-              {props.city}, {props.state} {props.zipCode}
+              {cityStateZip}
             </p>
             <p>{props.email}</p>
             <p>{props.phone}</p>

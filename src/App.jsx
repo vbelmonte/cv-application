@@ -197,8 +197,6 @@ function EditArea() {
     setSkillTechEntries(<></>);
     setSkillSoftArray([]);
     setSkillTechArray([]);
-    setSkillSoftArray(<></>);
-    setSkillTechArray(<></>);
 
     setAwardEntries(<></>);
     setAwardArray([]);
@@ -669,8 +667,6 @@ function Main() {
     setSkillTechEntries(<></>);
     setSkillSoftArray([]);
     setSkillTechArray([]);
-    setSkillSoftArray(<></>);
-    setSkillTechArray(<></>);
 
     setAwardEntries(<></>);
     setAwardArray([]);
