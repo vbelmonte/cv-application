@@ -25,18 +25,18 @@ function Container({ direction, children }) {
   }
 }
 
-function JobEntry({ jobTitle, company, startDate, endDate }) {
+function JobEntry({ jobTitle, company, startDate, endDate, body, secondary }) {
   return (
     <div className='display-flex flex-column'>
       <div className='display-flex gap-48 justify-space-between'>
         <div>
-          <p><strong>{jobTitle}</strong> / {company}</p>
+          <p style={body}><strong>{jobTitle}</strong> / {company}</p>
         </div>
         <div>
-          <p className='primary'>{startDate} - {endDate}</p>
+          <p style={secondary}>{startDate} - {endDate}</p>
         </div>
       </div>
-      <ul>
+      <ul style={body}>
         <li>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</li>
         <li>However some fonts, called variable fonts, can support a range of weights with a more or less fine granularity, and this can give the designer a much closer degree of control over the chosen weight.</li>
       </ul>
@@ -44,18 +44,18 @@ function JobEntry({ jobTitle, company, startDate, endDate }) {
   )
 }
 
-function VolunteerEntry({ position, organization, startDate, endDate }) {
+function VolunteerEntry({ position, organization, startDate, endDate, body, secondary }) {
   return (
     <div className='display-flex flex-column'>
       <div className='display-flex gap-48 justify-space-between'>
         <div>
-          <p><strong>{position}</strong> / {organization}</p>
+          <p style={body}><strong>{position}</strong> / {organization}</p>
         </div>
         <div>
-          <p className='primary'>{startDate} - {endDate}</p>
+          <p style={secondary}>{startDate} - {endDate}</p>
         </div>
       </div>
-      <ul>
+      <ul style={body}>
         <li>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</li>
         <li>However some fonts, called variable fonts, can support a range of weights with a more or less fine granularity, and this can give the designer a much closer degree of control over the chosen weight.</li>
       </ul>
@@ -63,12 +63,12 @@ function VolunteerEntry({ position, organization, startDate, endDate }) {
   )
 }
 
-function GeneralEntry({ main, detail, subDetail }) {
+function GeneralEntry({ main, detail, subDetail, body, secondary }) {
   return (
     <div className='display-flex flex-column flex-1'>
-      <strong>{main}</strong>
-      <p>{detail}</p>
-      <p className='primary'>{subDetail}</p>
+      <strong style={body}>{main}</strong>
+      <p style={body}>{detail}</p>
+      <p style={secondary}>{subDetail}</p>
     </div>
   )
 }
@@ -109,61 +109,61 @@ function TechnicalSkillListings({ array }) {
   )
 }
 
-function JobListings({array}) {
+function JobListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        return <JobEntry key={entry.position} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} />
+        return <JobEntry key={entry.position} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} body={body} secondary={secondary} />
       })}
     </>
   )
 }
 
-function VolunteerListings({array}) {
+function VolunteerListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} />
+        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} body={body} secondary={secondary} />
       })}
     </>
   )
 }
 
-function EducationListings({ array }) {
+function EducationListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.degree} main={entry.degree} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} />
+        return <GeneralEntry key={entry.degree} main={entry.degree} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} body={body} secondary={secondary} />
       })}
     </>
   )
 }
 
-function CertificationListings({ array }) {
+function CertificationListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.certification} main={entry.certification} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} />
+        return <GeneralEntry key={entry.certification} main={entry.certification} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} body={body} secondary={secondary} />
       })}
     </>
   )
 }
 
-function AwardListings({ array }) {
+function AwardListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.award} main={entry.award} detail={entry.organization} subDetail={entry.date} />
+        return <GeneralEntry key={entry.award} main={entry.award} detail={entry.organization} subDetail={entry.date} body={body} secondary={secondary} />
       })}
     </>
   )
 }
 
-function ReferenceListings({ array }) {
+function ReferenceListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.name} main={entry.name} detail={entry.position} subDetail={entry.contact} />
+        return <GeneralEntry key={entry.name} main={entry.name} detail={entry.position} subDetail={entry.contact} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -189,81 +189,94 @@ function assignCityStateZip(city, state, zip) {
   return cityStateZip;
 }
 
+
 export function Traditional(props) {
   let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
+  const body = {
+    color: props.body,
+  }
+  const primary = {
+    color: props.primary,
+  }
+  const secondary = {
+    color: props.secondary,
+  }
+  const tertiary = {
+    color: props.tertiary,
+  }
 
   return (
     <div className='page'>
       <div className='traditional'>
         <header className='display-flex justify-space-between'>
           <div>
-            <h1>{props.firstName} {props.lastName}</h1>
-            <h2>{props.jobTitle}</h2>
+            <h1 style={primary}>{props.firstName} {props.lastName}</h1>
+            <h2 style={secondary}>{props.jobTitle}</h2>
           </div>
           <div>
-            <p>{props.address} <br />
+            <p style={body}>{props.address} <br />
               {cityStateZip}
             </p>
-            <p>{props.email}</p>
-            <p>{props.phone}</p>
+            <p style={body}>{props.email}</p>
+            <p style={body}>{props.phone}</p>
           </div>
         </header>
         <hr/>
         <main className='display-flex flex-column gap-48'>
           <Section>
-            <h1>Summary</h1>
+            <h1 style={tertiary}>Summary</h1>
             <Container>
-              <p>{props.summary}</p>
+              <p style={body}>{props.summary}</p>
             </Container>
           </Section>
           <Section>
-            <h1>Work Experience</h1>
+            <h1 style={tertiary}>Work Experience</h1>
               <Container>
-                <JobListings array={props.workExperience}/>
+                <JobListings array={props.workExperience} body={body} secondary={secondary}/>
               </Container>
           </Section>
           <Section>
-            <h1>Volunteer Experience</h1>
+            <h1 style={tertiary}>Volunteer Experience</h1>
             <Container>
-              <VolunteerListings array={props.volunteerExperience}/>
+              <VolunteerListings array={props.volunteerExperience} body={body} secondary={secondary}/>
             </Container>
           </Section>
           <Section>
-            <h1>Skills</h1>
+            <h1 style={tertiary}>Skills</h1>
             <Container direction='row'>
               <SkillsContainer>
-                <h2>Soft</h2>
+                <h2 style={body}>Soft</h2>
                 <SoftSkillListings array={props.softSkills}/>
               </SkillsContainer>
               <SkillsContainer>
-                <h2>Technical</h2>
+                <h2 style={body}>Technical</h2>
                 <TechnicalSkillListings array={props.technicalSkills}/>
               </SkillsContainer>
             </Container>
           </Section>
           <div className='display-flex gap-48 column-gap-80 flex-wrap'>
             <Section classes='flex-grow-1'>
-              <h1>Education</h1>
+              <h1 style={tertiary}>Education</h1>
               <Container direction='row'>
-                <EducationListings array={props.education}/>
+                <EducationListings array={props.education} body={body} secondary={secondary}/>
               </Container>
             </Section>
             <Section classes='flex-grow-1'>
-              <h1>Certifications</h1>
+              <h1 style={tertiary}>Certifications</h1>
               <Container>
-                <CertificationListings array={props.certification}/>
+                <CertificationListings array={props.certification} body={body} secondary={secondary}/>
               </Container>
             </Section>
             <Section classes='flex-grow-1'>
-              <h1>Awards</h1>
+              <h1 style={tertiary}>Awards</h1>
               <Container>
-                <AwardListings array={props.awards}/>
+                <AwardListings array={props.awards} body={body} secondary={secondary}/>
               </Container>
             </Section>
             <Section classes='flex-grow-1'>
-              <h1>References</h1>
+              <h1 style={tertiary}>References</h1>
               <Container>
-                <ReferenceListings array={props.references}/>
+                <ReferenceListings array={props.references} body={body} secondary={secondary}/>
               </Container>
             </Section>
           </div>
