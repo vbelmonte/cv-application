@@ -42,6 +42,7 @@ export function Entries({ children }) {
 }
 
 export function List(props) {
+  console.log(props.formClass);
   switch(props.formClass) {
     case 'work':
       return (
@@ -75,7 +76,8 @@ export function List(props) {
           })}
         </>
       )
-    case 'skill':
+    case 'skill-soft':
+    case 'skill-technical':
       return (
         <>
           {props.list.map((entry) => {
