@@ -546,6 +546,7 @@ div.palette {
   background-color: var(--white);
   width: 816px;
   height: 1054px;
+  margin: 5rem;
 
   font-size: 0.875rem;
   line-height: 150%;

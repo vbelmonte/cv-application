@@ -220,14 +220,12 @@ export function Traditional(props) {
             <h1>Work Experience</h1>
               <Container>
                 <JobListings array={props.workExperience}/>
-                <JobEntry jobTitle='Job Title' company='Company' startDate='October 2016' endDate='December 2021'/>
               </Container>
           </Section>
           <Section>
             <h1>Volunteer Experience</h1>
             <Container>
               <VolunteerListings array={props.volunteerExperience}/>
-              <VolunteerEntry position='Volunteer' organization='Executive Lions Club' startDate='June 2018' endDate='February 2020'/>
             </Container>
           </Section>
           <Section>
@@ -236,12 +234,10 @@ export function Traditional(props) {
               <SkillsContainer>
                 <h2>Soft</h2>
                 <SoftSkillListings array={props.softSkills}/>
-                <Skills skill='Project Management, Delegation, Customer Service, Communication' />
               </SkillsContainer>
               <SkillsContainer>
                 <h2>Technical</h2>
                 <TechnicalSkillListings array={props.technicalSkills}/>
-                <Skills entry='C++, C#, Unreal, Unity, Figma, VR/AR' />
               </SkillsContainer>
             </Container>
           </Section>
@@ -250,49 +246,24 @@ export function Traditional(props) {
               <h1>Education</h1>
               <Container direction='row'>
                 <EducationListings array={props.education}/>
-                <GeneralEntry
-                  main='Computer Science, Bachelor of Science'
-                  detail='Embry Riddle Aeronautical University'
-                  subDetail='2011-2015'
-                />
-                <GeneralEntry
-                  main='Computer Science, Bachelor of Science'
-                  detail='Embry Riddle Aeronautical University'
-                  subDetail='2011-2015'
-                />
               </Container>
             </Section>
             <Section classes='flex-grow-1'>
               <h1>Certifications</h1>
               <Container>
                 <CertificationListings array={props.certification}/>
-                <GeneralEntry
-                  main='Certificate'
-                  detail='Institution'
-                  subDetail='2011-2015'
-                />
               </Container>
             </Section>
             <Section classes='flex-grow-1'>
               <h1>Awards</h1>
               <Container>
                 <AwardListings array={props.awards}/>
-                <GeneralEntry
-                  main='Award'
-                  detail='Institution'
-                  subDetail='2011-2015'
-                />
               </Container>
             </Section>
             <Section classes='flex-grow-1'>
               <h1>References</h1>
               <Container>
                 <ReferenceListings array={props.references}/>
-                <GeneralEntry
-                  main='Magnus Larsson'
-                  detail='Manager'
-                  subDetail='888-123-4567'
-                />
               </Container>
             </Section>
           </div>
