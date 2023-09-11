@@ -192,6 +192,9 @@ function assignCityStateZip(city, state, zip) {
 
 export function Traditional(props) {
   let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
+  const layoutPrimary = {
+    borderColor: props.layoutPrimary,
+  }
   const body = {
     color: props.body,
   }
@@ -221,7 +224,7 @@ export function Traditional(props) {
             <p style={body}>{props.phone}</p>
           </div>
         </header>
-        <hr/>
+        <hr style={layoutPrimary}/>
         <main className='display-flex flex-column gap-48'>
           <Section>
             <h1 style={tertiary}>Summary</h1>

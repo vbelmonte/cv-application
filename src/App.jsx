@@ -596,6 +596,7 @@ function Main() {
 
   const [design, setDesign] = useState('design-1');
   const [font, setFont] = useState('Inter');
+  const [layoutPrimaryColor, setLayoutPrimaryColor] = useState('#000000');
   const [bodyColor, setBodyColor] = useState('#212529');
   const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
   const [secondaryColor, setSecondaryColor] = useState('#EF233C');
@@ -996,6 +997,11 @@ function Main() {
                   </InputForm>
                 </div>
               </DropdownContainer>
+              <DropdownContainer containerName='Layout Color Style' containerType='no-entries'>
+                <div className='display-flex gap-16 padding-left-32'>
+                  <InputSet label='Primary' id='primary-layout' name='primary-layout' option='color' classes='flex-column-reverse palette' value={layoutPrimaryColor} callback={setLayoutPrimaryColor} />
+                </div>
+              </DropdownContainer>
               <DropdownContainer containerName='Font Style'>
                 <InputSet label='Font' id='font' name='font' option='select-font' select={font} callback={setFont} />
               </DropdownContainer>
@@ -1031,6 +1037,11 @@ function Main() {
           certification={certificationArray}
           awards={awardArray}
           references={referenceArray}
+          body={bodyColor}
+          primary={primaryColor}
+          secondary={secondaryColor}
+          tertiary={tertiaryColor}
+          layoutPrimary={layoutPrimaryColor}
         />
       </div>
     </main>
