@@ -189,9 +189,30 @@ function assignCityStateZip(city, state, zip) {
   return cityStateZip;
 }
 
+function assignFont(option) {
+  let fontClass;
+  switch(option) {
+    case 'Inter Regular':
+      fontClass = 'inter';
+      break;
+    case 'Montserrat Regular':
+      fontClass = 'montserrat';
+      break;
+    case 'Georgia':
+      fontClass = 'georgia';
+      break;
+    case 'Oswald':
+      fontClass = 'oswald';
+  }
+
+  return fontClass;
+}
 
 export function Traditional(props) {
   let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
+  
+  const fontClass = assignFont(props.font);
+
   const layoutPrimary = {
     borderColor: props.layoutPrimary,
   }
@@ -209,7 +230,7 @@ export function Traditional(props) {
   }
 
   return (
-    <div className='page'>
+    <div className={'page ' + fontClass}>
       <div className='traditional'>
         <header className='display-flex justify-space-between'>
           <div>

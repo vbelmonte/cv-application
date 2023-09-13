@@ -564,7 +564,7 @@ function Main() {
   const [email, setEmail] = useState('jsmith@gmail.com');
   const [phone, setPhone] = useState('310-123-4567');
 
-  const [summary, setSummary] = useState('I am UI/UX Designer who assists companies with improving their application interfaces.');
+  const [summary, setSummary] = useState('I am UI/UX Designer who assists companies with improving their application interfaces. I take the time to understand both the client and end-user\'s needs in order to reach an effective solution for both parties.');
 
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
@@ -595,7 +595,7 @@ function Main() {
   const [skillType, setSkillType] = useState('default');
 
   const [design, setDesign] = useState('design-1');
-  const [font, setFont] = useState('Inter');
+  const [font, setFont] = useState('Inter Regular');
   const [layoutPrimaryColor, setLayoutPrimaryColor] = useState('#000000');
   const [bodyColor, setBodyColor] = useState('#212529');
   const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
@@ -1042,6 +1042,7 @@ function Main() {
           secondary={secondaryColor}
           tertiary={tertiaryColor}
           layoutPrimary={layoutPrimaryColor}
+          font={font}
         />
       </div>
     </main>
