@@ -11,6 +11,7 @@ import { Entries, List } from './components/Entries'
 import { DropdownContainer } from './components/Dropdown'
 import { Options } from './components/Options'
 import {Traditional} from './components/Traditional'
+import { Banner } from './components/Banner'
 
 
 
@@ -1018,7 +1019,7 @@ function Main() {
         </div>
       </div>
       <div className='preview-area'>
-        <Traditional
+        <Banner
           firstName={firstName}
           lastName={lastName}
           jobTitle={jobTitle}

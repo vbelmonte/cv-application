@@ -258,7 +258,9 @@ strong {
 
 .preview-area
 
-.page.inter {
+.page.inter,
+.page.inter header h2,
+.page.inter li {
   font-family: 'Inter Regular';
 }
 
@@ -270,7 +272,9 @@ strong {
   font-family: 'Inter Bold';
 }
 
-.page.georgia {
+.page.georgia,
+.page.georgia header h2,
+.page.georgia li {
   font-family: 'Georgia Regular';
 }
 
@@ -282,7 +286,9 @@ strong {
   font-family: 'Georgia Bold';
 }
 
-.page.montserrat {
+.page.montserrat,
+.page.montserrat header h2,
+.page.montserrat li {
   font-family: 'Montserrat Regular';
 }
 
@@ -294,7 +300,9 @@ strong {
   font-family: 'Montserrat SemiBold';
 }
 
-.page.oswald {
+.page.oswald,
+.page.oswald header h2,
+.page.oswald li {
   font-family: 'Lato Regular';
 }
 
@@ -653,11 +661,11 @@ div.palette {
   line-height: 150%;
 }
 
-.page li {
+/*.page li {
   font-family: 'Inter Regular';
   list-style: disc;
   margin-left: 2rem;
-}
+}*/
 
 .traditional {
   padding: 2rem;
@@ -669,4 +677,27 @@ div.palette {
 
 .traditional hr {
   margin: 3rem 0rem;
+}
+
+.banner header {
+  padding: 3rem 0rem;
+  text-align: center;
+}
+
+.banner main {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
+.banner main .column {
+  padding: 1.5rem;
+  padding-right: 0.5rem;
+}
+
+.banner main .main {
+  padding: 1.5rem;
+}
+
+.banner header h1 {
+  font-size: 2.5rem;
 }
