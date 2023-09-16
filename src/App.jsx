@@ -595,7 +595,7 @@ function Main() {
 
   const [skillType, setSkillType] = useState('default');
 
-  const [design, setDesign] = useState('design-1');
+  const [design, setDesign] = useState('traditional');
   const [font, setFont] = useState('Inter Regular');
   const [layoutPrimaryColor, setLayoutPrimaryColor] = useState('#000000');
   const [bodyColor, setBodyColor] = useState('#212529');
@@ -991,9 +991,9 @@ function Main() {
                   <InputForm>
                     <div className='display-flex gap-16'>
                       <RadioImg id='design-1' name='design' value='design-1' src={design1} state={design} callback={setDesign} />
-                      <RadioImg id='design-2' name='design' value='design-2' src={design2} state={design} callback={setDesign} />
+                      <RadioImg id='banner' name='design' value='banner' src={design2} state={design} callback={setDesign} />
                       <RadioImg id='design-3' name='design' value='design-3' src={design3} state={design} callback={setDesign} />
-                      <RadioImg id='design-4' name='design' value='design-4' src={design4} state={design} callback={setDesign} />         
+                      <RadioImg id='traditional' name='design' value='traditional' src={design4} state={design} callback={setDesign} />         
                     </div>
                   </InputForm>
                 </div>
@@ -1019,32 +1019,62 @@ function Main() {
         </div>
       </div>
       <div className='preview-area'>
-        <Banner
-          firstName={firstName}
-          lastName={lastName}
-          jobTitle={jobTitle}
-          address={address}
-          city={city}
-          state={state}
-          zipCode={zipCode}
-          email={email}
-          phone={phone}
-          summary={summary}
-          workExperience={workArray}
-          volunteerExperience={volunteerArray}
-          softSkills={skillSoftArray}
-          technicalSkills={skillTechArray}
-          education={educationArray}
-          certification={certificationArray}
-          awards={awardArray}
-          references={referenceArray}
-          body={bodyColor}
-          primary={primaryColor}
-          secondary={secondaryColor}
-          tertiary={tertiaryColor}
-          layoutPrimary={layoutPrimaryColor}
-          font={font}
-        />
+        {design === 'banner' &&
+          <Banner
+            firstName={firstName}
+            lastName={lastName}
+            jobTitle={jobTitle}
+            address={address}
+            city={city}
+            state={state}
+            zipCode={zipCode}
+            email={email}
+            phone={phone}
+            summary={summary}
+            workExperience={workArray}
+            volunteerExperience={volunteerArray}
+            softSkills={skillSoftArray}
+            technicalSkills={skillTechArray}
+            education={educationArray}
+            certification={certificationArray}
+            awards={awardArray}
+            references={referenceArray}
+            body={bodyColor}
+            primary={primaryColor}
+            secondary={secondaryColor}
+            tertiary={tertiaryColor}
+            layoutPrimary={layoutPrimaryColor}
+            font={font}
+          />
+        }
+        {design === 'traditional' &&
+          <Traditional
+            firstName={firstName}
+            lastName={lastName}
+            jobTitle={jobTitle}
+            address={address}
+            city={city}
+            state={state}
+            zipCode={zipCode}
+            email={email}
+            phone={phone}
+            summary={summary}
+            workExperience={workArray}
+            volunteerExperience={volunteerArray}
+            softSkills={skillSoftArray}
+            technicalSkills={skillTechArray}
+            education={educationArray}
+            certification={certificationArray}
+            awards={awardArray}
+            references={referenceArray}
+            body={bodyColor}
+            primary={primaryColor}
+            secondary={secondaryColor}
+            tertiary={tertiaryColor}
+            layoutPrimary={layoutPrimaryColor}
+            font={font}
+          />
+        }
       </div>
     </main>
   )
