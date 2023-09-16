@@ -11,6 +11,7 @@ import { Entries, List } from './components/Entries'
 import { DropdownContainer } from './components/Dropdown'
 import { Options } from './components/Options'
 import {Traditional} from './components/Traditional'
+import { Banner } from './components/Banner'
 
 
 
@@ -564,7 +565,7 @@ function Main() {
   const [email, setEmail] = useState('jsmith@gmail.com');
   const [phone, setPhone] = useState('310-123-4567');
 
-  const [summary, setSummary] = useState('I am UI/UX Designer who assists companies with improving their application interfaces.');
+  const [summary, setSummary] = useState('I am UI/UX Designer who assists companies with improving their application interfaces. I take the time to understand both the client and end-user\'s needs in order to reach an effective solution for both parties.');
 
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
@@ -594,8 +595,9 @@ function Main() {
 
   const [skillType, setSkillType] = useState('default');
 
-  const [design, setDesign] = useState('design-1');
-  const [font, setFont] = useState('Inter');
+  const [design, setDesign] = useState('traditional');
+  const [font, setFont] = useState('Inter Regular');
+  const [layoutPrimaryColor, setLayoutPrimaryColor] = useState('#000000');
   const [bodyColor, setBodyColor] = useState('#212529');
   const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
   const [secondaryColor, setSecondaryColor] = useState('#EF233C');
@@ -989,11 +991,16 @@ function Main() {
                   <InputForm>
                     <div className='display-flex gap-16'>
                       <RadioImg id='design-1' name='design' value='design-1' src={design1} state={design} callback={setDesign} />
-                      <RadioImg id='design-2' name='design' value='design-2' src={design2} state={design} callback={setDesign} />
+                      <RadioImg id='banner' name='design' value='banner' src={design2} state={design} callback={setDesign} />
                       <RadioImg id='design-3' name='design' value='design-3' src={design3} state={design} callback={setDesign} />
-                      <RadioImg id='design-4' name='design' value='design-4' src={design4} state={design} callback={setDesign} />         
+                      <RadioImg id='traditional' name='design' value='traditional' src={design4} state={design} callback={setDesign} />         
                     </div>
                   </InputForm>
+                </div>
+              </DropdownContainer>
+              <DropdownContainer containerName='Layout Color Style' containerType='no-entries'>
+                <div className='display-flex gap-16 padding-left-32'>
+                  <InputSet label='Primary' id='primary-layout' name='primary-layout' option='color' classes='flex-column-reverse palette' value={layoutPrimaryColor} callback={setLayoutPrimaryColor} />
                 </div>
               </DropdownContainer>
               <DropdownContainer containerName='Font Style'>
@@ -1012,26 +1019,62 @@ function Main() {
         </div>
       </div>
       <div className='preview-area'>
-        <Traditional
-          firstName={firstName}
-          lastName={lastName}
-          jobTitle={jobTitle}
-          address={address}
-          city={city}
-          state={state}
-          zipCode={zipCode}
-          email={email}
-          phone={phone}
-          summary={summary}
-          workExperience={workArray}
-          volunteerExperience={volunteerArray}
-          softSkills={skillSoftArray}
-          technicalSkills={skillTechArray}
-          education={educationArray}
-          certification={certificationArray}
-          awards={awardArray}
-          references={referenceArray}
-        />
+        {design === 'banner' &&
+          <Banner
+            firstName={firstName}
+            lastName={lastName}
+            jobTitle={jobTitle}
+            address={address}
+            city={city}
+            state={state}
+            zipCode={zipCode}
+            email={email}
+            phone={phone}
+            summary={summary}
+            workExperience={workArray}
+            volunteerExperience={volunteerArray}
+            softSkills={skillSoftArray}
+            technicalSkills={skillTechArray}
+            education={educationArray}
+            certification={certificationArray}
+            awards={awardArray}
+            references={referenceArray}
+            body={bodyColor}
+            primary={primaryColor}
+            secondary={secondaryColor}
+            tertiary={tertiaryColor}
+            layoutPrimary={layoutPrimaryColor}
+            font={font}
+          />
+        }
+        {design === 'traditional' &&
+          <Traditional
+            firstName={firstName}
+            lastName={lastName}
+            jobTitle={jobTitle}
+            address={address}
+            city={city}
+            state={state}
+            zipCode={zipCode}
+            email={email}
+            phone={phone}
+            summary={summary}
+            workExperience={workArray}
+            volunteerExperience={volunteerArray}
+            softSkills={skillSoftArray}
+            technicalSkills={skillTechArray}
+            education={educationArray}
+            certification={certificationArray}
+            awards={awardArray}
+            references={referenceArray}
+            body={bodyColor}
+            primary={primaryColor}
+            secondary={secondaryColor}
+            tertiary={tertiaryColor}
+            layoutPrimary={layoutPrimaryColor}
+            font={font}
+          />
+        }
       </div>
     </main>
   )

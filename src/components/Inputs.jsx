@@ -76,16 +76,20 @@ export function InputSelectSkill({ id, name, select, callback }) {
 function InputSelectFont({ id, name, select, callback }) {
   const fonts = [
     {
-      'name': 'Inter'
+      'name': 'Inter',
+      'value': 'Inter Regular'
     },
     {
-      'name': 'Montserrat'
+      'name': 'Montserrat',
+      'value': 'Montserrat Regular'
     },
     {
-      'name': 'Georgia'
+      'name': 'Georgia',
+      'value': 'Georgia'
     },
     {
-      'name': 'Oswald/Lato'
+      'name': 'Oswald/Lato',
+      'value': 'Oswald'
     }
   ]
 
@@ -93,7 +97,7 @@ function InputSelectFont({ id, name, select, callback }) {
     <select name={name} id={id} value={select} onChange={e => {handleChange(e, callback, 'select')}}>
       {fonts.map( (font) => {
         return (
-          <option key={font.name} value={font.name}>{font.name}</option>
+          <option key={font.name} value={font.value}>{font.name}</option>
         )
       })}
     </select>

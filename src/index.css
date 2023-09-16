@@ -191,6 +191,56 @@ body {
   src: url('./assets/fonts/Inter-Bold.ttf');
 }
 
+@font-face {
+  font-family: 'Georgia Regular';
+  src: url('./assets/fonts/Georgia-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Georgia Bold';
+  src: url('./assets/fonts/Georgia-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Georgia Italic';
+  src: url('./assets/fonts/Georgia-Italic.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat Regular';
+  src: url('./assets/fonts/Montserrat-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat Medium';
+  src: url('./assets/fonts/Montserrat-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Montserrat SemiBold';
+  src: url('./assets/fonts/Montserrat-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: 'Oswald Regular';
+  src: url('./assets/fonts/Oswald-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Oswald Medium';
+  src: url('./assets/fonts/Oswald-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Lato Regular';
+  src: url('./assets/fonts/Lato-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Lato Bold';
+  src: url('./assets/fonts/Lato-Bold.ttf');
+}
+
 h2 {
   font-family: 'Inter Bold';
   font-size: 1.5rem;
@@ -208,6 +258,66 @@ strong {
 
 .preview-area
 
+.page.inter,
+.page.inter header h2,
+.page.inter li {
+  font-family: 'Inter Regular';
+}
+
+.page.inter main h1 {
+  font-family: 'Inter SemiBold';
+}
+
+.page.inter main h2 {
+  font-family: 'Inter Bold';
+}
+
+.page.georgia,
+.page.georgia header h2,
+.page.georgia li {
+  font-family: 'Georgia Regular';
+}
+
+.page.georgia main h1 {
+  font-family: 'Georgia Bold';
+}
+
+.page.georgia main h2 {
+  font-family: 'Georgia Bold';
+}
+
+.page.montserrat,
+.page.montserrat header h2,
+.page.montserrat li {
+  font-family: 'Montserrat Regular';
+}
+
+.page.montserrat main h1 {
+  font-family: 'Montserrat SemiBold';
+}
+
+.page.montserrat main h2 {
+  font-family: 'Montserrat SemiBold';
+}
+
+.page.oswald,
+.page.oswald header h2,
+.page.oswald li {
+  font-family: 'Lato Regular';
+}
+
+.page.oswald header h1 {
+  font-family: 'Oswald Regular';
+}
+
+.page.oswald main h1 {
+  font-family: 'Oswald Medium';
+}
+
+.page.oswald main h2 {
+  font-family: 'Lato Bold';
+}
+
 .page header h1 {
   font-size: 3rem;
   line-height: 120%;
@@ -222,7 +332,6 @@ strong {
 }
 
 .page main h1 {
-  font-family: 'Inter SemiBold';
   font-size: 1rem;
   line-height: 140%;
   text-transform: uppercase;
@@ -552,11 +661,11 @@ div.palette {
   line-height: 150%;
 }
 
-.page li {
+/*.page li {
   font-family: 'Inter Regular';
   list-style: disc;
   margin-left: 2rem;
-}
+}*/
 
 .traditional {
   padding: 2rem;
@@ -568,4 +677,27 @@ div.palette {
 
 .traditional hr {
   margin: 3rem 0rem;
+}
+
+.banner header {
+  padding: 3rem 0rem;
+  text-align: center;
+}
+
+.banner main {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+}
+
+.banner main .column {
+  padding: 1.5rem;
+  padding-right: 0.5rem;
+}
+
+.banner main .main {
+  padding: 1.5rem;
+}
+
+.banner header h1 {
+  font-size: 2.5rem;
 }
