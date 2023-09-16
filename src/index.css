@@ -656,6 +656,8 @@ div.palette {
   width: 816px;
   height: 1054px;
   margin: 5rem;
+  position: sticky;
+  top: 0;
 
   font-size: 0.875rem;
   line-height: 150%;
