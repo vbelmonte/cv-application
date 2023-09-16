@@ -81,31 +81,37 @@ function SkillsContainer({ children }) {
   )
 }
 
-function Skills({ skill }) {
+function SoftSkillListings({ array }) {
+  let string = '';
+
+  for (let i = 0; i < array.length; i += 1) {
+    string = string.concat(array[i].skill, ', ');
+  }
+
+  string = string.substring(0, string.length-2);
   return (
     <div>
-      {skill}
+      <p>
+        {string}
+      </p>
     </div>
   )
 }
 
-function SoftSkillListings({ array }) {
-  return (
-    <>
-      {array.map((entry) => {
-        return <Skills key={entry.skill} skill={entry.skill} />
-      })}
-    </>
-  )
-}
-
 function TechnicalSkillListings({ array }) {
+  let string = '';
+
+  for (let i = 0; i < array.length; i += 1) {
+    string = string.concat(array[i].skill, ', ');
+  }
+
+  string = string.substring(0, string.length-2);
   return (
-    <>
-      {array.map((entry) => {
-        return <Skills key={entry.skill} skill={entry.skill} />
-      })}
-    </>
+    <div>
+      <p>
+        {string}
+      </p>
+    </div>
   )
 }
 

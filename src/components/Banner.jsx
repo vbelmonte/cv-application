@@ -54,14 +54,6 @@ function SkillsContainer({ children }) {
   )
 }
 
-function Skills({ skill }) {
-  return (
-    <div>
-      {skill}
-    </div>
-  )
-}
-
 function GeneralEntry({ main, detail, subDetail, body, secondary }) {
   return (
     <div className='display-flex flex-column'>
@@ -111,22 +103,36 @@ function VolunteerEntry({ position, organization, startDate, endDate, body, seco
 }
 
 function SoftSkillListings({ array }) {
+  let string = '';
+
+  for (let i = 0; i < array.length; i += 1) {
+    string = string.concat(array[i].skill, ', ');
+  }
+
+  string = string.substring(0, string.length-2);
   return (
-    <>
-      {array.map((entry) => {
-        return <Skills key={entry.skill} skill={entry.skill} />
-      })}
-    </>
+    <div>
+      <p>
+        {string}
+      </p>
+    </div>
   )
 }
 
 function TechnicalSkillListings({ array }) {
-  return (
-    <>
-      {array.map((entry) => {
-        return <Skills key={entry.skill} skill={entry.skill} />
-      })}
-    </>
+  let string = '';
+
+  for (let i = 0; i < array.length; i += 1) {
+    string = string.concat(array[i].skill, ', ');
+  }
+
+  string = string.substring(0, string.length-2);
+  return (    
+    <div>
+      <p>
+        {string}
+      </p>
+    </div>
   )
 }
 
@@ -230,7 +236,6 @@ function assignFont(option) {
 }
 
 export function Banner(props) {
-  console.log(props.summary);
   let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
   
   const fontClass = assignFont(props.font);
