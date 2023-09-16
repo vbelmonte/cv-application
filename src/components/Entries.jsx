@@ -12,7 +12,6 @@ import { Button } from './Button'
 
 
 function Entry({ entry, type }) {
-  console.log(type);
   return (
     <li className='display-flex gap-48 justify-space-between entry'>
       <div className='display-flex gap-24 align-center'>
@@ -42,7 +41,6 @@ export function Entries({ children }) {
 }
 
 export function List(props) {
-  console.log(props.formClass);
   switch(props.formClass) {
     case 'work':
       return (
