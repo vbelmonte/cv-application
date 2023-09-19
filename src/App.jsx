@@ -665,16 +665,14 @@ function Main() {
           {area === 'customize' &&
             <>
               <DropdownContainer containerName='Layout Style' containerType='no-entries'>
-                <div className='display-flex flex-column gap-16 padding-left-32'>
                   <InputForm>
-                    <div className='display-flex gap-16'>
+                    <div className='display-flex gap-16 flex-wrap padding-left-32'>
                       <RadioImg id='design-1' name='design' value='design-1' src={design1} state={design} callback={setDesign} />
                       <RadioImg id='banner' name='design' value='banner' src={design2} state={design} callback={setDesign} />
                       <RadioImg id='design-3' name='design' value='design-3' src={design3} state={design} callback={setDesign} />
                       <RadioImg id='traditional' name='design' value='traditional' src={design4} state={design} callback={setDesign} />         
                     </div>
                   </InputForm>
-                </div>
               </DropdownContainer>
               <DropdownContainer containerName='Layout Color Style' containerType='no-entries'>
                 <div className='display-flex gap-16 padding-left-32'>
@@ -685,7 +683,7 @@ function Main() {
                 <InputSet label='Font' id='font' name='font' option='select-font' select={font} callback={setFont} />
               </DropdownContainer>
               <DropdownContainer containerName='Color Style' containerType='no-entries'>
-                <div className='display-flex gap-16 padding-left-32'>
+                <div className='display-flex flex-wrap gap-16 padding-left-32'>
                   <InputSet label='Body' id='body' name='body' option='color' classes='flex-column-reverse palette' value={bodyColor} callback={setBodyColor} />
                   <InputSet label='Primary' id='primary' name='primary' option='color' classes='flex-column-reverse palette' value={primaryColor} callback={setPrimaryColor} />
                   <InputSet label='Secondary' id='secondary' name='secondary' option='color' classes='flex-column-reverse palette' value={secondaryColor} callback={setSecondaryColor} />

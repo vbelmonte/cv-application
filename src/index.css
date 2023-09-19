@@ -73,6 +73,7 @@ body {
   color: var(--eerie-black);
   margin: 0;
   padding: 0;
+  width: 100%;
 }
 
 .display-none {
@@ -425,13 +426,26 @@ button.outline.black {
 }
 
 button.outline.black:hover {
-  border: solid 1px var(--slate-gray);
-  color: var(--slate-gray);
+  background-color: var(--slate-gray);
+  color: var(--white);
 }
 
 button.outline.red {
   border: solid 1px var(--red);
   color: var(--red);
+}
+
+button.outline.red:hover {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+button.french-gray-2 {
+  color: var(--eerie-black);
+}
+
+button.french-gray-2:hover {
+  background-color: var(--french-gray-2);
 }
 
 button.bittersweet:hover {
@@ -442,7 +456,7 @@ button.bittersweet:hover {
 button.icon, button.icon-text {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -645,7 +659,7 @@ img.chevron {
 }
 
 div.palette {
-  width: fit-content;
+  min-width: 8rem;
   align-items: center;
 }
 

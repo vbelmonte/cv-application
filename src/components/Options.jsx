@@ -7,8 +7,8 @@ export function Options({ showInput, showCustomize, children }) {
         <div className='options-container'>
             <div className='buttons'>
                 <div className='left'>
-                    <Button text='Edit' img={editIcon} type='icon-text' handleClick={showInput} />
-                    <Button text='Customize' img={customizeIcon} type='icon-text' handleClick={showCustomize} />
+                    <Button text='Edit' classes='french-gray-2' img={editIcon} type='icon-text' handleClick={showInput} />
+                    <Button text='Customize' classes='french-gray-2' img={customizeIcon} type='icon-text' handleClick={showCustomize} />
                 </div>
                 <div className='right'>
                     {children}
