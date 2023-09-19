@@ -24,8 +24,8 @@ export function Input({ type, id, name, value, callback }) {
   )
 }
   
-export function InputIm({ type, id, name }) {
-  const [text, setText] = useState('');
+export function InputIm({ type, id, name, value }) {
+  const [text, setText] = useState(value);
 
   return (
     <input
@@ -130,13 +130,14 @@ export function InputSet({ label, type, id, name, value, option, callback, selec
   if (classes === undefined) {
     classes = '';
   }
+
   return (
     <div className={'input flex-1 min-width-0 ' + classes}>
       <label htmlFor={name}>
         {label}
       </label>
       {option === 'input' && <Input type={type} id={id} name={name} value={value} callback={callback} />}
-      {option === 'input-im' && <InputIm type={type} id={id} name={name} />}
+      {option === 'input-im' && <InputIm type={type} id={id} name={name} value={value}/>}
       {option === 'textarea' && <TextArea id={id} name={name} value={value} callback={callback} />}
       {option === 'select-state' && <InputSelectState id={id} name={name} select={select} callback={callback} />}
       {option === 'select-font' && <InputSelectFont id={id} name={name} select={select} callback={callback} />}
