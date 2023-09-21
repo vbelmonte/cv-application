@@ -104,11 +104,19 @@ function InputSelectFont({ id, name, select, callback }) {
   )
 }
   
-export function TextArea({ id, name, value, callback }) {
-  return (
-    <textarea id={id} name={name} rows='4' value={value} onChange={e => handleChange(e, callback, 'change')}>
+export function TextArea({ id, name, value, callback, type }) {
+  const [text, setText] = useState(value);
+  if (type === 'no-cb') {
+    return (
+    <textarea id={id} name={name} rows='4' value={text} onChange={e => handleChange(e, setText, 'change')}>
     </textarea>
-  )
+    )
+  } else {
+    return (
+      <textarea id={id} name={name} rows='4' value={value} onChange={e => handleChange(e, callback, 'change')}>
+      </textarea>
+    )
+  }
 }
 
 export function RadioImg({ id, name, value, src, state, callback }) {
@@ -139,6 +147,7 @@ export function InputSet({ label, type, id, name, value, option, callback, selec
       {option === 'input' && <Input type={type} id={id} name={name} value={value} callback={callback} />}
       {option === 'input-im' && <InputIm type={type} id={id} name={name} value={value}/>}
       {option === 'textarea' && <TextArea id={id} name={name} value={value} callback={callback} />}
+      {option === 'textarea-no-cb' && <TextArea id={id} name={name} value={value} type='no-cb' />}
       {option === 'select-state' && <InputSelectState id={id} name={name} select={select} callback={callback} />}
       {option === 'select-font' && <InputSelectFont id={id} name={name} select={select} callback={callback} />}
       {option === 'color' && <InputColor id={id} name={name} value={value} callback={callback} />}
