@@ -387,6 +387,10 @@ li.entry button.edit img {
   filter: var(--onyx-filter);
 }
 
+li.entry.visibility-false {
+  opacity: 0.5;
+}
+
 
 /** IMAGE PROPERTIES **/
 .icon-16 {
@@ -483,6 +487,19 @@ button.power:hover {
 
 button.small {
   padding: 0.5rem 0.75rem;
+}
+
+
+
+/** NOTIFICATION MODAL PROPERTIES **/
+
+.notification {
+  display: flex;
+  justify-content: center;
+}
+
+.notification-container {
+  padding: 0rem 2rem;
 }
 
 

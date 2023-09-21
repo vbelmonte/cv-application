@@ -6,6 +6,7 @@ import boxIcon from '../assets/icon-box.svg'
 import userIcon from '../assets/icon-user.svg'
 import trashIcon from '../assets/icon-trash.svg'
 import eyeIcon from '../assets/icon-eye.svg'
+import eyeIconHidden from '../assets/icon-eye-hidden.svg'
 import { useState } from 'react'
 import editIcon from '../assets/icon-edit.svg'
 import { Button } from './Button'
@@ -16,10 +17,11 @@ import { createFormObj } from '../App'
 
 function Entry({ obj, entry, type, callback }) {
   const [edit, setEdit] = useState(false);
+  const [visibility, setVisibility] = useState(true);
 
   if (edit === false) {
     return (
-      <li className='display-flex gap-48 justify-space-between entry'>
+      <li className={`display-flex gap-48 justify-space-between entry visibility-${visibility}`}>
         <div className='display-flex gap-24 align-center'>
           {type === 'work' && <img src={briefcaseIcon} />}
           {type === 'volunteer' && <img src={starIcon} />}
@@ -32,7 +34,7 @@ function Entry({ obj, entry, type, callback }) {
         <div className='display-flex'>
           <Button img={editIcon} classes='edit' type='icon' handleClick={() => setEdit(true)} />
           <Button img={trashIcon} classes='edit' type='icon' />
-          <Button img={eyeIcon} classes='edit' type='icon' />
+          <Button img={visibility ? eyeIcon : eyeIconHidden} classes='edit' type='icon' handleClick={() => visibility ? setVisibility(false) : setVisibility(true)}  />
         </div>
       </li>
     )
