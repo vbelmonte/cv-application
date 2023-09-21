@@ -25,7 +25,7 @@ function Container({ direction, children }) {
   }
 }
 
-function JobEntry({ jobTitle, company, startDate, endDate, body, secondary }) {
+function JobEntry({ jobTitle, company, startDate, endDate, description, body, secondary }) {
   return (
     <div className='display-flex flex-column'>
       <div className='display-flex gap-48 justify-space-between'>
@@ -36,15 +36,14 @@ function JobEntry({ jobTitle, company, startDate, endDate, body, secondary }) {
           <p style={secondary}>{startDate} - {endDate}</p>
         </div>
       </div>
-      <ul style={body}>
-        <li>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</li>
-        <li>However some fonts, called variable fonts, can support a range of weights with a more or less fine granularity, and this can give the designer a much closer degree of control over the chosen weight.</li>
-      </ul>
+      <div style={body}>
+        <p>{description}</p>
+      </div>
     </div>
   )
 }
 
-function VolunteerEntry({ position, organization, startDate, endDate, body, secondary }) {
+function VolunteerEntry({ position, organization, startDate, endDate, description, body, secondary }) {
   return (
     <div className='display-flex flex-column'>
       <div className='display-flex gap-48 justify-space-between'>
@@ -55,10 +54,9 @@ function VolunteerEntry({ position, organization, startDate, endDate, body, seco
           <p style={secondary}>{startDate} - {endDate}</p>
         </div>
       </div>
-      <ul style={body}>
-        <li>Body Small. Most fonts have a particular weight which corresponds to one of the numbers in Common weight name mapping.</li>
-        <li>However some fonts, called variable fonts, can support a range of weights with a more or less fine granularity, and this can give the designer a much closer degree of control over the chosen weight.</li>
-      </ul>
+      <div style={body}>
+        <p>{description}</p>
+      </div>
     </div>
   )
 }
@@ -119,7 +117,7 @@ function JobListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        return <JobEntry key={entry.position} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} body={body} secondary={secondary} />
+        return <JobEntry key={entry.position} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -129,7 +127,7 @@ function VolunteerListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} body={body} secondary={secondary} />
+        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} body={body} secondary={secondary} />
       })}
     </>
   )

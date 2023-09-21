@@ -48,6 +48,7 @@ function Entry({ obj, entry, type, callback }) {
               <InputSet label='Start Date' type='text' id='start-date' name='start-date' value={obj.startDate} option='input-im' />
               <InputSet label='End Date' type='text' id='end-date' name='end-date' value={obj.endDate} option='input-im' />
             </div>
+            <InputSet label='Job Description' id='job-description' name='job-description' value={obj.description} option='textarea-no-cb' />
             <div className='display-flex gap-16 flex-wrap'>
               <Button
                 text='Modify'
@@ -76,6 +77,7 @@ function Entry({ obj, entry, type, callback }) {
               <InputSet label='Start Date' type='text' id='start-date' name='start-date' value={obj.startDate} option='input-im' />
               <InputSet label='End Date' type='text' id='end-date' name='end-date' value={obj.endDate} option='input-im' />
             </div>
+            <InputSet label='Job Description' id='volunteer-description' name='volunteer-description' value={obj.description} option='textarea-no-cb' />
             <div className='display-flex gap-16 flex-wrap'>
               <Button
                 text='Modify'

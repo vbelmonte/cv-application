@@ -25,6 +25,7 @@ function determineFormProcess(form, formName) {
         company: form.elements['company'].value,
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
+        description: form.elements['job-description'].value,
         key: key,
         type: formName
       }
@@ -35,6 +36,7 @@ function determineFormProcess(form, formName) {
         organization: form.elements['organization'].value,
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
+        description: form.elements['volunteer-description'].value,
         key: key,
         type: formName
       };
@@ -104,6 +106,7 @@ export function createFormObj(key, form, formName) {
         company: form.elements['company'].value,
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
+        description: form.elements['job-description'].value,
         key: key,
         type: formName
       }
@@ -114,6 +117,7 @@ export function createFormObj(key, form, formName) {
         organization: form.elements['organization'].value,
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
+        description: form.elements['volunteer-description'].value,
         key: key,
         type: formName
       };
@@ -443,6 +447,7 @@ function Main() {
           <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input-im' />
           <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input-im' />
         </div>
+        <InputSet label='Job Description' id='job-description' name='job-description' value='' option='textarea-no-cb' />
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)}/>
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setWorkExperienceForm(<></>)}/>
@@ -464,6 +469,7 @@ function Main() {
           <InputSet label='Start Date' type='text' id='start-date' name='start-date' value='' option='input-im' />
           <InputSet label='End Date' type='text' id='end-date' name='end-date' value='' option='input-im' />
         </div>
+        <InputSet label='Job Description' id='volunteer-description' name='volunteer-description' value='' option='textarea-no-cb' />
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' handleClick={() => addEntry(event, formClass)} />
           <Button text='Cancel' classes='outline black flex-1' handleClick={() => setVolunteerExperienceForm(<></>)}/>
