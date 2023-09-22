@@ -27,6 +27,7 @@ function determineFormProcess(form, formName) {
         endDate: form.elements['end-date'].value,
         description: form.elements['job-description'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -38,6 +39,7 @@ function determineFormProcess(form, formName) {
         endDate: form.elements['end-date'].value,
         description: form.elements['volunteer-description'].value,
         key: key,
+        visibility: true,
         type: formName
       };
       break;
@@ -48,6 +50,7 @@ function determineFormProcess(form, formName) {
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -58,6 +61,7 @@ function determineFormProcess(form, formName) {
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -65,6 +69,7 @@ function determineFormProcess(form, formName) {
       obj = {
         skill: form.elements['skill'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -72,6 +77,7 @@ function determineFormProcess(form, formName) {
       obj = {
         skill: form.elements['skill'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -81,6 +87,7 @@ function determineFormProcess(form, formName) {
         organization: form.elements['organization'].value,
         date: form.elements['date'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -90,6 +97,7 @@ function determineFormProcess(form, formName) {
         position: form.elements['position'].value,
         contact: form.elements['contact'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -108,6 +116,7 @@ export function createFormObj(key, form, formName) {
         endDate: form.elements['end-date'].value,
         description: form.elements['job-description'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -119,6 +128,7 @@ export function createFormObj(key, form, formName) {
         endDate: form.elements['end-date'].value,
         description: form.elements['volunteer-description'].value,
         key: key,
+        visibility: true,
         type: formName
       };
       break;
@@ -129,6 +139,7 @@ export function createFormObj(key, form, formName) {
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -139,6 +150,7 @@ export function createFormObj(key, form, formName) {
         startDate: form.elements['start-date'].value,
         endDate: form.elements['end-date'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -146,6 +158,7 @@ export function createFormObj(key, form, formName) {
       obj = {
         skill: form.elements['skill'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -155,6 +168,7 @@ export function createFormObj(key, form, formName) {
         organization: form.elements['organization'].value,
         date: form.elements['date'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
@@ -164,11 +178,94 @@ export function createFormObj(key, form, formName) {
         position: form.elements['position'].value,
         contact: form.elements['contact'].value,
         key: key,
+        visibility: true,
         type: formName
       }
       break;
   }
   return obj;
+}
+
+export function updateObjVis(objType, obj, visibile) {
+  let newObj;
+  switch(objType) {
+    case 'work':
+      newObj = {
+        position: obj.position,
+        company: obj.company,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        description: obj.description,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'volunteer':
+      newObj = {
+        position: obj.position,
+        organization: obj.organization,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        description: obj.description,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'education':
+      newObj = {
+        degree: obj.degree,
+        institution: obj.institution,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type,
+      }
+      break;
+    case 'certification':
+      newObj = {
+        certification: obj.certification,
+        institution: obj.institution,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'skill-soft':
+    case 'skill-technical':
+      newObj = {
+        skill: obj.skill,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'award':
+      newObj = {
+        award: obj.award,
+        organization: obj.organization,
+        date: obj.date,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'reference':
+      newObj = {
+        name: obj.name,
+        position: obj.position,
+        contact: obj.contact,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+  }
+  return newObj;
 }
 
 function Main() {

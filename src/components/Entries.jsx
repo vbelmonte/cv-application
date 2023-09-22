@@ -11,13 +11,14 @@ import { useState } from 'react'
 import editIcon from '../assets/icon-edit.svg'
 import { Button } from './Button'
 import { InputForm, InputSet } from './Inputs'
-import { createFormObj } from '../App'
+import { createFormObj, updateObjVis } from '../App'
 
 
 
 function Entry({ obj, entry, type, callback }) {
   const [edit, setEdit] = useState(false);
   const [visibility, setVisibility] = useState(true);
+  console.log(visibility);
 
   if (edit === false) {
     return (
@@ -34,7 +35,22 @@ function Entry({ obj, entry, type, callback }) {
         <div className='display-flex'>
           <Button img={editIcon} classes='edit' type='icon' handleClick={() => setEdit(true)} />
           <Button img={trashIcon} classes='edit' type='icon' />
-          <Button img={visibility ? eyeIcon : eyeIconHidden} classes='edit' type='icon' handleClick={() => visibility ? setVisibility(false) : setVisibility(true)}  />
+          <Button
+            img={visibility ? eyeIcon : eyeIconHidden}
+            classes='edit'
+            type='icon'
+            handleClick={() => {
+              if (visibility) {
+                console.log('set to hidden');
+                setVisibility(false);
+                const newObj = updateObjVis(type, obj, false);
+                callback(newObj, type);
+              } else {
+                setVisibility(true);
+              const newObj = updateObjVis(type, obj, true);
+              callback(newObj, type);
+              }
+            }}  />
         </div>
       </li>
     )

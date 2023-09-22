@@ -54,57 +54,66 @@ function SkillsContainer({ children }) {
   )
 }
 
-function GeneralEntry({ main, detail, subDetail, body, secondary }) {
-  return (
-    <div className='display-flex flex-column'>
-      <strong style={body}>{main}</strong>
-      <p style={body}>{detail}</p>
-      <p style={secondary}>{subDetail}</p>
-    </div>
-  )
+function GeneralEntry({ main, detail, subDetail, visibility, body, secondary }) {
+  if (visibility) {
+    return (
+      <div className='display-flex flex-column'>
+        <strong style={body}>{main}</strong>
+        <p style={body}>{detail}</p>
+        <p style={secondary}>{subDetail}</p>
+      </div>
+    )
+  }
 }
 
-function JobEntry({ jobTitle, company, startDate, endDate, description, body, secondary }) {
-  return (
-    <div className='display-flex flex-column'>
-      <div className='display-flex gap-48 justify-space-between'>
-        <div>
-          <p style={body}><strong>{jobTitle}</strong> / {company}</p>
+function JobEntry({ jobTitle, company, startDate, endDate, description, visibility, body, secondary }) {
+  console.log(visibility);
+  if (visibility) {
+    return (
+      <div className='display-flex flex-column'>
+        <div className='display-flex gap-48 justify-space-between'>
+          <div>
+            <p style={body}><strong>{jobTitle}</strong> / {company}</p>
+          </div>
+          <div>
+            <p style={secondary}>{startDate} - {endDate}</p>
+          </div>
         </div>
-        <div>
-          <p style={secondary}>{startDate} - {endDate}</p>
+        <div style={body}>
+          <p>{description}</p>
         </div>
       </div>
-      <div style={body}>
-        <p>{description}</p>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
-function VolunteerEntry({ position, organization, startDate, endDate, description, body, secondary }) {
-  return (
-    <div className='display-flex flex-column'>
-      <div className='display-flex gap-48 justify-space-between'>
-        <div>
-          <p style={body}><strong>{position}</strong> / {organization}</p>
+function VolunteerEntry({ position, organization, startDate, endDate, description, visibility, body, secondary }) {
+  if (visibility) {
+    return (
+      <div className='display-flex flex-column'>
+        <div className='display-flex gap-48 justify-space-between'>
+          <div>
+            <p style={body}><strong>{position}</strong> / {organization}</p>
+          </div>
+          <div>
+            <p style={secondary}>{startDate} - {endDate}</p>
+          </div>
         </div>
-        <div>
-          <p style={secondary}>{startDate} - {endDate}</p>
+        <div style={body}>
+          <p>{description}</p>
         </div>
       </div>
-      <div style={body}>
-        <p>{description}</p>
-      </div>
-    </div>
-  )
+    )
+  }
 }
 
 function SoftSkillListings({ array }) {
   let string = '';
 
   for (let i = 0; i < array.length; i += 1) {
-    string = string.concat(array[i].skill, ', ');
+    if (array[i].visibility) {
+      string = string.concat(array[i].skill, ', ');
+    }
   }
 
   string = string.substring(0, string.length-2);
@@ -121,7 +130,9 @@ function TechnicalSkillListings({ array }) {
   let string = '';
 
   for (let i = 0; i < array.length; i += 1) {
-    string = string.concat(array[i].skill, ', ');
+    if (array[i].visibility) {
+      string = string.concat(array[i].skill, ', ');
+    }
   }
 
   string = string.substring(0, string.length-2);
@@ -138,7 +149,7 @@ function EducationListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.degree} main={entry.degree} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} body={body} secondary={secondary} />
+        return <GeneralEntry key={entry.degree} main={entry.degree} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -148,7 +159,7 @@ function CertificationListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.certification} main={entry.certification} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} body={body} secondary={secondary} />
+        return <GeneralEntry key={entry.certification} main={entry.certification} detail={entry.institution} subDetail={`${entry.startDate} - ${entry.endDate}`} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -158,7 +169,7 @@ function AwardListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.award} main={entry.award} detail={entry.organization} subDetail={entry.date} body={body} secondary={secondary} />
+        return <GeneralEntry key={entry.award} main={entry.award} detail={entry.organization} subDetail={entry.date} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -168,7 +179,8 @@ function JobListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        return <JobEntry key={entry.position} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} body={body} secondary={secondary} />
+        console.log(entry.visibility);
+        return <JobEntry key={entry.key} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -178,7 +190,7 @@ function VolunteerListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} body={body} secondary={secondary} />
+        return <VolunteerEntry key={entry.position} position={entry.position} organization={entry.organization} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
   )
@@ -188,7 +200,7 @@ function ReferenceListings({ array, body, secondary }) {
   return (
     <>
       {array.map((entry) => {
-        return <GeneralEntry key={entry.name} main={entry.name} detail={entry.position} subDetail={entry.contact} body={body} secondary={secondary} />
+        return <GeneralEntry key={entry.name} main={entry.name} detail={entry.position} subDetail={entry.contact} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
   )
