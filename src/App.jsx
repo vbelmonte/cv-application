@@ -412,25 +412,25 @@ function Main() {
         temp = workArray;
         updatedArray = replaceObj(temp, newObj);
         setWorkArray(updatedArray);
-        setWorkEntries(<List list={workArray} formClass={'work'} callBack={updateEntry} />);
+        setWorkEntries(<List list={updatedArray} formClass={'work'} callBack={updateEntry} />);
         break;
       case 'volunteer':
         temp = volunteerArray;
         updatedArray = replaceObj(temp, newObj);
         setVolunteerArray(updatedArray);
-        setVolunteerEntries(<List list={volunteerArray} formClass={'volunteer'} callBack={updateEntry} />);
+        setVolunteerEntries(<List list={updatedArray} formClass={'volunteer'} callBack={updateEntry} />);
         break;
       case 'education':
         temp = educationArray;
         updatedArray = replaceObj(temp, newObj);
         setEducationArray(updatedArray);
-        setEducationEntries(<List list={educationArray} formClass={'education'} callBack={updateEntry} />);
+        setEducationEntries(<List list={updatedArray} formClass={'education'} callBack={updateEntry} />);
         break;
       case 'certification':
         temp = certificationArray;
         updatedArray = replaceObj(temp, newObj);
         setCertificationArray(updatedArray);
-        setCertificationEntries(<List list={certificationArray} formClass={'certification'} callBack={updateEntry} />);
+        setCertificationEntries(<List list={updatedArray} formClass={'certification'} callBack={updateEntry} />);
         break;
       case 'skill-soft':
         temp = skillSoftArray;

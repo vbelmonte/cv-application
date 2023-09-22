@@ -17,9 +17,8 @@ import { createFormObj, updateObjVis } from '../App'
 
 function Entry({ obj, entry, type, callback }) {
   const [edit, setEdit] = useState(false);
-  const [visibility, setVisibility] = useState(true);
-  console.log(visibility);
-
+  const [visibility, setVisibility] = useState(obj.visibility);
+  
   if (edit === false) {
     return (
       <li className={`display-flex gap-48 justify-space-between entry visibility-${visibility}`}>
