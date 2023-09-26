@@ -12,6 +12,7 @@ import { DropdownContainer } from './components/Dropdown'
 import { Options } from './components/Options'
 import {Traditional} from './components/Traditional'
 import { Banner } from './components/Banner'
+import { Warning } from './components/Warning'
 
 
 
@@ -318,6 +319,9 @@ function Main() {
   const [tertiaryColor, setTertiaryColor] = useState('#F27059');
 
   const [area, setArea] = useState('info');
+  const [warning, setWarning] = useState(false);
+  const [warningEntry, setWarningEntry] = useState('');
+  const [deleteObj, setDeleteObj] = useState({});
 
   const [options, setOptions] = useState(
     <Options showInput={displayInput} showCustomize={displayCustomize}>
@@ -349,6 +353,16 @@ function Main() {
         <Button text='Restore Default Styles' classes='red' type='outline' handleClick={restoreDefaults} />
       </Options>
     );
+  }
+
+  function displayWarning(entry, obj, state) {
+    if (state) {
+      setWarning(true);
+      setWarningEntry(entry);
+      setDeleteObj(obj);
+    } else {
+      setWarning(false);
+    }
   }
 
   function clearAllFields() {
@@ -459,6 +473,62 @@ function Main() {
     }
   }
 
+  function deleteEntry(obj, type) {
+    let tmp;
+
+    switch(type) {
+      case 'work':
+        tmp = workArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setWorkArray(tmp);
+        setWorkEntries(<List list={tmp} formClass={'work'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'volunteer':
+        tmp = volunteerArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setVolunteerArray(tmp);
+        setVolunteerEntries(<List list={tmp} formClass={'volunteer'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'education':
+        tmp = educationArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setEducationArray(tmp);
+        setEducationEntries(<List list={tmp} formClass={'education'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'certification':
+        tmp = certificationArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setCertificationArray(tmp);
+        setCertificationEntries(<List list={tmp} formClass={'certification'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'skill-soft':
+        tmp = skillSoftArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setSkillSoftArray(tmp);
+        setSkillSoftEntries(<List list={tmp} formClass={'skill-soft'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'skill-technical':
+        tmp = skillTechArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setSkillTechArray(tmp);
+        setSkillTechEntries(<List list={tmp} formClass={'skill-technical'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'award':
+        tmp = awardArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setAwardArray(tmp);
+        setAwardEntries(<List list={tmp} formClass={'award'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+      case 'reference':
+        tmp = referenceArray;
+        tmp = tmp.filter(entry => entry.key !== obj.key);
+        setReferenceArray(tmp);
+        setReferenceEntries(<List list={tmp} formClass={'reference'} callBack={updateEntry} warningCallBack={displayWarning} />);
+        break;
+
+    }
+  }
+
   function addEntry(event, formClass) {
     event.preventDefault();
     let form;
@@ -476,35 +546,35 @@ function Main() {
         temp = workArray;
         temp.push(obj);
         setWorkArray(temp);
-        setWorkEntries(<List list={workArray} formClass={formClass} callBack={updateEntry} />);
+        setWorkEntries(<List list={workArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setWorkExperienceForm(<></>);
         break;
       case 'volunteer':
         temp = volunteerArray;
         temp.push(obj);
         setVolunteerArray(temp);
-        setVolunteerEntries(<List list={volunteerArray} formClass={formClass} callBack={updateEntry} />);
+        setVolunteerEntries(<List list={volunteerArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setVolunteerExperienceForm(<></>);
         break;
       case 'education':
         temp = educationArray;
         temp.push(obj);
         setEducationArray(temp);
-        setEducationEntries(<List list={educationArray} formClass={formClass} callBack={updateEntry} />);
+        setEducationEntries(<List list={educationArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setEducationForm(<></>);
         break;
       case 'certification':
         temp = certificationArray;
         temp.push(obj);
         setCertificationArray(temp);
-        setCertificationEntries(<List list={certificationArray} formClass={formClass} callBack={updateEntry} />);
+        setCertificationEntries(<List list={certificationArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setCertificationForm(<></>);
         break;
       case 'skill-soft':
         temp = skillSoftArray;
         temp.push(obj);
         setSkillSoftArray(temp);
-        setSkillSoftEntries(<List list={skillSoftArray} formClass={formClass} callBack={updateEntry} />);
+        setSkillSoftEntries(<List list={skillSoftArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setSkillType('default');
         setSkillForm(<></>);
         break;
@@ -512,7 +582,7 @@ function Main() {
         temp = skillTechArray;
         temp.push(obj);
         setSkillTechArray(temp);
-        setSkillTechEntries(<List list={skillTechArray} formClass={formClass} callBack={updateEntry} />);
+        setSkillTechEntries(<List list={skillTechArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setSkillType('default');
         setSkillForm(<></>);
         break;
@@ -520,14 +590,14 @@ function Main() {
         temp = awardArray;
         temp.push(obj);
         setAwardArray(temp);
-        setAwardEntries(<List list={awardArray} formClass={formClass} callBack={updateEntry} />);
+        setAwardEntries(<List list={awardArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setAwardForm(<></>);
         break;
       case 'reference':
         temp = referenceArray;
         temp.push(obj);
         setReferenceArray(temp);
-        setReferenceEntries(<List list={referenceArray} formClass={formClass} callBack={updateEntry} />);
+        setReferenceEntries(<List list={referenceArray} formClass={formClass} callBack={updateEntry} warningCallBack={displayWarning} />);
         setReferenceForm(<></>);
         break;
     }
@@ -676,6 +746,7 @@ function Main() {
 
   return (
     <main>
+      <Warning entry={warningEntry} obj={deleteObj} visibility={warning} visibilityCallBack={setWarning} deleteCallBack={deleteEntry} />
       <div className='edit-area'>
         {options}
         <div className='input-area'>

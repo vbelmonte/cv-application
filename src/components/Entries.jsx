@@ -15,7 +15,7 @@ import { createFormObj, updateObjVis } from '../App'
 
 
 
-function Entry({ obj, entry, type, callback }) {
+function Entry({ obj, entry, type, callback, warningCallBack }) {
   const [edit, setEdit] = useState(false);
   const [visibility, setVisibility] = useState(obj.visibility);
   
@@ -33,7 +33,13 @@ function Entry({ obj, entry, type, callback }) {
         </div>
         <div className='display-flex'>
           <Button img={editIcon} classes='edit' type='icon' handleClick={() => setEdit(true)} />
-          <Button img={trashIcon} classes='edit' type='icon' />
+          <Button
+            img={trashIcon}
+            classes='edit'
+            type='icon'
+            handleClick={() => {
+              warningCallBack(entry, obj, true);
+            }} />
           <Button
             img={visibility ? eyeIcon : eyeIconHidden}
             classes='edit'
@@ -264,7 +270,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.position} type={entry.type} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.position} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )
@@ -272,7 +278,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.position} type={entry.type} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.position} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )  
@@ -280,7 +286,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.degree} type={entry.type} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.degree} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )
@@ -288,7 +294,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.certification} type={entry.type} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.certification} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )
@@ -297,7 +303,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.skill} type={props.formClass} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.skill} type={props.formClass} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )
@@ -305,7 +311,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.award} type={entry.type} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.award} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )
@@ -313,7 +319,7 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.name} type={entry.type} obj={entry} callback={props.callBack} />
+            return <Entry key={entry.key} entry={entry.name} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
           })}
         </>
       )
