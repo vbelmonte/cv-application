@@ -1,9 +1,11 @@
 function Section({ classes, children }) {
+
+function Section({ classes, children, visibility }) {
   if (classes === undefined) {
     classes = '';
   }
   return (
-    <div className={'display-flex flex-column gap-8 '+ classes}>
+    <div className={`display-flex flex-column gap-8 ${visibility} ${classes}`}>
       {children}
     </div>
   )
@@ -46,9 +48,9 @@ function Container({ direction, gap, children }) {
   }
 }
 
-function SkillsContainer({ children }) {
+function SkillsContainer({ children, visibility }) {
   return (
-    <div className='display-flex flex-column flex-1 gap-4'>
+    <div className={'display-flex flex-column flex-1 gap-4 ' + visibility}>
       {children}
     </div>
   )
@@ -245,10 +247,44 @@ function assignFont(option) {
   return fontClass;
 }
 
+function setVisibility(array) {
+  console.log(array);
+  if (array.length === 0) {
+    return 'hidden';
+  } else {
+    for (let i = 0; i < array.length; i += 1) {
+      if (array[i].visibility === true) {
+        return '';
+      }
+    }
+    return 'hidden';
+  }
+}
+
+function setVisibilitySkills(softArray, technicalArray) {
+  if (softArray.length === 0 && technicalArray.length === 0) {
+    return 'hidden';
+  } else {
+    for (let i = 0; i < softArray.length; i += 1) {
+      if (softArray[i].visibility === true) {
+        return ''
+      }
+    }
+    for (let i = 0; i < technicalArray.length; i += 1) {
+      if (technicalArray[i].visibility === true) {
+        return '';
+      }
+    }
+    return 'hidden';
+  }
+}
+
 export function Banner(props) {
   let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
   
   const fontClass = assignFont(props.font);
+
+  console.log('loading banner');
 
   const layoutPrimary = {
     backgroundColor: props.layoutPrimary,
@@ -280,38 +316,38 @@ export function Banner(props) {
             <Section>
               <h1 style={tertiary}>Contact</h1>
               <Container gap='4'>
-                <p>{props.address}<br/>
-                  {cityStateZip}</p>
+                <div><img src={home}/><p>{props.address}</p></div>
+                  {cityStateZip}
                 <p>{props.email}</p>
                 <p>{props.phone}</p>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibility(props.education)}>
               <h1 style={tertiary}>Education</h1>
               <Container gap='8'>
                 <EducationListings array={props.education} body={body} secondary={secondary}/>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibility(props.certification)}>
               <h1 style={tertiary}>Certifications</h1>
               <Container gap='8'>
                 <CertificationListings array={props.certification} body={body} secondary={secondary}/>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibilitySkills(props.softSkills, props.technicalSkills)}>
               <h1 style={tertiary}>Skills</h1>
               <Container gap='8'>
-                <SkillsContainer>
+                <SkillsContainer visibility={setVisibility(props.softSkills)}>
                   <h2 style={body}>Soft</h2>
                   <SoftSkillListings array={props.softSkills}/>
                 </SkillsContainer>
-                <SkillsContainer>
+                <SkillsContainer visibility={setVisibility(props.technicalSkills)}>
                   <h2 style={body}>Technical</h2>
                   <TechnicalSkillListings array={props.technicalSkills}/>
                 </SkillsContainer>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibility(props.awards)}>
               <h1 style={tertiary}>Awards</h1>
               <Container gap='8'>
                 <AwardListings array={props.awards} body={body} secondary={secondary}/>
@@ -325,19 +361,19 @@ export function Banner(props) {
                 <p>{props.summary}</p>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibility(props.workExperience)}>
               <h1 style={tertiary}>Work Experience</h1>
               <Container gap='4'>
                 <JobListings array={props.workExperience} body={body} secondary={secondary}/>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibility(props.volunteerExperience)}>
               <h1 style={tertiary}>Volunteer Experience</h1>
               <Container gap='4'>
                 <VolunteerListings array={props.volunteerExperience} body={body} secondary={secondary}/>
               </Container>
             </Section>
-            <Section>
+            <Section visibility={setVisibility(props.references)}>
               <h1 style={tertiary}>References</h1>
               <Container gap='4'>
                 <ReferenceListings array={props.references} body={body} secondary={secondary}/>
