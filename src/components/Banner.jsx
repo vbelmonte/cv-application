@@ -1,4 +1,6 @@
-function Section({ classes, children }) {
+import home from '../assets/home.svg'
+import envelope from '../assets/envelope.svg'
+import phone from '../assets/phone.svg'
 
 function Section({ classes, children, visibility }) {
   if (classes === undefined) {
@@ -316,10 +318,27 @@ export function Banner(props) {
             <Section>
               <h1 style={tertiary}>Contact</h1>
               <Container gap='4'>
-                <div><img src={home}/><p>{props.address}</p></div>
-                  {cityStateZip}
-                <p>{props.email}</p>
-                <p>{props.phone}</p>
+                <div className='display-flex gap-16'>
+                  <div className='home-img'>
+                    <img src={home}/>
+                  </div>
+                  <div>
+                    <p>{props.address}</p>
+                    <p>{cityStateZip}</p>
+                  </div>
+                </div>
+                <div className='display-flex gap-16 align-center'>
+                  <img src={envelope}/>
+                  <div>
+                    <p>{props.email}</p>
+                  </div>
+                </div>
+                <div className='display-flex gap-16 align-center'>
+                  <img src={phone}/>
+                  <div>
+                    <p>{props.phone}</p>
+                  </div>
+                </div>
               </Container>
             </Section>
             <Section visibility={setVisibility(props.education)}>
