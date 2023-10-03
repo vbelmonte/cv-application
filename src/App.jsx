@@ -426,49 +426,49 @@ function Main() {
         temp = workArray;
         updatedArray = replaceObj(temp, newObj);
         setWorkArray(updatedArray);
-        setWorkEntries(<List list={updatedArray} formClass={'work'} callBack={updateEntry} />);
+        setWorkEntries(<List list={updatedArray} formClass={'work'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'volunteer':
         temp = volunteerArray;
         updatedArray = replaceObj(temp, newObj);
         setVolunteerArray(updatedArray);
-        setVolunteerEntries(<List list={updatedArray} formClass={'volunteer'} callBack={updateEntry} />);
+        setVolunteerEntries(<List list={updatedArray} formClass={'volunteer'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'education':
         temp = educationArray;
         updatedArray = replaceObj(temp, newObj);
         setEducationArray(updatedArray);
-        setEducationEntries(<List list={updatedArray} formClass={'education'} callBack={updateEntry} />);
+        setEducationEntries(<List list={updatedArray} formClass={'education'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'certification':
         temp = certificationArray;
         updatedArray = replaceObj(temp, newObj);
         setCertificationArray(updatedArray);
-        setCertificationEntries(<List list={updatedArray} formClass={'certification'} callBack={updateEntry} />);
+        setCertificationEntries(<List list={updatedArray} formClass={'certification'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'skill-soft':
         temp = skillSoftArray;
         updatedArray = replaceObj(temp, newObj);
         setSkillSoftArray(updatedArray);
-        setSkillSoftEntries(<List list={updatedArray} formClass={'skill-soft'} callBack={updateEntry} />);
+        setSkillSoftEntries(<List list={updatedArray} formClass={'skill-soft'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'skill-technical':
         temp = skillTechArray;
         updatedArray = replaceObj(temp, newObj);
         setSkillTechArray(updatedArray);
-        setSkillTechEntries(<List list={updatedArray} formClass={'skill-technical'} callBack={updateEntry} />);
+        setSkillTechEntries(<List list={updatedArray} formClass={'skill-technical'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'award':
         temp = awardArray;
         updatedArray = replaceObj(temp, newObj);
         setAwardArray(updatedArray);
-        setAwardEntries(<List list={updatedArray} formClass={'award'} callBack={updateEntry} />);
+        setAwardEntries(<List list={updatedArray} formClass={'award'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
       case 'reference':
         temp = referenceArray;
         updatedArray = replaceObj(temp, newObj);
         setReferenceArray(updatedArray);
-        setReferenceEntries(<List list={updatedArray} formClass={'reference'} callBack={updateEntry} />);
+        setReferenceEntries(<List list={updatedArray} formClass={'reference'} callBack={updateEntry} warningCallBack={displayWarning} />);
         break;
     }
   }
