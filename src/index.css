@@ -435,6 +435,7 @@ button.outline.black {
 
 button.outline.black:hover {
   background-color: var(--slate-gray);
+  border: solid 1px var(--slate-gray);
   color: var(--white);
 }
 
