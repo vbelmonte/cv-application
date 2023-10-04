@@ -841,10 +841,8 @@ function Main() {
               <DropdownContainer containerName='Layout Style' containerType='no-entries'>
                   <InputForm>
                     <div className='display-flex gap-16 flex-wrap padding-left-32'>
-                      <RadioImg id='design-1' name='design' value='design-1' src={design1} state={design} callback={setDesign} />
-                      <RadioImg id='banner' name='design' value='banner' src={design2} state={design} callback={setDesign} />
-                      <RadioImg id='design-3' name='design' value='design-3' src={design3} state={design} callback={setDesign} />
-                      <RadioImg id='traditional' name='design' value='traditional' src={design4} state={design} callback={setDesign} />         
+                      <RadioImg id='traditional' name='design' value='traditional' src={design4} state={design} callback={setDesign} />  
+                      <RadioImg id='banner' name='design' value='banner' src={design2} state={design} callback={setDesign} />       
                     </div>
                   </InputForm>
               </DropdownContainer>
