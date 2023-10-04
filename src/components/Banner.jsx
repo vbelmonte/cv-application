@@ -340,7 +340,7 @@ export function Banner(props) {
               <Container gap='4'>
                 <div className='display-flex gap-16'>
                   <div className='home-img'>
-                    <Home fill={props.body} />
+                    <Home fill={props.layoutPrimary} />
                   </div>
                   <div>
                     <p>{props.address}</p>
@@ -348,13 +348,13 @@ export function Banner(props) {
                   </div>
                 </div>
                 <div className='display-flex gap-16 align-center'>
-                  <Envelope fill={props.body} />
+                  <Envelope fill={props.layoutPrimary} />
                   <div>
                     <p>{props.email}</p>
                   </div>
                 </div>
                 <div className='display-flex gap-16 align-center'>
-                  <Phone stroke={props.body} />
+                  <Phone stroke={props.layoutPrimary} />
                   <div>
                     <p>{props.phone}</p>
                   </div>
