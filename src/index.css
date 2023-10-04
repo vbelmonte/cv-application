@@ -680,6 +680,14 @@ img.chevron {
   filter: var(--onyx-filter);
 }
 
+img.chevron.up {
+  transform: rotate(0deg);
+}
+
+img.chevron.down {
+  transform: rotate(180deg);
+}
+
 .input-container .entries-input-container {
   padding-left: 2rem;
 }

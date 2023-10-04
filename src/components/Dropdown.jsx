@@ -5,12 +5,15 @@ import chevronUp from '../assets/chevron-up.svg'
 export function DropdownContainer({ containerName, children, containerType }) {
 
     const [hidden, setHidden] = useState('');
+    const [chevron, setChevron] = useState('up');
   
     function toggleHidden() {
       if (hidden === 'hidden') {
         setHidden('');
+        setChevron('up')
       } else {
         setHidden('hidden');
+        setChevron('down');
       }
     }
   
@@ -22,7 +25,7 @@ export function DropdownContainer({ containerName, children, containerType }) {
               <h2 className='onyx'>{containerName}</h2>
             </div>
             <div>
-              <img src={chevronUp} className='chevron' onClick={toggleHidden} />
+              <img src={chevronUp} className={'chevron ' + chevron} onClick={toggleHidden} />
             </div>
           </div>
           <div className={hidden}>
@@ -38,7 +41,7 @@ export function DropdownContainer({ containerName, children, containerType }) {
               <h2 className='onyx'>{containerName}</h2>
             </div>
             <div>
-              <img src={chevronUp} className='chevron' onClick={toggleHidden}/>
+              <img src={chevronUp} className={'chevron ' + chevron} onClick={toggleHidden}/>
             </div>
           </div>
           <div className={'entries-input-container display-flex flex-column gap-32 ' + hidden}>
