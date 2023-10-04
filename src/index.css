@@ -638,12 +638,12 @@ main {
 
 .input-area {
   padding: 3rem;
-  padding-bottom: 15rem;
+  padding-bottom: 30rem;
   display: flex;
   flex-direction: column;
   gap: 6rem;
   overflow-y: scroll;
-  max-height: 67%;
+  max-height: 47.7%;
 }
 
 .input-area::-webkit-scrollbar {
@@ -723,7 +723,6 @@ div.palette {
   width: 816px;
   height: 1054px;
   margin: 5rem;
-  position: sticky;
   top: 0;
 
   font-size: 0.875rem;
