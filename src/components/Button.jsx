@@ -1,4 +1,4 @@
-export function Button({ text, classes, img, imgClasses, type, handleClick }) {
+export function Button({ text, classes, img, imgTitle, imgClasses, type, handleClick }) {
 	if (type === 'icon-text') {
 		return (
 			<button className={classes + ' icon-text'} type='button' onClick={handleClick}>
@@ -9,7 +9,7 @@ export function Button({ text, classes, img, imgClasses, type, handleClick }) {
 	} else if (type === 'icon') {
 		return (
 			<button className={classes + ' icon'} type='button' onClick={handleClick}>
-					<img src={img} className='icon-20' />
+					<img src={img} className='icon-20' title={imgTitle} />
 			</button>
 		)
 	} else if (type === 'outline') {
