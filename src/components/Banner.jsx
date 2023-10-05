@@ -91,7 +91,6 @@ function GeneralEntry({ main, detail, subDetail, visibility, body, secondary }) 
 }
 
 function JobEntry({ jobTitle, company, startDate, endDate, description, visibility, body, secondary }) {
-  console.log(visibility);
   if (visibility) {
     return (
       <div className='display-flex flex-column'>
@@ -203,7 +202,6 @@ function JobListings({array, body, secondary}) {
   return (
     <>
       {array.map((entry) => {
-        console.log(entry.visibility);
         return <JobEntry key={entry.key} jobTitle={entry.position} company={entry.company} startDate={entry.startDate} endDate={entry.endDate} description={entry.description} visibility={entry.visibility} body={body} secondary={secondary} />
       })}
     </>
@@ -270,7 +268,6 @@ function assignFont(option) {
 }
 
 function setVisibility(array) {
-  console.log(array);
   if (array.length === 0) {
     return 'hidden';
   } else {
@@ -305,8 +302,6 @@ export function Banner(props) {
   let cityStateZip = assignCityStateZip(props.city, props.state, props.zipCode);
   
   const fontClass = assignFont(props.font);
-
-  console.log('loading banner');
 
   const layoutPrimary = {
     backgroundColor: props.layoutPrimary,

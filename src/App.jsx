@@ -1,8 +1,6 @@
 import { useState } from 'react'
 import plusIcon from './assets/icon-plus.svg'
-import design1 from './assets/resume-design-1.svg'
 import design2 from './assets/resume-design-2.svg'
-import design3 from './assets/resume-design-3.svg'
 import design4 from './assets/resume-design-4.svg'
 import { Navigation } from './components/Navigation'
 import { Button } from './components/Button'
@@ -375,7 +373,6 @@ function Main() {
       form = document.getElementsByClassName(formClass)[0];
     }
     const obj = determineFormProcess(form, formClass);
-    console.log(obj);
     let temp;
 
     switch(formClass) {

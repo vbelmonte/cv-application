@@ -214,7 +214,6 @@ function Entry({ obj, entry, type, callback, warningCallBack }) {
             type='icon'
             handleClick={() => {
               if (visibility) {
-                console.log('set to hidden');
                 setVisibility(false);
                 const newObj = updateObjVis(type, obj, false);
                 callback(newObj, type);
