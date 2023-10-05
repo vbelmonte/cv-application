@@ -73,7 +73,7 @@ body {
   color: var(--eerie-black);
   margin: 0;
   padding: 0;
-  width: 100%;
+  min-width: fit-content;
 }
 
 .display-none {
@@ -547,6 +547,7 @@ div.input {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  min-width: 8rem;
 }
 
 div.input.flex-column-reverse {
