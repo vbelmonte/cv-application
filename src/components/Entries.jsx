@@ -11,9 +11,170 @@ import { useState } from 'react'
 import editIcon from '../assets/icon-edit.svg'
 import { Button } from './Button'
 import { InputForm, InputSet } from './Inputs'
-import { createFormObj, updateObjVis } from '../App'
 
 
+function createFormObj(key, form, formName) {
+  let obj;
+  switch(formName) {
+    case 'work':
+      obj = {
+        position: form.elements['position'].value,
+        company: form.elements['company'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        description: form.elements['job-description'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+    case 'volunteer':
+      obj = {
+        position: form.elements['position'].value,
+        organization: form.elements['organization'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        description: form.elements['volunteer-description'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      };
+      break;
+    case 'education':
+      obj = {
+        degree: form.elements['degree'].value,
+        institution: form.elements['institution'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+    case 'certification':
+      obj = {
+        certification: form.elements['certification'].value,
+        institution: form.elements['institution'].value,
+        startDate: form.elements['start-date'].value,
+        endDate: form.elements['end-date'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+    case 'skill':
+      obj = {
+        skill: form.elements['skill'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+    case 'award':
+      obj = {
+        award: form.elements['award'].value,
+        organization: form.elements['organization'].value,
+        date: form.elements['date'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+    case 'reference':
+      obj = {
+        name: form.elements['name'].value,
+        position: form.elements['position'].value,
+        contact: form.elements['contact'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+  }
+  return obj;
+}
+
+function updateObjVis(objType, obj, visibile) {
+  let newObj;
+  switch(objType) {
+    case 'work':
+      newObj = {
+        position: obj.position,
+        company: obj.company,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        description: obj.description,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'volunteer':
+      newObj = {
+        position: obj.position,
+        organization: obj.organization,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        description: obj.description,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'education':
+      newObj = {
+        degree: obj.degree,
+        institution: obj.institution,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type,
+      }
+      break;
+    case 'certification':
+      newObj = {
+        certification: obj.certification,
+        institution: obj.institution,
+        startDate: obj.startDate,
+        endDate: obj.endDate,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'skill-soft':
+    case 'skill-technical':
+      newObj = {
+        skill: obj.skill,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'award':
+      newObj = {
+        award: obj.award,
+        organization: obj.organization,
+        date: obj.date,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+    case 'reference':
+      newObj = {
+        name: obj.name,
+        position: obj.position,
+        contact: obj.contact,
+        key: obj.key,
+        visibility: visibile,
+        type: obj.type
+      }
+      break;
+  }
+  return newObj;
+}
 
 function Entry({ obj, entry, type, callback, warningCallBack }) {
   const [edit, setEdit] = useState(false);
@@ -32,9 +193,15 @@ function Entry({ obj, entry, type, callback, warningCallBack }) {
           {entry}
         </div>
         <div className='display-flex'>
-          <Button img={editIcon} classes='edit' type='icon' handleClick={() => setEdit(true)} />
+          <Button
+            img={editIcon}
+            imgTitle='Edit entry'
+            classes='edit'
+            type='icon'
+            handleClick={() => setEdit(true)} />
           <Button
             img={trashIcon}
+            imgTitle='Delete entry'
             classes='edit'
             type='icon'
             handleClick={() => {
@@ -42,6 +209,7 @@ function Entry({ obj, entry, type, callback, warningCallBack }) {
             }} />
           <Button
             img={visibility ? eyeIcon : eyeIconHidden}
+            imgTitle='Show/Hide entry'
             classes='edit'
             type='icon'
             handleClick={() => {
