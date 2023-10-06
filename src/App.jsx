@@ -1,7 +1,7 @@
-import { useState } from 'react'
 import plusIcon from './assets/icon-plus.svg'
 import design2 from './assets/resume-design-2.svg'
 import design4 from './assets/resume-design-4.svg'
+import { useState } from 'react'
 import { Navigation } from './components/Navigation'
 import { Button } from './components/Button'
 import { InputSet, InputForm, RadioImg, InputSelectSkill } from './components/Inputs'
@@ -526,7 +526,7 @@ function Main() {
 
     setSkillForm (
       <InputForm classes={formClass}>
-        <InputSet label='Skill' type='text' id='skill' name='skill' option='input-im' />
+        <InputSet label='Skill' type='text' id='skill' name='skill' value='' option='input-im' />
         <InputSelectSkill id='skill-type' name='skill-type' select={skillType} callback={setSkillType} />
         <div className='display-flex gap-16 flex-wrap'>
           <Button text='Add' classes='power flex-1' 

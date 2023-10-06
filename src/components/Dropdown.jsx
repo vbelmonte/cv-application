@@ -3,7 +3,6 @@ import chevronUp from '../assets/chevron-up.svg'
 
 
 export function DropdownContainer({ containerName, children, containerType }) {
-
     const [hidden, setHidden] = useState('');
     const [chevron, setChevron] = useState('up');
   

@@ -7,8 +7,8 @@ import userIcon from '../assets/icon-user.svg'
 import trashIcon from '../assets/icon-trash.svg'
 import eyeIcon from '../assets/icon-eye.svg'
 import eyeIconHidden from '../assets/icon-eye-hidden.svg'
-import { useState } from 'react'
 import editIcon from '../assets/icon-edit.svg'
+import { useState } from 'react'
 import { Button } from './Button'
 import { InputForm, InputSet } from './Inputs'
 
@@ -445,7 +445,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.position} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.position}
+              type={entry.type}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+              />
           })}
         </>
       )
@@ -453,7 +460,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.position} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.position}
+              type={entry.type}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+            />
           })}
         </>
       )  
@@ -461,7 +475,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.degree} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.degree}
+              type={entry.type}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+            />
           })}
         </>
       )
@@ -469,7 +490,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.certification} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.certification}
+              type={entry.type}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+            />
           })}
         </>
       )
@@ -478,7 +506,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.skill} type={props.formClass} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.skill}
+              type={props.formClass}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+            />
           })}
         </>
       )
@@ -486,7 +521,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.award} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.award}
+              type={entry.type}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+            />
           })}
         </>
       )
@@ -494,7 +536,14 @@ export function List(props) {
       return (
         <>
           {props.list.map((entry) => {
-            return <Entry key={entry.key} entry={entry.name} type={entry.type} obj={entry} callback={props.callBack} warningCallBack={props.warningCallBack} />
+            return <Entry
+              key={entry.key}
+              entry={entry.name}
+              type={entry.type}
+              obj={entry}
+              callback={props.callBack}
+              warningCallBack={props.warningCallBack}
+            />
           })}
         </>
       )
