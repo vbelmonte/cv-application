@@ -62,7 +62,15 @@ function createFormObj(key, form, formName) {
         type: formName
       }
       break;
-    case 'skill':
+    case 'skill-soft':
+      obj = {
+        skill: form.elements['skill'].value,
+        key: key,
+        visibility: true,
+        type: formName
+      }
+      break;
+    case 'skill-technical':
       obj = {
         skill: form.elements['skill'].value,
         key: key,
@@ -345,7 +353,7 @@ function Entry({ obj, entry, type, callback, warningCallBack }) {
               classes='power flex-1' 
               handleClick={() => {
                 const form = document.getElementsByClassName('skill-soft-edit')[0];
-                const newObj = createFormObj(obj.key, form, 'skill');
+                const newObj = createFormObj(obj.key, form, 'skill-soft');
                 callback(newObj, 'skill-soft');
                 setEdit(false);
               }} />
@@ -363,7 +371,7 @@ function Entry({ obj, entry, type, callback, warningCallBack }) {
               classes='power flex-1' 
               handleClick={() => {
                 const form = document.getElementsByClassName('skill-technical-edit')[0];
-                const newObj = createFormObj(obj.key, form, 'skill');
+                const newObj = createFormObj(obj.key, form, 'skill-technical');
                 callback(newObj, 'skill-technical');
                 setEdit(false);
               }} />
