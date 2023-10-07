@@ -116,7 +116,7 @@ function Main() {
   const [email, setEmail] = useState('jsmith@gmail.com');
   const [phone, setPhone] = useState('310-123-4567');
 
-  const [summary, setSummary] = useState('I am UI/UX Designer who assists companies with improving their application interfaces. I take the time to understand both the client and end-user\'s needs in order to reach an effective solution for both parties.');
+  const [summary, setSummary] = useState('I am a UI/UX Designer who assists companies with improving their application interfaces. I take the time to understand both the client and end-user\'s needs in order to provide a solution that satisfies both parties.');
 
   const [workExperienceForm, setWorkExperienceForm] = useState(<></>);
   const [volunteerExperienceForm, setVolunteerExperienceForm] = useState(<></>);
@@ -148,11 +148,11 @@ function Main() {
 
   const [design, setDesign] = useState('traditional');
   const [font, setFont] = useState('Inter Regular');
-  const [layoutPrimaryColor, setLayoutPrimaryColor] = useState('#000000');
-  const [bodyColor, setBodyColor] = useState('#212529');
-  const [primaryColor, setPrimaryColor] = useState('#FFFFFF');
-  const [secondaryColor, setSecondaryColor] = useState('#EF233C');
-  const [tertiaryColor, setTertiaryColor] = useState('#F27059');
+  const [layoutPrimaryColor, setLayoutPrimaryColor] = useState('#CCCCCC');
+  const [bodyColor, setBodyColor] = useState('#000000');
+  const [primaryColor, setPrimaryColor] = useState('#000000');
+  const [secondaryColor, setSecondaryColor] = useState('#000000');
+  const [tertiaryColor, setTertiaryColor] = useState('#000000');
 
   const [area, setArea] = useState('info');
   const [warning, setWarning] = useState(false);
@@ -165,12 +165,13 @@ function Main() {
     </Options>);
 
   function restoreDefaults() {
-    setDesign('design-1');
-    setFont('Inter');
-    setBodyColor('#212529');
-    setPrimaryColor('#FFFFFF');
-    setSecondaryColor('#EF233C');
-    setTertiaryColor('#F27059');
+    setDesign('traditional');
+    setFont('Inter Regular');
+    setBodyColor('#000000');
+    setPrimaryColor('#000000');
+    setSecondaryColor('#000000');
+    setTertiaryColor('#000000');
+    setLayoutPrimaryColor('#CCCCCC');
   }
 
   function displayInput() {
