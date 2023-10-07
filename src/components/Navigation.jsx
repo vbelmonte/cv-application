@@ -1,9 +1,9 @@
 import cvLogo from '../assets/cv-builder-logo.svg'
 
 export function Navigation() {
-    return (
-        <nav>
-        <img src={cvLogo} />
-        </nav>
-    )
+  return (
+    <nav>
+      <img src={cvLogo} />
+    </nav>
+  )
 }
