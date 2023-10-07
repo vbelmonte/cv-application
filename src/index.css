@@ -250,6 +250,10 @@ body {
   src: url('./assets/fonts/Lato-Bold.ttf');
 }
 
+a {
+  color: var(--bittersweet);
+}
+
 h2 {
   font-family: 'Inter Bold';
   font-size: 1.5rem;
