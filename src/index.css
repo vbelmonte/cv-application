@@ -132,6 +132,10 @@ body {
   gap: 5rem;
 }
 
+.gap-96 {
+  gap: 6rem;
+}
+
 .column-gap-80 {
   column-gap: 5rem;
 }
@@ -613,7 +617,6 @@ main {
 .edit-area {
   background-color: var(--seasalt);
   flex: 1;
-  max-height: 1214px;
 }
 
 .preview-area {
@@ -639,12 +642,12 @@ main {
 
 .input-area {
   padding: 3rem;
-  padding-bottom: 30rem;
+  /*padding-bottom: 30rem;*/
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 25rem;
   overflow-y: scroll;
-  max-height: 47.7%;
+  max-height: 109vh;
 }
 
 .input-area::-webkit-scrollbar {
@@ -791,4 +794,13 @@ div.palette {
 .modal .modal-content.warning {
   background-color: var(--white);
   padding: 3rem;
+}
+
+
+
+/** FOOTER PROPERTIES **/
+footer {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-align: center;
 }

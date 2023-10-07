@@ -11,6 +11,7 @@ import { Options } from './components/Options'
 import {Traditional} from './components/Traditional'
 import { Banner } from './components/Banner'
 import { Warning } from './components/Warning'
+import { Footer } from './components/Footer'
 
 
 
@@ -585,7 +586,7 @@ function Main() {
         {options}
         <div className='input-area'>
           {area === 'info' &&
-            <>
+            <div className='display-flex flex-column gap-96'>
               <DropdownContainer containerName='Personal Details' containerType='no-entries'>
                 <InputForm classes='personal-details padding-left-32'>
                   <div className='display-flex gap-16 flex-wrap'>
@@ -668,10 +669,10 @@ function Main() {
                 {referenceForm}
                 <Button text='Add Reference' classes='small bittersweet' imgClasses='bittersweet-filter' img={plusIcon} type='icon-text' handleClick={addReference} />
               </DropdownContainer>
-            </>
+            </div>
           }
           {area === 'customize' &&
-            <>
+            <div className='display-flex flex-column gap-96'>
               <DropdownContainer containerName='Layout Style' containerType='no-entries'>
                   <InputForm>
                     <div className='display-flex gap-16 flex-wrap padding-left-32'>
@@ -696,8 +697,9 @@ function Main() {
                   <InputSet label='Tertiary' id='tertiary' name='tertiary' option='color' classes='flex-column-reverse palette' value={tertiaryColor} callback={setTertiaryColor} />
                 </div>
               </DropdownContainer>
-            </>
+            </div>
           }
+          <Footer />
         </div>
       </div>
       <div className='preview-area'>
