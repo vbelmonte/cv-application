@@ -126,23 +126,23 @@ function Main() {
   const [awardForm, setAwardForm] = useState(<></>);
   const [referenceForm, setReferenceForm] = useState(<></>);
 
-  const [workEntries, setWorkEntries] = useState(<></>);
-  const [volunteerEntries, setVolunteerEntries] = useState(<></>);
-  const [educationEntries, setEducationEntries] = useState(<></>);
-  const [certificationEntries, setCertificationEntries] = useState(<></>);
-  const [skillSoftEntries, setSkillSoftEntries] = useState(<></>);
-  const [skillTechEntries, setSkillTechEntries] = useState(<></>);
-  const [awardEntries, setAwardEntries] = useState(<></>);
-  const [referenceEntries, setReferenceEntries] = useState(<></>);
-
-  const [workArray, setWorkArray] = useState([]);
+  const [workArray, setWorkArray] = useState([{position: 'UI/UX Developer', company: 'Marketing', startDate: 'September 2016', endDate: 'January 2020', description: 'Developed interfaces for large-scale applications', key: self.crypto.randomUUID(), visibility: true, type: 'work'}, {position: 'Project Manager', company: 'Marketing', startDate: 'January 2020', endDate: 'present', description: 'Manage projects, project requirements, and dedalines; mentor developers and delegate tasks to team members', key: self.crypto.randomUUID(), visibility: true, type: 'work'}]);
   const [volunteerArray, setVolunteerArray] = useState([]);
-  const [educationArray, setEducationArray] = useState([]);
+  const [educationArray, setEducationArray] = useState([{degree: 'Computer Science, Bachelor of Science', institution: 'University of California, Irvine', startDate: '2012', endDate: '2016', key: self.crypto.randomUUID(), visibility: true, type: 'education'}]);
   const [certificationArray, setCertificationArray] = useState([]);
-  const [skillSoftArray, setSkillSoftArray] = useState([]);
-  const [skillTechArray, setSkillTechArray] = useState([]);
+  const [skillSoftArray, setSkillSoftArray] = useState([{skill: 'Project Management', key: self.crypto.randomUUID(), visibility: true, type: 'skill-soft'}]);
+  const [skillTechArray, setSkillTechArray] = useState([{skill: 'Figma', key: self.crypto.randomUUID(), visibility: true, type: 'skill-technical'}]);
   const [awardArray, setAwardArray] = useState([]);
-  const [referenceArray, setReferenceArray] = useState([]);
+  const [referenceArray, setReferenceArray] = useState([{name: 'Magnus Larsen', position: 'Manager', contact: 'mlarsen@marketing.com', visibility: true, key: self.crypto.randomUUID(), type: 'reference'}]);
+
+  const [workEntries, setWorkEntries] = useState(<List list={workArray} formClass='work' callBack={updateEntry} warningCallBack={displayWarning} />);
+  const [volunteerEntries, setVolunteerEntries] = useState(<></>);
+  const [educationEntries, setEducationEntries] = useState(<List list={educationArray} formClass='education' callBack={updateEntry} warningCallBack={displayWarning} />);
+  const [certificationEntries, setCertificationEntries] = useState(<></>);
+  const [skillSoftEntries, setSkillSoftEntries] = useState(<List list={skillSoftArray} formClass='skill-soft' callBack={updateEntry} warningCallBack={displayWarning} />);
+  const [skillTechEntries, setSkillTechEntries] = useState(<List list={skillTechArray} formClass='skill-technical' callBack={updateEntry} warningCallBack={displayWarning} />);
+  const [awardEntries, setAwardEntries] = useState(<></>);
+  const [referenceEntries, setReferenceEntries] = useState(<List list={referenceArray} formClass='reference' callBack={updateEntry} warningCallBack={displayWarning} />);
 
   const [skillType, setSkillType] = useState('default');
 
